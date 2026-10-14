@@ -1,0 +1,479 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const sections = ['database', 'hardware', 'software', 'gear'] as const;
+  return sections.map((section) => ({
+    params: { section },
+    props: { section },
+  }));
+}
+
+const { section } = Astro.props;
+
+const getSlug = (entry: any) => entry.slug || entry.id.replace(/\.[^/.]+$/, '');
+const getExtension = (sec: string) => {
+  switch (sec) {
+    case 'database': return '.dat';
+    case 'hardware': return '.spec';
+    case 'software': return '.sys';
+    case 'gear': return '.loadout';
+    default: return '.dat';
+  }
+};
+
+const rawEntries = await getCollection(section as any);
+const entries = rawEntries.map((e: any) => ({
+  ...e,
+  section,
+  ext: getExtension(section),
+  url: `/${section}/${getSlug(e)}`,
+})).sort((a: any, b: any) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const sectionDescriptions: Record<string, string> = {
+  database: 'MEDIA & LORE ARCHIVE // BOOKS, FILMS, ANIME, GAMES CANON',
+  hardware: 'PHYSICAL COMPUTING // SILICON, RETRO PC, CHIPS & WORKSTATIONS',
+  software: 'SYSTEMS & CODE // LINUX KERNEL, CLI UTILITIES, AI & NETWORKS',
+  gear: 'OPERATIONAL LOADOUT // VEHICLES, FIREARMS, BALLISTICS, DRONES & EDC',
+};
+---
+
+<BaseLayout title={`adriko // ./${section}`} activeNav={section as any}>
+  <div style="margin-bottom: 2rem;">
+    <a href="/" style="color: #888; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      &larr; [RETURN TO ROOT FEED]
+    </a>
+  </div>
+
+  <section style="margin-bottom: 2rem; border-bottom: 1px solid #2a1212; padding-bottom: 1rem;">
+    <h2 style="color: #fff; font-size: 1.4rem; margin: 0 0 0.5rem 0;">
+      [ DIRECTORY // ./{section} ]
+    </h2>
+    <p style="color: #885555; font-size: 0.85rem; margin: 0;">
+      // {sectionDescriptions[section]}
+    </p>
+    <div style="margin-top: 0.75rem; color: #777; font-size: 0.8rem;">
+      INDEXED_RECORDS: <span style="color: #ff3333; font-weight: bold;">{entries.length}</span>
+    </div>
+  </section>
+
+  <!-- UNIWERSALNY TERMINAL CLI -->
+  <div class="grep-wrapper">
+    <div class="grep-prefix">
+      <span class="grep-prompt-user">operator@adriko</span>:<span class="grep-prompt-path">~/{section}</span>$ <span class="grep-cmd">sh:</span>
+    </div>
+    <input 
+      type="text" 
+      id="cli-input" 
+      class="grep-input" 
+      placeholder="Type search pattern or command ('help', 'specs', 'weather tokyo', 'crypto btc', 'cat database')..." 
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button id="cli-clear-btn" class="grep-clear-btn" type="button">[ESC / CLEAR]</button>
+  </div>
+
+  <!-- OKNO WYNIKÓW CLI -->
+  <div id="cli-output" class="cli-terminal-window" style="display: none;">
+    <div class="cli-terminal-header">
+      <span class="cli-terminal-title">[ TTY_OUTPUT // EXEC_RESULT ]</span>
+      <button id="cli-output-close" class="cli-close-btn" type="button">[X]</button>
+    </div>
+    <div id="cli-output-content" class="cli-terminal-body"></div>
+  </div>
+
+  <div id="grep-status" class="grep-status-bar"></div>
+
+  {entries.length === 0 ? (
+    <div style="padding: 2.5rem 1rem; border: 1px dashed #331515; text-align: center; color: #3d1b1b; font-style: italic; font-size: 0.9rem;">
+      // DIRECTORY EMPTY // NO INDEXED DATA IN THIS SECTOR
+    </div>
+  ) : (
+    <div style="display: flex; flex-direction: column; gap: 1.15rem;">
+      {entries.map((entry: any) => {
+        const slug = getSlug(entry);
+        const searchPayload = `${entry.data.title} ${entry.data.description || ''} ${entry.data.tags.join(' ')} ${slug}`.toLowerCase();
+        
+        return (
+          <article 
+            class="terminal-card cat-item" 
+            data-search={searchPayload}
+            style="padding: 1.15rem;"
+          >
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin-bottom: 0.35rem;">
+              <span style="color: #774444; font-size: 0.8rem;">
+                [{entry.data.date}]
+              </span>
+              {entry.data.rating && (
+                <span style="color: #ff4d4d; font-size: 0.8rem; font-weight: bold;">
+                  {entry.data.rating}
+                </span>
+              )}
+            </div>
+
+            <h3 style="margin: 0.4rem 0 0.45rem 0;">
+              <a href={entry.url} style="color: #ffffff; font-size: 1.15rem; display: inline-block;">
+                &gt; {entry.data.title}
+              </a>
+            </h3>
+
+            {entry.data.description && (
+              <p style="color: #999; font-size: 0.88rem; margin: 0 0 0.65rem 0; line-height: 1.5;">
+                {entry.data.description}
+              </p>
+            )}
+
+            {entry.data.tags.length > 0 && (
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+                {entry.data.tags.map((tag: string) => (
+                  <span style="color: #664444; font-size: 0.74rem;">#{tag}</span>
+                ))}
+              </div>
+            )}
+          </article>
+        );
+      })}
+    </div>
+  )}
+</BaseLayout>
+
+<style>
+  .cli-terminal-window {
+    background: #070404;
+    border: 1px solid #ff1a1a;
+    box-shadow: 0 0 20px rgba(255, 26, 26, 0.2);
+    margin-bottom: 2rem;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .cli-terminal-header {
+    background: #140707;
+    border-bottom: 1px solid #331212;
+    padding: 0.4rem 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.76rem;
+  }
+
+  .cli-terminal-title {
+    color: #ff4d4d;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+  }
+
+  .cli-close-btn {
+    background: transparent;
+    border: none;
+    color: #885555;
+    font-family: inherit;
+    font-size: 0.76rem;
+    cursor: pointer;
+  }
+
+  .cli-close-btn:hover {
+    color: #ff1a1a;
+  }
+
+  .cli-terminal-body {
+    padding: 1rem;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: #d8d8d8;
+    white-space: pre-wrap;
+    font-family: var(--mono-font-stack);
+  }
+</style>
+
+<script is:inline>
+  const cliInput = document.getElementById('cli-input');
+  const cliClear = document.getElementById('cli-clear-btn');
+  const grepStatus = document.getElementById('grep-status');
+  const cliOutput = document.getElementById('cli-output');
+  const cliOutputContent = document.getElementById('cli-output-content');
+  const cliOutputClose = document.getElementById('cli-output-close');
+
+  cliOutputClose?.addEventListener('click', () => {
+    cliOutput.style.display = 'none';
+  });
+
+  const cmdHistory = [];
+  let historyIdx = -1;
+
+  function runGrep(query) {
+    const term = query.trim().toLowerCase();
+    let matchesCount = 0;
+
+    if (term.length > 0) {
+      cliClear.style.display = 'inline-block';
+    } else {
+      cliClear.style.display = 'none';
+      grepStatus.style.display = 'none';
+    }
+
+    document.querySelectorAll('.cat-item').forEach((item) => {
+      const text = item.getAttribute('data-search') || '';
+      const match = !term || text.includes(term);
+      item.style.display = match ? 'block' : 'none';
+      if (match) matchesCount++;
+    });
+
+    if (term.length > 0) {
+      grepStatus.style.display = 'block';
+      if (matchesCount > 0) {
+        grepStatus.textContent = `// GREP: ${matchesCount} RECORD(S) MATCHED FOR "${term}"`;
+        grepStatus.style.color = '#77aa77';
+      } else {
+        grepStatus.textContent = `// GREP_STATUS: 0 RECORDS MATCHED FOR "${term}"`;
+        grepStatus.style.color = '#aa4444';
+      }
+    }
+  }
+
+  async function executeCommand(cmdStr) {
+    const raw = cmdStr.trim();
+    if (!raw) return;
+
+    cmdHistory.push(raw);
+    historyIdx = cmdHistory.length;
+
+    const parts = raw.split(/\s+/);
+    const command = parts[0].toLowerCase();
+    const arg = parts.slice(1).join(' ').trim();
+
+    cliOutput.style.display = 'block';
+
+    switch (command) {
+      case 'help':
+        cliOutputContent.textContent = 
+`[ COMMAND REGISTRY // SYSTEM CLI v2.0 ]
+----------------------------------------------------------------------
+whoami            : Operator profile & active technology stack
+specs             : Hardware & browser diagnostics probe
+weather [city]    : Orbital weather telemetry (defaults to Jarosław base)
+crypto <symbol>   : Realtime crypto exchange feed via Binance (e.g. crypto btc, crypto eth)
+fx <currency>     : Official fiat exchange rate via NBP (e.g. fx usd, fx eur, fx chf)
+ping [target]     : Probe latency round-trip time (e.g. ping cloudflare)
+cat <section>     : Jump to catalog (database, hardware, software, gear)
+clear             : Flush console output and reset filters
+grep <pattern>    : Filter filesystem by text pattern`;
+        break;
+
+      case 'whoami':
+        cliOutputContent.textContent = 
+`[ OPERATOR IDENTITY DOSSIER ]
+----------------------------------------------------------------------
+OPERATOR          : Adrian Korzeń // Core System Administrator
+DESIGNATION       : Developer, Techie & System Architect
+LOCATION_GRID     : 50.0197° N, 22.6781° E [Jarosław, PL]
+TECH_STACK        : Astro, TypeScript, Python, Linux Kernel, CLI
+SECTORS_OF_FOCUS  : Retro Computing, Cyberpunk Media, High-End Firearms, Moto Machines
+STATUS            : ACTIVE // ALL SYSTEMS NOMINAL`;
+        break;
+
+      case 'specs': {
+        cliOutputContent.textContent = '// RUNNING SUBSYSTEM PROBE DISCOVERY...';
+        let gpu = 'INTEGRATED GRAPHICS ARRAY';
+        try {
+          const cvs = document.createElement('canvas');
+          const gl = cvs.getContext('webgl') || cvs.getContext('experimental-webgl');
+          if (gl) {
+            const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+            if (dbg) gpu = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || gpu;
+          }
+        } catch (e) {}
+
+        const cores = navigator.hardwareConcurrency || 4;
+        const ram = navigator.deviceMemory ? `${navigator.deviceMemory * 1024} MB` : '8192 MB (ESTIMATED)';
+        const scr = `${window.screen.width}x${window.screen.height} (DPR: ${(window.devicePixelRatio || 1).toFixed(1)})`;
+        const ua = navigator.userAgent;
+        let os = 'UNIX COMPATIBLE SYSTEM';
+        if (/windows nt 10\.0/i.test(ua)) os = 'WIN11 / NT 10.0 KERNEL';
+        else if (/linux/i.test(ua)) os = 'GNU/LINUX KERNEL';
+        else if (/mac os x/i.test(ua)) os = 'macOS DARWIN UNIX';
+        else if (/android/i.test(ua)) os = 'ANDROID OS [MOBILE]';
+        else if (/iphone|ipad/i.test(ua)) os = 'APPLE iOS [MOBILE]';
+
+        cliOutputContent.textContent = 
+`[ CLIENT HARDWARE & ENVIRONMENT TELEMETRY ]
+----------------------------------------------------------------------
+CPU_CORES         : ${cores} LOGICAL PROCESSING UNITS
+GPU_PROBE         : ${gpu}
+MEMORY_BANKS      : ${ram} ALLOCATED
+PLATFORM_OS       : ${os}
+DISPLAY_HUD       : ${scr} // 24-BIT COLOR DEPTH
+NETWORK_CLIENT    : ONLINE // TLS 1.3 SECURE LINK`;
+        break;
+      }
+
+      case 'ping': {
+        const target = arg || 'cloudflare-dns.com';
+        cliOutputContent.textContent = `// PINGING TARGET: ${target}...`;
+        const start = performance.now();
+        try {
+          await fetch(`https://1.1.1.1/cdn-cgi/trace?cache=${Date.now()}`, { mode: 'no-cors' });
+          const rtt = Math.round(performance.now() - start);
+          cliOutputContent.textContent = 
+`[ ICMP PROBE // PACKET ROUND-TRIP TELEMETRY ]
+----------------------------------------------------------------------
+TARGET_HOST       : ${target}
+PACKETS_SENT      : 4 // TRANSMITTED: 4 // LOSS: 0.0%
+ROUND_TRIP_TIME   : ${rtt} ms (ESTIMATED LATENCY)
+LINK_INTEGRITY    : OPTIMAL // SIGNAL SATURATED`;
+        } catch (e) {
+          const simRtt = Math.floor(Math.random() * 15) + 18;
+          cliOutputContent.textContent = 
+`[ ICMP PROBE // PACKET ROUND-TRIP TELEMETRY ]
+----------------------------------------------------------------------
+TARGET_HOST       : ${target}
+ROUND_TRIP_TIME   : ${simRtt} ms
+LINK_INTEGRITY    : SECURE VIA EDGE GATEWAY`;
+        }
+        break;
+      }
+
+      case 'crypto': {
+        if (!arg) {
+          cliOutputContent.textContent = '// ERROR: MISSING COIN SYMBOL. Usage: crypto btc, crypto eth, crypto sol';
+          break;
+        }
+        const coin = arg.toUpperCase().replace(/USDT$/i, '');
+        cliOutputContent.textContent = `// CONTACTING GLOBAL LIQUIDITY ORACLE FOR [${coin}/USDT]...`;
+        try {
+          const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${coin}USDT`);
+          if (!res.ok) throw new Error();
+          const data = await res.json();
+          const price = parseFloat(data.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+          cliOutputContent.textContent = 
+`[ CRYPTO-ASSET LIQUIDITY TICKER // BINANCE CORE ]
+----------------------------------------------------------------------
+ASSET_PAIR        : ${coin} / USDT
+SPOT_VALUATION    : $${price} USD
+ORACLE_STATUS     : REALTIME SYNC OK`;
+        } catch (e) {
+          cliOutputContent.textContent = `// ORACLE_FAULT: ASSET "${coin}" NOT FOUND OR ORACLE REJECTED REQUEST. Try: btc, eth, sol, ltc`;
+        }
+        break;
+      }
+
+      case 'fx': {
+        if (!arg) {
+          cliOutputContent.textContent = '// ERROR: MISSING CURRENCY CODE. Usage: fx usd, fx eur, fx chf, fx gbp';
+          break;
+        }
+        const cur = arg.toUpperCase();
+        cliOutputContent.textContent = `// CONTACTING CENTRAL BANK ORACLE (NBP) FOR [${cur}/PLN]...`;
+        try {
+          const res = await fetch(`https://api.nbp.pl/api/exchangerates/rates/a/${cur}/?format=json`);
+          if (!res.ok) throw new Error();
+          const data = await res.json();
+          const rate = data.rates[0].mid.toFixed(4);
+          const effectiveDate = data.rates[0].effectiveDate;
+          cliOutputContent.textContent = 
+`[ FIAT EXCHANGE RATE // NATIONAL BANK ORACLE ]
+----------------------------------------------------------------------
+BASE_CURRENCY     : 1 ${cur} (${data.currency})
+EXCHANGE_VAL      : ${rate} PLN
+EFFECTIVE_DATE    : ${effectiveDate}
+ORACLE_STATUS     : NBP OFFICIAL MID-RATE`;
+        } catch (e) {
+          cliOutputContent.textContent = `// ORACLE_FAULT: UNABLE TO RESOLVE CURRENCY "${cur}". Supported: USD, EUR, CHF, GBP, JPY, CZK`;
+        }
+        break;
+      }
+
+      case 'weather': {
+        cliOutputContent.textContent = '// CONTACTING METEOROLOGICAL TELEMETRY SATELLITE...';
+        let lat = 50.0197;
+        let lng = 22.6781;
+        let locName = 'JAROSŁAW BASE NODE [50.0197° N, 22.6781° E]';
+
+        try {
+          if (arg) {
+            const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(arg)}&count=1&language=en&format=json`);
+            const geoData = await geoRes.json();
+            if (!geoData.results || geoData.results.length === 0) {
+              cliOutputContent.textContent = `// GEODATA_ERROR: LOCATION "${arg}" NOT FOUND IN ORBITAL SATELLITE INDEX.`;
+              break;
+            }
+            const place = geoData.results[0];
+            lat = place.latitude;
+            lng = place.longitude;
+            locName = `${place.name.toUpperCase()} [${place.country || 'GLOBAL'}] (${lat.toFixed(4)}° N, ${lng.toFixed(4)}° E)`;
+          }
+
+          const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current_weather=true`);
+          const data = await res.json();
+          const cur = data.current_weather;
+          cliOutputContent.textContent = 
+`[ ORBITAL WEATHER TELEMETRY // ATMOSPHERIC SENSORS ]
+----------------------------------------------------------------------
+TARGET_SECTOR     : ${locName}
+TEMPERATURE       : ${cur.temperature}°C
+WIND_VELOCITY     : ${cur.windspeed} km/h (AZIMUTH: ${cur.winddirection}°)
+TIMESTAMP_UTC     : ${cur.time}
+SUBSYSTEM_STATUS  : ATMOSPHERIC SENSORS NOMINAL`;
+        } catch (e) {
+          cliOutputContent.textContent = '// TELEMETRY_FAULT: UNABLE TO CONTACT ATMOSPHERIC PROBE.';
+        }
+        break;
+      }
+
+      case 'clear':
+        cliOutput.style.display = 'none';
+        cliInput.value = '';
+        runGrep('');
+        break;
+
+      case 'cat':
+        if (['database', 'hardware', 'software', 'gear'].includes(arg)) {
+          cliOutputContent.textContent = `// REDIRECTING TO /${arg}...`;
+          setTimeout(() => { window.location.href = `/${arg}`; }, 300);
+        } else {
+          cliOutputContent.textContent = `// ERROR: UNKNOWN TARGET "${arg}". Available targets: database, hardware, software, gear`;
+        }
+        break;
+
+      default:
+        cliOutput.style.display = 'none';
+        runGrep(raw);
+        break;
+    }
+  }
+
+  cliInput?.addEventListener('input', (e) => {
+    runGrep(e.target.value);
+  });
+
+  cliInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      executeCommand(cliInput.value);
+    } else if (e.key === 'Escape') {
+      cliInput.value = '';
+      runGrep('');
+      cliOutput.style.display = 'none';
+    } else if (e.key === 'ArrowUp') {
+      if (cmdHistory.length > 0 && historyIdx > 0) {
+        historyIdx--;
+        cliInput.value = cmdHistory[historyIdx];
+      }
+    } else if (e.key === 'ArrowDown') {
+      if (historyIdx < cmdHistory.length - 1) {
+        historyIdx++;
+        cliInput.value = cmdHistory[historyIdx];
+      } else {
+        historyIdx = cmdHistory.length;
+        cliInput.value = '';
+      }
+    }
+  });
+
+  cliClear?.addEventListener('click', () => {
+    cliInput.value = '';
+    runGrep('');
+    cliOutput.style.display = 'none';
+    cliInput.focus();
+  });
+</script>

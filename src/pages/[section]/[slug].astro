@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const sections = ['database', 'hardware', 'software', 'gear'] as const;
+  const paths: any[] = [];
+
+  for (const section of sections) {
+    const rawEntries = await getCollection(section);
+
+    // Sortowanie chronologiczne od najstarszego wpisu
+    const chronological = [...rawEntries].sort((a: any, b: any) => {
+      const diff = new Date(a.data.date).getTime() - new Date(b.data.date).getTime();
+      if (diff !== 0) return diff;
+      return a.id.localeCompare(b.id);
+    });
+
+    chronological.forEach((entry: any, index: number) => {
+      const slug = entry.id.replace(/\.[^/.]+$/, '');
+      const prev = index > 0 ? chronological[index - 1] : null;
+      const next = index < chronological.length - 1 ? chronological[index + 1] : null;
+
+      paths.push({
+        params: { section, slug },
+        props: {
+          entry,
+          section,
+          prevEntry: prev
+            ? { slug: prev.id.replace(/\.[^/.]+$/, ''), date: prev.data.date }
+            : null,
+          nextEntry: next
+            ? { slug: next.id.replace(/\.[^/.]+$/, ''), date: next.data.date }
+            : null,
+        },
+      });
+    });
+  }
+
+  return paths;
+}
+
+const { entry, section, prevEntry, nextEntry } = Astro.props;
+const { Content } = await render(entry);
+
+// 1. Licznik słów i szacowany czas czytania
+const rawContent = entry.body || '';
+const wordCount = rawContent.trim() ? rawContent.trim().split(/\s+/).length : 0;
+const readTime = Math.max(1, Math.ceil(wordCount / 200));
+
+// 2. Metadane wpisu
+const title = entry.data.title;
+const date = entry.data.date;
+const tags = entry.data.tags || [];
+const year = (entry.data as any).year;
+const creator = (entry.data as any).creator;
+const rating = (entry.data as any).rating;
+---
+
+<BaseLayout title={`${title} // DOSSIER`} activeNav={section as any}>
+  <!-- Czerwony neonowy pasek postępu czytania -->
+  <div id="reading-progress" class="reading-progress-bar"></div>
+
+  <div style="margin-bottom: 2rem;">
+    <a 
+      href={`/${section}`} 
+      style="color: #888; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 0.4rem;"
+    >
+      &larr; [RETURN TO ./{section}]
+    </a>
+  </div>
+
+  <article>
+    <!-- Nagłówek Akt Sprawy (Dossier Header) -->
+    <header style="border-bottom: 1px solid #2a1212; padding-bottom: 1.25rem; margin-bottom: 2rem;">
+      <div style="color: #ff3333; font-size: 0.78rem; margin-bottom: 0.6rem; letter-spacing: 0.06em; display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center;">
+        <span style="background: #1a0808; padding: 1px 6px; border: 1px solid #331212;">
+          ./{section}
+        </span>
+        <span style="color: #441a1a;">//</span>
+        <span>INDEXED: [{date}]</span>
+        <span style="color: #441a1a;">//</span>
+        <span style="color: #885555;">WORDS: {wordCount}</span>
+        <span style="color: #441a1a;">//</span>
+        <span style="color: #885555;">EST_READ: ~{readTime} MIN</span>
+        {year && (
+          <>
+            <span style="color: #441a1a;">//</span>
+            <span style="color: #885555;">RELEASE: {year}</span>
+          </>
+        )}
+        {rating && (
+          <>
+            <span style="color: #441a1a;">//</span>
+            <span style="color: #ff4d4d; font-weight: bold;">STATUS: {rating}</span>
+          </>
+        )}
+      </div>
+
+      <h1 style="color: #ffffff; margin: 0 0 0.75rem 0; font-size: 1.85rem; line-height: 1.25;">
+        &gt; {title}
+      </h1>
+
+      {creator && (
+        <div style="color: #aaa; font-size: 0.88rem; margin-bottom: 0.75rem;">
+          CREATOR / ENTITY: <strong style="color: #fff;">{creator}</strong>
+        </div>
+      )}
+
+      {tags.length > 0 && (
+        <div style="display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.75rem;">
+          {tags.map((t: string) => (
+            <span style="color: #774444; font-size: 0.74rem;">#{t}</span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- Treść wpisu -->
+    <div class="post-content" style="line-height: 1.8; color: #d0d0d0; font-size: 0.95rem;">
+      <Content />
+    </div>
+
+    <!-- Pasek nawigacji rozbity na 3 niezależne przyciski -->
+    <div class="post-nav-bar" role="navigation" aria-label="Nawigacja wpisów">
+      {prevEntry ? (
+        <a href={`/${section}/${prevEntry.slug}`} class="btn-terminator post-nav-btn">
+          &lt; [PREV: {prevEntry.date}]
+        </a>
+      ) : (
+        <span class="btn-terminator post-nav-btn disabled">&lt; [PREV: NONE]</span>
+      )}
+
+      <a href={`/${section}`} class="btn-terminator post-nav-btn">
+        [INDEX]
+      </a>
+
+      {nextEntry ? (
+        <a href={`/${section}/${nextEntry.slug}`} class="btn-terminator post-nav-btn">
+          [NEXT: {nextEntry.date}] &gt;
+        </a>
+      ) : (
+        <span class="btn-terminator post-nav-btn disabled">[NEXT: NONE] &gt;</span>
+      )}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-content :global(p) {
+    margin-bottom: 1.4rem;
+  }
+  .post-content :global(h2) {
+    color: #ffffff;
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid #221111;
+    padding-bottom: 0.4rem;
+  }
+  .post-content :global(blockquote) {
+    border-left: 2px solid #ff1a1a;
+    padding-left: 1rem;
+    color: #888888;
+    margin: 1.5rem 0;
+  }
+</style>
+
+<script is:inline>
+  function updateReadingProgress() {
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const bar = document.getElementById('reading-progress');
+    if (bar) {
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      bar.style.width = scrolled + '%';
+    }
+  }
+
+  window.addEventListener('scroll', updateReadingProgress, { passive: true });
+  window.addEventListener('resize', updateReadingProgress);
+  updateReadingProgress();
+</script>

@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="ERROR 404 // SECTOR_NOT_FOUND">
+  <div style="margin-top: 2rem; max-width: 650px;">
+    <div style="border: 1px solid #ff1a1a; background: #0c0505; padding: 1.5rem; box-shadow: 0 0 25px rgba(255, 26, 26, 0.15);">
+      <div style="color: #ff3333; font-weight: bold; font-size: 0.82rem; letter-spacing: 0.08em; margin-bottom: 0.75rem;">
+        [ CRITICAL_ALERT // MEMORY_FAULT ]
+      </div>
+      
+      <h1 style="color: #ffffff; font-size: 1.8rem; margin: 0 0 1rem 0;">
+        &gt; ERROR 404: TARGET_NOT_RESOLVED
+      </h1>
+
+      <p style="color: #aaa; font-size: 0.9rem; line-height: 1.6; margin: 0 0 1.5rem 0;">
+        Żądany węzeł, plik lub podkatalog nie istnieje w rejestrze <strong style="color: #fff;">/sys/root/</strong>. Połączenie przerwane lub ścieżka została przeniesiona do archiwum o wyższym poziomie dostępu.
+      </p>
+
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <a href="/" class="btn-terminator" style="padding: 6px 14px; font-size: 0.85rem;">
+          [ &lt; RETURN_TO_ROOT ]
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

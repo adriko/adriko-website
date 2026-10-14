@@ -45,11 +45,11 @@ const counts = {
     <!-- RETRO BIOS / KERNEL BOOT OVERLAY -->
     <div id="boot-screen" class="boot-overlay" data-counts={JSON.stringify(counts)}>
       <div class="boot-header-bar">
-        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
           <!-- Logo w ekranie BIOS -->
           <svg
-            width="20"
-            height="20"
+            width="18"
+            height="18"
             viewBox="0 0 24 24"
             fill="none"
             stroke="#ff1a1a"
@@ -62,8 +62,8 @@ const counts = {
             <line x1="7" y1="11" x2="10" y2="12" />
             <line x1="17" y1="11" x2="14" y2="12" />
           </svg>
-          <span style="color: #ff3333; font-weight: bold;">[ADRIKO BIOS // AMI-COMPATIBLE v4.02]</span>
-          <span id="boot-status-msg" style="color: #774444; font-size: 0.75rem;">[SPACE: PAUSE | ESC: SKIP]</span>
+          <span style="color: #ff3333; font-weight: bold; font-size: 0.75rem;">[ADRIKO BIOS // v4.02]</span>
+          <span id="boot-status-msg" style="color: #774444; font-size: 0.68rem;">[SPACE: PAUSE | ESC: SKIP]</span>
         </div>
         <button id="boot-skip-btn" class="boot-skip-trg" type="button">[SKIP / ESC]</button>
       </div>
@@ -133,7 +133,7 @@ const counts = {
     </div>
 
     <style>
-      /* Styl nakładki rozruchowej BIOS / Kernel */
+      /* Styl nakładki rozruchowej BIOS / Kernel - wersja w pełni responsywna */
       .boot-overlay {
         position: fixed;
         inset: 0;
@@ -141,7 +141,7 @@ const counts = {
         color: #ff3333;
         font-family: var(--font-stack);
         z-index: 9999999;
-        padding: 2rem;
+        padding: 1rem;
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
@@ -153,11 +153,13 @@ const counts = {
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid #331212;
-        padding-bottom: 0.75rem;
-        margin-bottom: 1.5rem;
-        font-size: 0.8rem;
-        letter-spacing: 0.05em;
+        padding-bottom: 0.6rem;
+        margin-bottom: 1rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.03em;
         color: #ff4d4d;
+        flex-wrap: wrap;
+        gap: 0.5rem;
       }
 
       .boot-skip-trg {
@@ -165,9 +167,9 @@ const counts = {
         border: 1px solid #ff1a1a;
         color: #ff3333;
         font-family: inherit;
-        font-size: 0.78rem;
+        font-size: 0.72rem;
         font-weight: bold;
-        padding: 4px 10px;
+        padding: 4px 8px;
         cursor: pointer;
         box-shadow: 0 0 8px rgba(255, 26, 26, 0.3);
         transition: all 0.15s ease;
@@ -180,10 +182,33 @@ const counts = {
       }
 
       .boot-terminal-body {
-        font-size: 0.85rem;
-        line-height: 1.6;
+        font-size: 0.76rem; /* Kompaktowa, czytelna czcionka na smartfonach */
+        line-height: 1.5;
         white-space: pre-wrap;
         color: #d0d0d0;
+        max-width: 1200px;
+        word-break: break-word;
+      }
+
+      /* Desktop / Monitory 2K / 4K */
+      @media (min-width: 768px) {
+        .boot-overlay {
+          padding: 3rem 4rem;
+        }
+        .boot-header-bar {
+          font-size: 0.95rem;
+          padding-bottom: 1rem;
+          margin-bottom: 2rem;
+        }
+        .boot-skip-trg {
+          font-size: 0.85rem;
+          padding: 6px 14px;
+        }
+        .boot-terminal-body {
+          font-size: 1.1rem; /* Duża, kinowa czcionka na dużych ekranach */
+          line-height: 1.75;
+          word-break: normal;
+        }
       }
     </style>
 
@@ -202,7 +227,6 @@ const counts = {
           }
         } catch (e) {}
 
-        // Obliczenia telemetrii na kliencie do wyświetlenia w BIOS-ie
         const now = new Date();
         const lat = 50.0197;
         const lng = 22.6781;
@@ -232,7 +256,6 @@ const counts = {
         if (cycleFraction >= 0.47 && cycleFraction < 0.53) phase = 'FULL_MOON';
         else if (cycleFraction >= 0.03 && cycleFraction < 0.22) phase = 'WAX_CRES';
 
-        // Sprawdzenie czy sesja już się zainicjalizowała
         if (sessionStorage.getItem('adriko_booted') === 'true') {
           if (bootScreen) bootScreen.style.display = 'none';
         } else {
@@ -274,7 +297,7 @@ const counts = {
             isPaused = !isPaused;
             if (statusMsg) {
               if (isPaused) {
-                statusMsg.textContent = "[SYSTEM PAUSED - PRESS SPACE TO RESUME]";
+                statusMsg.textContent = "[SYSTEM PAUSED - SPACE TO RESUME]";
                 statusMsg.style.color = "#ffaa00";
               } else {
                 statusMsg.textContent = "[SPACE: PAUSE | ESC: SKIP]";
@@ -317,7 +340,6 @@ const counts = {
           timerId = setTimeout(runSequence, 250);
         }
 
-        // Inicjalizacja stopki HUD (Solar / Luna)
         if (!sessionStorage.getItem('adriko_session_start')) {
           sessionStorage.setItem('adriko_session_start', Date.now().toString());
         }

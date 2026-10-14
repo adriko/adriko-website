@@ -5,14 +5,17 @@
   --global-line-height: 1.6em;
   --global-space: 12px;
 
+  /* Czcionka JetBrains Mono */
   --font-stack: "JetBrains Mono", monospace;
   --mono-font-stack: "JetBrains Mono", monospace;
 
+  /* Motyw: Terminator Black & Neon Red */
   --background-color: #060606;
   --page-width: 76em;
   --font-color: #e5e5e5;
   --invert-font-color: #060606;
 
+  /* Czerwień T-800 */
   --primary-color: #ff1a1a;
   --secondary-color: #331010;
   --error-color: #ff3333;
@@ -21,6 +24,7 @@
   --code-bg-color: #0f0a0a;
 }
 
+/* Wymuszenie czcionki */
 html, body, input, button, select, textarea, code, pre {
   font-family: var(--font-stack) !important;
 }
@@ -33,6 +37,7 @@ body {
   flex-direction: column;
 }
 
+/* Bezpieczny kontener z marginesami bocznymi na mobilkach */
 .container {
   max-width: var(--page-width);
   margin: 0 auto;
@@ -44,6 +49,7 @@ body {
   min-height: 100vh;
 }
 
+/* Reset podświetleń terminal.css dla odnośników */
 a, a:visited {
   color: #ff1a1a;
   text-decoration: none;
@@ -58,6 +64,7 @@ a:hover, a:focus {
   text-shadow: 0 0 8px rgba(255, 26, 26, 0.6);
 }
 
+/* Karty wpisów */
 .terminal-card > header {
   background-color: transparent !important;
   color: inherit !important;
@@ -77,6 +84,7 @@ a:hover, a:focus {
   box-shadow: 0 0 15px rgba(255, 26, 26, 0.15);
 }
 
+/* Górna nawigacja */
 .terminal-nav {
   display: flex;
   justify-content: space-between;
@@ -151,6 +159,7 @@ a:hover, a:focus {
   text-shadow: 0 0 8px rgba(255, 26, 26, 0.6);
 }
 
+/* Przyciski i formularze */
 .btn-terminator, 
 a.btn-terminator, 
 button[type="submit"] {
@@ -177,6 +186,7 @@ button[type="submit"]:hover {
   text-shadow: none !important;
 }
 
+/* Wyszukiwarka w stylu Grep */
 .grep-wrapper {
   display: flex;
   align-items: center;
@@ -231,6 +241,38 @@ button[type="submit"]:hover {
   color: #856666;
 }
 
+/* Przycisk ESC/CLEAR w terminalu (poprawiony - brak białego tła) */
+.grep-clear-btn {
+  background: #090505 !important;
+  border: 1px solid #ff1a1a !important;
+  color: #ff1a1a !important;
+  font-family: inherit !important;
+  font-size: 0.75rem !important;
+  font-weight: bold !important;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 2px 6px !important;
+  border-radius: 2px;
+  display: none;
+  box-shadow: 0 0 6px rgba(255, 26, 26, 0.2);
+  transition: all 0.15s ease;
+}
+
+.grep-clear-btn:hover {
+  background: #ff1a1a !important;
+  color: #060606 !important;
+  box-shadow: 0 0 12px rgba(255, 26, 26, 0.6) !important;
+}
+
+.grep-status-bar {
+  font-size: 0.8rem;
+  margin-top: -1.25rem;
+  margin-bottom: 1.5rem;
+  color: #885555;
+  display: none;
+}
+
+/* Widok Drzewa UNIX */
 .tree-container {
   font-family: var(--font-stack);
   background: #080505;
@@ -294,6 +336,7 @@ button[type="submit"]:hover {
   text-overflow: ellipsis;
 }
 
+/* Stopka Taktyczna HUD */
 .tactical-footer {
   margin-top: 4rem;
   padding: 1.75rem 0 1.25rem 0;

@@ -9,7 +9,6 @@ interface Props {
 
 const { title = 'adriko // SYSTEM_HUB', activeNav = 'index' } = Astro.props;
 
-// Pobranie rzeczywistej liczby wpisów w kolekcjach na poziomie serwera
 const dbEntries = await getCollection('database').catch(() => []);
 const hwEntries = await getCollection('hardware').catch(() => []);
 const swEntries = await getCollection('software').catch(() => []);
@@ -30,13 +29,11 @@ const counts = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="adriko.net // Cyfrowy bunkier, retro-futurystyczny terminal, baza wiedzy i archiwum technologiczne." />
     
-    <!-- Ikona SVG -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
     
     <title>{title}</title>
     
-    <!-- Import Google Fonts: JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -46,10 +43,9 @@ const counts = {
     <div id="boot-screen" class="boot-overlay" data-counts={JSON.stringify(counts)}>
       <div class="boot-header-bar">
         <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-          <!-- Powiększone logo w ekranie BIOS -->
           <svg
-            width="24"
-            height="24"
+            width="22"
+            height="22"
             viewBox="0 0 24 24"
             fill="none"
             stroke="#ff1a1a"
@@ -63,7 +59,7 @@ const counts = {
             <line x1="17" y1="11" x2="14" y2="12" />
           </svg>
           <span style="color: #ff3333; font-weight: bold; letter-spacing: 0.05em;">[ADRIKO BIOS // v4.02]</span>
-          <span id="boot-status-msg" style="color: #aa5555; font-size: 0.8rem;">[SPACE/TAP: PAUSE | ESC: SKIP]</span>
+          <span id="boot-status-msg" style="color: #aa5555; font-size: 0.75rem;">[SPACE/TAP: PAUSE | ESC: SKIP]</span>
         </div>
         <button id="boot-skip-btn" class="boot-skip-trg" type="button">[SKIP / ESC]</button>
       </div>
@@ -73,7 +69,6 @@ const counts = {
     <div class="container">
       <header class="terminal-nav">
         <a href="/" class="brand">
-          <!-- Logo T-800 Hunter -->
           <svg
             width="26"
             height="26"
@@ -93,7 +88,6 @@ const counts = {
           <span style="font-size: 1.15rem; font-weight: 700; color: #ffffff; letter-spacing: 0.05em; text-shadow: 0 0 4px rgba(255, 26, 26, 0.35); white-space: nowrap;">adriko</span>
         </a>
 
-        <!-- Systemowa nawigacja po katalogach -->
         <nav class="nav-right" aria-label="Nawigacja systemowa">
           <ul class="nav-links">
             <li>
@@ -116,7 +110,6 @@ const counts = {
         <slot />
       </main>
 
-      <!-- Stopka taktyczna HUD -->
       <footer class="tactical-footer">
         <div class="hud-container">
           <span class="hud-item">[ HUB // ADRIKO.NET ]</span>
@@ -133,7 +126,6 @@ const counts = {
     </div>
 
     <style>
-      /* Styl nakładki rozruchowej BIOS / Kernel */
       .boot-overlay {
         position: fixed;
         inset: 0;
@@ -146,7 +138,7 @@ const counts = {
         flex-direction: column;
         box-sizing: border-box;
         overflow-y: auto;
-        cursor: pointer; /* Wskazuje, że ekran reaguje na dotknięcie/kliknięcie */
+        cursor: pointer;
       }
 
       .boot-header-bar {
@@ -156,7 +148,7 @@ const counts = {
         border-bottom: 1px solid #331212;
         padding-bottom: 0.8rem;
         margin-bottom: 1.25rem;
-        font-size: 1rem;
+        font-size: 0.9rem;
         letter-spacing: 0.03em;
         color: #ff4d4d;
         flex-wrap: wrap;
@@ -168,9 +160,9 @@ const counts = {
         border: 1px solid #ff1a1a;
         color: #ff3333;
         font-family: inherit;
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         font-weight: bold;
-        padding: 6px 12px;
+        padding: 5px 10px;
         cursor: pointer;
         box-shadow: 0 0 8px rgba(255, 26, 26, 0.3);
         transition: all 0.15s ease;
@@ -183,7 +175,7 @@ const counts = {
       }
 
       .boot-terminal-body {
-        font-size: 0.82rem;
+        font-size: 0.82rem; /* Standardowa wielkość czcionki terminalowej */
         line-height: 1.6;
         white-space: pre-wrap;
         color: #d0d0d0;
@@ -191,30 +183,28 @@ const counts = {
         word-break: break-word;
       }
 
-      /* Desktop / Monitory 2K / 4K */
       @media (min-width: 768px) {
         .boot-overlay {
-          padding: 3rem 4rem;
+          padding: 2.5rem 3rem;
         }
         .boot-header-bar {
-          font-size: 1.35rem;
-          padding-bottom: 1rem;
-          margin-bottom: 2rem;
+          font-size: 1rem;
+          padding-bottom: 0.8rem;
+          margin-bottom: 1.5rem;
         }
         .boot-skip-trg {
-          font-size: 0.95rem;
-          padding: 8px 16px;
+          font-size: 0.85rem;
+          padding: 6px 12px;
         }
         .boot-terminal-body {
-          font-size: 1.1rem;
-          line-height: 1.75;
+          font-size: 0.85rem; /* Zwrócona standardowa wielkość czcionki na PC */
+          line-height: 1.6;
           word-break: normal;
         }
       }
     </style>
 
     <script is:inline>
-      // Logika sekwencji rozruchowej BIOS / Kernel z obsługą tapnięcia na mobile
       (function() {
         const bootScreen = document.getElementById('boot-screen');
         const bootLog = document.getElementById('boot-log');
@@ -309,11 +299,10 @@ const counts = {
           }
 
           skipBtn?.addEventListener('click', (e) => {
-            e.stopPropagation(); // Zapobiega wywołaniu pauzy przy pomijaniu
+            e.stopPropagation();
             finishBoot();
           });
 
-          // Obsługa kliknięcia/dotknięcia ekranu w celu pauzy (działa na telefonach i PC)
           bootScreen?.addEventListener('click', (e) => {
             togglePause();
           });
@@ -361,7 +350,7 @@ const counts = {
 
         const lunaEl = document.getElementById('hud-luna');
         if (lunaEl) {
-          lunaEl.textContent = `LUNA: ${phase} [${ill}%]`;
+          lunaEl.textContext = `LUNA: ${phase} [${ill}%]`;
         }
       })();
     </script>

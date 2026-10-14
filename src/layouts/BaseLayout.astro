@@ -5,10 +5,12 @@ import { getCollection } from 'astro:content';
 interface Props {
   title?: string;
   activeNav?: 'database' | 'hardware' | 'software' | 'gear' | 'index';
+  showLogout?: boolean;
 }
 
-const { title = 'adriko // SYSTEM_HUB', activeNav = 'index' } = Astro.props;
+const { title = 'adriko // SYSTEM_HUB', activeNav = 'index', showLogout = false } = Astro.props;
 
+// Pobranie rzeczywistej liczby wpisów w kolekcjach na poziomie serwera
 const dbEntries = await getCollection('database').catch(() => []);
 const hwEntries = await getCollection('hardware').catch(() => []);
 const swEntries = await getCollection('software').catch(() => []);
@@ -29,11 +31,13 @@ const counts = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="adriko.net // Cyfrowy bunkier, retro-futurystyczny terminal, baza wiedzy i archiwum technologiczne." />
     
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Ikona SVG z wymuszeniem odświeżenia cache -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg?v=3" />
     
     <title>{title}</title>
     
+    <!-- Import Google Fonts: JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -69,6 +73,7 @@ const counts = {
     <div class="container">
       <header class="terminal-nav">
         <a href="/" class="brand">
+          <!-- Wariant C: T-800 Hunter -->
           <svg
             width="26"
             height="26"
@@ -104,12 +109,21 @@ const counts = {
             </li>
           </ul>
         </nav>
+
+        {showLogout && (
+          <form method="POST" action="/logout" style="margin: 0; display: inline-flex;">
+            <button type="submit" class="btn-terminator" style="padding: 2px 8px; font-size: 0.78rem; white-space: nowrap;">
+              [exit]
+            </button>
+          </form>
+        )}
       </header>
 
       <main style="flex: 1 0 auto;">
         <slot />
       </main>
 
+      <!-- Stopka taktyczna HUD (Retro-Futurism T-800 & Orbital Telemetry) -->
       <footer class="tactical-footer">
         <div class="hud-container">
           <span class="hud-item">[ HUB // ADRIKO.NET ]</span>
@@ -175,7 +189,7 @@ const counts = {
       }
 
       .boot-terminal-body {
-        font-size: 0.82rem; /* Standardowa wielkość czcionki terminalowej */
+        font-size: 0.82rem;
         line-height: 1.6;
         white-space: pre-wrap;
         color: #d0d0d0;
@@ -197,7 +211,7 @@ const counts = {
           padding: 6px 12px;
         }
         .boot-terminal-body {
-          font-size: 0.85rem; /* Zwrócona standardowa wielkość czcionki na PC */
+          font-size: 0.85rem;
           line-height: 1.6;
           word-break: normal;
         }
@@ -250,15 +264,16 @@ const counts = {
         if (sessionStorage.getItem('adriko_booted') === 'true') {
           if (bootScreen) bootScreen.style.display = 'none';
         } else {
+          // Usunięte zbędne spacje, idealne wyrównanie kolumn
           const bootSequence = [
             { text: "CPU: VIRTUAL RISC-V CORE @ 4.2 GHz // ARCH: x86_64-UNIX", delay: 230, color: "#ff3333" },
             { text: "BIOS MEMORY CHECK: 131072 KB RAM OK [0 ERROR(S)]", delay: 240 },
             { text: "INITIALIZING BUS & STORAGE CONTROLLERS... [DONE]", delay: 240 },
             { text: "MOUNTING VIRTUAL FILESYSTEM /sys/root/...", delay: 280 },
-            { text: ` -> SCANNING ./database [RECORDS: ${counts.database}] ... [OK]`, delay: 200 },
-            { text: ` -> SCANNING ./hardware [RECORDS: ${counts.hardware}] ... [OK]`, delay: 200 },
-            { text: ` -> SCANNING ./software [RECORDS: ${counts.software}] ... [OK]`, delay: 200 },
-            { text: ` -> SCANNING ./gear     [RECORDS: ${counts.gear}]     ... [OK]`, delay: 220 },
+            { text: ` -> SCANNING ${'./database'.padEnd(12, ' ')} [RECORDS: ${counts.database}] ... [OK]`, delay: 200 },
+            { text: ` -> SCANNING ${'./hardware'.padEnd(12, ' ')} [RECORDS: ${counts.hardware}] ... [OK]`, delay: 200 },
+            { text: ` -> SCANNING ${'./software'.padEnd(12, ' ')} [RECORDS: ${counts.software}] ... [OK]`, delay: 200 },
+            { text: ` -> SCANNING ${'./gear'.padEnd(12, ' ')} [RECORDS: ${counts.gear}] ... [OK]`, delay: 220 },
             { text: "ESTABLISHING ORBITAL TELEMETRY LINK...", delay: 260 },
             { text: ` -> TARGET GRID: 50.0197° N, 22.6781° E [JAROSŁAW, PL]`, delay: 200 },
             { text: ` -> ENVIRONMENTAL: ${solarStr} // LUNA: ${phase} [${ill}%]`, delay: 240 },
@@ -350,7 +365,7 @@ const counts = {
 
         const lunaEl = document.getElementById('hud-luna');
         if (lunaEl) {
-          lunaEl.textContext = `LUNA: ${phase} [${ill}%]`;
+          lunaEl.textContent = `LUNA: ${phase} [${ill}%]`;
         }
       })();
     </script>

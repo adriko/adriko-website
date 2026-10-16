@@ -261,7 +261,18 @@ hr {
 }
 
 .grep-input::placeholder {
-  color: #a87878;
+  color: #6e4646 !important;
+  opacity: 1 !important;
+}
+
+.grep-input::-webkit-input-placeholder {
+  color: #6e4646 !important;
+  opacity: 1 !important;
+}
+
+.grep-input::-moz-placeholder {
+  color: #6e4646 !important;
+  opacity: 1 !important;
 }
 
 .grep-clear-btn {

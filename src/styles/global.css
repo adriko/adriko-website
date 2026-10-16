@@ -9,19 +9,19 @@
   --font-stack: "JetBrains Mono", monospace;
   --mono-font-stack: "JetBrains Mono", monospace;
 
-  /* Motyw: T-800 Deep Carbon Graphite */
-  --background-color: #100e0e;
+  /* Motyw: Wyraźny grafit węglowy (Dark Carbon / Cyberpunk Slate) */
+  --background-color: #181515;
   --page-width: 76em;
   --font-color: #dedede;
-  --invert-font-color: #100e0e;
+  --invert-font-color: #181515;
 
   /* Czerwień T-800 i neony */
   --primary-color: #ff1a1a;
-  --secondary-color: #2b1313;
+  --secondary-color: #331515;
   --error-color: #ff3333;
-  --progress-bar-background: #1c1111;
+  --progress-bar-background: #251818;
   --progress-bar-fill: #ff1a1a;
-  --code-bg-color: #161010;
+  --code-bg-color: #201919;
 }
 
 /* Wymuszenie czcionki */
@@ -64,7 +64,7 @@ a:hover, a:focus {
   text-shadow: 0 0 10px rgba(255, 26, 26, 0.75), 0 0 20px rgba(255, 26, 26, 0.35);
 }
 
-/* Karty wpisów na grafitowym tle z głęboką poświatą */
+/* Karty wpisów – wyraźnie odcięte od tła */
 .terminal-card > header {
   background-color: transparent !important;
   color: inherit !important;
@@ -73,16 +73,16 @@ a:hover, a:focus {
 }
 
 .terminal-card {
-  border: 1px solid #2a1616 !important;
-  background: #161111 !important;
+  border: 1px solid #361c1c !important;
+  background: #221b1b !important;
   border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
 }
 
 .terminal-card:hover {
   border-color: #ff1a1a !important;
-  box-shadow: 0 0 16px rgba(255, 26, 26, 0.25), 0 0 32px rgba(255, 26, 26, 0.1);
+  box-shadow: 0 0 16px rgba(255, 26, 26, 0.3), 0 0 32px rgba(255, 26, 26, 0.12);
   transform: translateY(-1px);
 }
 
@@ -91,7 +91,7 @@ a:hover, a:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #261414;
+  border-bottom: 1px solid #331919;
   padding: 1.2rem 0;
   margin-bottom: 2.2rem;
   flex-wrap: nowrap;
@@ -150,7 +150,7 @@ a:hover, a:focus {
 }
 
 .nav-links a {
-  color: #8c8282 !important;
+  color: #9c8e8e !important;
   font-size: 0.78rem;
   white-space: nowrap;
   transition: color 0.15s ease, text-shadow 0.15s ease;
@@ -165,7 +165,7 @@ a:hover, a:focus {
 
 /* Przyciski i formularze z neonowym akcentem */
 .btn-terminator, button[type="submit"] {
-  background: #171010 !important;
+  background: #241818 !important;
   border: 1px solid #ff1a1a !important;
   color: #ff2a2a !important;
   font-family: inherit;
@@ -177,7 +177,7 @@ a:hover, a:focus {
 
 .btn-terminator:hover, button[type="submit"]:hover {
   background: #ff1a1a !important;
-  color: #0d0a0a !important;
+  color: #120d0d !important;
   box-shadow: 0 0 18px rgba(255, 26, 26, 0.75), 0 0 30px rgba(255, 26, 26, 0.35);
 }
 
@@ -185,44 +185,44 @@ a:hover, a:focus {
   opacity: 0.3;
   cursor: not-allowed;
   pointer-events: none;
-  border-color: #442222 !important;
+  border-color: #4a2828 !important;
   color: #777777 !important;
   box-shadow: none !important;
 }
 
 input {
-  background: #140f0f !important;
-  border: 1px solid #2e1616 !important;
+  background: #1f1818 !important;
+  border: 1px solid #3a1e1e !important;
   color: #ffffff !important;
 }
 
 input:focus {
   border-color: #ff1a1a !important;
-  box-shadow: 0 0 12px rgba(255, 26, 26, 0.4) !important;
+  box-shadow: 0 0 12px rgba(255, 26, 26, 0.45) !important;
 }
 
 fieldset {
-  border: 1px solid #2a1616 !important;
+  border: 1px solid #361c1c !important;
 }
 
 hr {
   border: 0;
-  border-top: 1px dashed #2a1616;
+  border-top: 1px dashed #361c1c;
 }
 
 /* ========================================================
-   KONSOLA WYSZUKIWANIA I CLI (Grafit z czerwoną poświatą)
+   KONSOLA WYSZUKIWANIA I CLI
    ======================================================== */
 .grep-wrapper {
   display: flex;
   align-items: center;
-  background: #140f0f;
-  border: 1px solid #2d1616;
+  background: #201919;
+  border: 1px solid #381e1e;
   border-radius: 2px;
   padding: 0.5rem 0.85rem;
   margin: 1.25rem 0 2rem 0;
   gap: 0.6rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -235,7 +235,7 @@ hr {
   font-size: 0.8rem;
   white-space: nowrap;
   user-select: none;
-  color: #8f5a5a;
+  color: #9c6363;
 }
 
 .grep-prompt-user {
@@ -245,7 +245,7 @@ hr {
 }
 
 .grep-prompt-path {
-  color: #8a7a7a;
+  color: #948686;
 }
 
 .grep-cmd {
@@ -266,11 +266,11 @@ hr {
 }
 
 .grep-input::placeholder {
-  color: #7d5b5b;
+  color: #8c6767;
 }
 
 .grep-clear-btn {
-  background: #180f0f !important;
+  background: #261616 !important;
   border: 1px solid #ff1a1a !important;
   color: #ff2a2a !important;
   font-family: inherit !important;
@@ -287,7 +287,7 @@ hr {
 
 .grep-clear-btn:hover {
   background: #ff1a1a !important;
-  color: #0e0a0a !important;
+  color: #120d0d !important;
   box-shadow: 0 0 14px rgba(255, 26, 26, 0.8) !important;
 }
 
@@ -295,7 +295,7 @@ hr {
   font-size: 0.8rem;
   margin-top: -1.25rem;
   margin-bottom: 1.5rem;
-  color: #8c5858;
+  color: #9c6363;
   display: none;
 }
 
@@ -304,11 +304,11 @@ hr {
    ======================================================== */
 .tree-container {
   font-family: var(--font-stack);
-  background: #140f0f;
-  border: 1px solid #2a1616;
+  background: #201919;
+  border: 1px solid #361c1c;
   padding: 1.5rem;
   border-radius: 2px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
   overflow-x: auto;
 }
 
@@ -335,31 +335,31 @@ hr {
 }
 
 .tree-item:hover {
-  background: #231414 !important;
+  background: #2d1d1d !important;
 }
 
 .tree-branch {
-  color: #5d2626;
+  color: #6d2f2f;
   user-select: none;
   flex-shrink: 0;
 }
 
 .tree-date {
-  color: #8c5252;
+  color: #9e5d5d;
   font-size: 0.8rem;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .tree-filename {
-  color: #e5e5e5;
+  color: #efefef;
   font-size: 0.9rem;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .tree-comment {
-  color: #7d7070;
+  color: #8c7e7e;
   font-size: 0.8rem;
   margin-left: 0.25rem;
   white-space: nowrap;
@@ -389,7 +389,7 @@ hr {
   gap: 1rem;
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px dashed #2a1616;
+  border-top: 1px dashed #361c1c;
   flex-wrap: wrap;
 }
 
@@ -407,9 +407,9 @@ hr {
 .tactical-footer {
   margin-top: 4rem;
   padding: 1.75rem 0 1.25rem 0;
-  border-top: 1px solid #241212;
+  border-top: 1px solid #301717;
   font-size: 0.72rem;
-  color: #946868;
+  color: #a37272;
   user-select: none;
 }
 
@@ -426,7 +426,7 @@ hr {
 }
 
 .hud-sep {
-  color: #5c2d2d;
+  color: #6a3434;
 }
 
 /* ========================================================

@@ -61,24 +61,13 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
 ---
 
 <BaseLayout title="adriko // SYSTEM_HUB" activeNav="index">
+  <!-- Nagłówek i telemetria z przyciskami w jednej linii -->
   <section style="margin-bottom: 1.5rem;">
+    <h2 style="margin-bottom: 0.5rem; color: #fff; font-size: 1.25rem; letter-spacing: 0.05em;">
+      [ SYS_FEED // MAIN_REGISTRY ]
+    </h2>
+
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
-      <h2 style="margin: 0; color: #fff; font-size: 1.25rem; letter-spacing: 0.05em;">
-        [ SYS_FEED // MAIN_REGISTRY ]
-      </h2>
-
-      <!-- Przełącznik widoków z domyślnie aktywną klasą CARDS -->
-      <div style="display: flex; gap: 0.5rem;">
-        <button id="view-cards-btn" class="btn-terminator active" style="padding: 2px 8px; font-size: 0.75rem;">
-          [VIEW: CARDS]
-        </button>
-        <button id="view-tree-btn" class="btn-terminator" style="padding: 2px 8px; font-size: 0.75rem;">
-          [VIEW: TREE]
-        </button>
-      </div>
-    </div>
-
-    <div style="margin-top: 0.6rem;">
       <p style="color: #777; font-size: 0.82rem; margin: 0; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
         <span>STATUS: <span style="color: #ff1a1a; font-weight: bold; text-shadow: 0 0 6px rgba(255,26,26,0.6);">ONLINE</span></span>
         <span style="color: #331515;">|</span>
@@ -88,6 +77,16 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
         <span style="color: #331515;">|</span>
         <span id="session-uptime" style="color: #aa4444; font-weight: 600;">[UPTIME 00:00:00]</span>
       </p>
+
+      <!-- Przełącznik widoków CARDS / TREE -->
+      <div style="display: flex; gap: 0.5rem;">
+        <button id="view-cards-btn" class="btn-terminator active" style="padding: 2px 8px; font-size: 0.75rem;">
+          [VIEW: CARDS]
+        </button>
+        <button id="view-tree-btn" class="btn-terminator" style="padding: 2px 8px; font-size: 0.75rem;">
+          [VIEW: TREE]
+        </button>
+      </div>
     </div>
   </section>
 
@@ -413,7 +412,7 @@ grep <pattern>    : Filter filesystem by text pattern`;
         cliOutputContent.textContent = 
 `[ OPERATOR IDENTITY DOSSIER ]
 ----------------------------------------------------------------------
-OPERATOR          : Adrian Korzeń // Core System Administrator
+OPERATOR          : Adrian K***** // Core System Administrator
 DESIGNATION       : Developer, Techie & System Architect
 LOCATION_GRID     : 50.0197° N, 22.6781° E [Jarosław, PL]
 TECH_STACK        : Astro, TypeScript, Python, Linux Kernel, CLI

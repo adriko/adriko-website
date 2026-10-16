@@ -1,54 +1,55 @@
 ---
-title: "SYS_INIT // Geneza adriko.net: od kafejek internetowych i Deus Ex po cyfrowy bunkier"
+title: "SYS_INIT // Skąd się wziął adriko.net: kafejki, Deus Ex i mój własny kąt w sieci"
 date: "2026-10-16"
-tags: ["manifesto", "cyberpunk", "retro", "deus-ex", "half-life", "duron", "astro", "terminal"]
-description: "Inauguracyjny wpis na adriko.net. Osobiste korzenie rocznika '87: granie w Half-Life w banku u mamy, wakacje z Deus Ex w kafejce, walka z DOS-em i architektura mojego cyfrowego bunkra."
+tags: ["manifesto", "retro", "deus-ex", "half-life", "nostalgia", "gry", "duron"]
+description: "Skąd wziął się pomysł na tę stronę, jak wyglądały moje początki z grami w banku u mamy i kafejkach internetowych oraz o czym będę tutaj pisać."
 ---
 
-Współczesny internet bywa męczący. Zdominowany przez jednakowe algorytmiczne tablice, powtarzalne layouty i bezduszny clickbait, stracił gdzieś ten surowy, fascynujący charakter, którym zarażał na przełomie tysiącleci. 
+Cześć! Jeśli tu trafiłeś, to pewnie też masz już trochę dość tego, jak wygląda dzisiejszy internet. Wszędzie te same szablony, tablice zalane reklamami, algorytmy wciskające clickbaity i zero jakiejkolwiek duszy. Strasznie brakuje mi tamtego klimatu sieci z przełomu wieków — czasów, kiedy strony robiło się z czystej pasji, a internet był miejscem fascynujących odkryć, a nie wielką machiną do robienia wyświetleń.
 
-**adriko.net** to moja odpowiedź na ten przesyt — prywatny cyfrowy bunkier, autorskie archiwum i przestrzeń zbudowana z czystej pasji do technologii, fantastyki naukowej i mechanicznej precyzji.
+Dlatego powstało **adriko.net**. To po prostu mój prywatny, cyfrowy kąt w sieci, w którym zbieram rzeczy, które naprawdę mnie kręcą: technologię, gry, stare dobre sci-fi i wszystko, co ma w sobie odrobinę cyberpunkowego klimatu.
 
 ---
 
-### Rocznik '87, kasety VHS i bankowy Half-Life
+### Rocznik '87, kasety VHS i Half-Life w banku
 
-Moje zamiłowanie do science fiction i technologii nie wzięło się znikąd. Kształtowało się w latach 90. przed kineskopowym telewizorem, gdzie na kasetach VHS w pętli oglądałem biomechaniczny mrok w *Alienie*, chłodną stal szkieletu T-800 w *Terminatorze 2* oraz wehikuł czasu w *Powrocie do Przyszłości*. Te produkcje miały namacalną wagę — technologia brzmiała tam stukotem przekaźników i nie ukrywała kabli ani śrub.
+Moja zajawka na fantastykę i komputery nie wzięła się znikąd. Jestem z rocznika '87, więc dzieciństwo spędziłem z nosem przy kineskopowym telewizorze. Kasety VHS oglądało się u mnie do zajechania taśmy — nie zliczę, ile razy leciał *Obcy*, *Terminator 2* z niezniszczalnym T-800 czy *Powrót do Przyszłości*. Te filmy miały w sobie coś namacalnego i surowego; technologia na ekranie miała swoją wagę, kable były na wierzchu, a maszyny brzmiały jak prawdziwe, ciężkie żelastwo.
 
-Zanim w moim domu stanął pierwszy stacjonarny komputer, technologia wkradała się do mojego życia tylnymi drzwiami. Po lekcjach w szkole często chodziłem do pracy mojej mamy, która była zatrudniona w banku. Pracujący tam informatyk miał w swoim pokoju prawdziwe technologiczne królestwo i serce na dłoni — odpalał mi na firmowym pececie pierwszego **Half-Life (1998)**. Pamiętny wjazd wagonikiem do podziemnego kompleksu Black Mesa i surowy, laboratoryjny klimat zapadły mi w pamięć na zawsze.
+Z komputerami było podobnie, choć na własnego peceta w pokoju musiałem trochę poczekać. W latach 90. po szkole często zachodziłem do pracy mojej mamy, która pracowała w banku. Trafiłem tam na świetnego gościa — bankowego informatyka. Widząc dzieciaka wpatrzonego z zachwytem w monitor, sadzał mnie u siebie w pokoju i odpalał na służbowym sprzęcie pierwszego **Half-Life'a**. Ten kultowy wjazd wagonikiem do laboratorium Black Mesa i surowy, laboratoryjny klimat wryły mi się w pamięć na zawsze.
 
-Czasami mama przynosiła komputer z biura do domu na weekend, żeby nadrobić zaległości w papierkowej robocie. Kiedy tylko zwalniało się miejsce przy klawiaturze, natychmiast siadałem do eksperymentów. Nie zliczę, ile razy grzebiąc w MS-DOS, `config.sys` czy plikach systemowych potrafiłem coś totalnie wysypać... Kończyło się to nerwowymi wycieczkami do zaprzyjaźnionego sklepu komputerowego, gdzie serwisanci cierpliwie stawiali system na nogi. To była moja pierwsza, bezcenna szkoła obcowania z hardwarem i oprogramowaniem.
+Czasem mama pożyczała komputer z biura na weekend do domu, żeby nadgonić papiery. Jak tylko wstawała od biurka, natychmiast dopadałem do klawiatury. No i... nie zliczę, ile razy tak namieszałem w DOS-ie czy plikach systemowych, że w poniedziałek rano sprzęt nie chciał wstać. Trzeba było na szybko wieźć całą skrzynkę do zaprzyjaźnionego sklepu komputerowego, żeby chłopaki postawili system na nogi. Do dzisiaj mam z tego niezły ubaw, ale to była moja najlepsza szkoła życia z komputerami.
 
 ---
 
 ### Wakacje 2000: Kafejka internetowa, Deus Ex i magia Diablo 2
 
-Gdy w 2000 roku zadebiutował **Deus Ex**, większość moich znajomych bez reszty przepadała w mroku Sanktuarium w **Diablo 2**. Choć sam również dałem się porwać niesamowitej magii dzieła Blizzarda, to moje serce bezpowrotnie ukradł cyberpunk. 
+Kiedy w 2000 roku premierę miał **Deus Ex**, wszyscy kumple dookoła zagrywali się do upadłego w **Diablo 2**. Mnie też mroczny świat Sanktuarium niesamowicie wciągnął, ale cyberpunk to było coś zupełnie innego — to była miłość od pierwszego wejrzenia.
 
-Nie mając jeszcze w domu własnej maszyny zdolnej uciągnąć rewolucyjną grafikę 3D, całe kieszonkowe podczas wakacji zostawiałem w lokalnej kafejce internetowej. Godzinami przesiadywałem w dymie i półmroku, eksplorując deszczowe doki Nowego Jorku jako JC Denton. Nanotechnologia, spiski korporacyjne, trackerowy soundtrack i absolutna swoboda wyboru — *Deus Ex* na zawsze zdefiniował to, czym dla mnie jest dojrzałe sci-fi.
+W domu nie miałem jeszcze wtedy maszyny, która pociągnęłaby tak zaawansowaną grafikę 3D, więc całe wakacyjne kieszonkowe lądowało w lokalnej kafejce internetowej. Wykupowałem godziny i przesiadywałem w dusznej sali, wczuwając się w rolę JC Dentona w deszczowym Nowym Jorku. Nanoulepszenia, spiski wielkich korporacji, wolność wyboru i genialna muzyka — to był dla mnie absolutny kosmos.
 
-Wreszcie, w 2001 roku, nadszedł upragniony moment: rodzice kupili mi mój pierwszy własny, porządny komputer z procesorem **AMD Duron 850 MHz** na pokładzie. Od tamtej pory nie musiałem już dzielić czasu na minuty w kafejce — mogłem do woli rozbierać systemy na części pierwsze we własnym pokoju.
-
----
-
-### Manifest: Czym jest to miejsce?
-
-Nie buduję kolejnego portalu informacyjnego, który goni za wyświetleniami i powiela korporacyjne notki prasowe. adriko.net to subiektywna baza wiedzy i autorski dziennik operacyjny pasjonata. Znajdziesz tu:
-
-1. **Popkulturę i archiwum wrażeń (`./database`)** — szczere, osobiste opinie o filmach, książkach sci-fi, ukończonych grach czy wartym uwagi anime, zamiast suchych ocen z agregatorów.
-2. **Hardware i gadżety (`./hardware`)** — praktyczne spojrzenie na sprzęt komputerowy, smartwatche, urządzenia mobile i testowane nowinki technologiczne.
-3. **Software i systemy operacyjne (`./software`)** — ciekawostki ze świata środowisk uniksowych, narzędzi terminalowych, programowania, automatyzacji i minimalistycznego oprogramowania.
-4. **Mechanikę i motoryzację (`./gear`)** — inżynierię na dwóch i czterech kołach, od motocyklowych nakedów pokroju Triumpha Street Triple po intrygujące rozwiązania mechaniczne.
+Wreszcie w 2001 roku nadszedł ten wielki dzień: rodzice kupili mi pierwszy porządny, stacjonarny komputer do domu. Pamiętam jak dziś, że sercem tej maszyny był procesor **AMD Duron 850 MHz**. Wtedy dopiero zaczęła się prawdziwa zabawa, bo mogłem testować, uczyć się i psuć systemy już na własną rękę, bez patrzenia na uciekające minuty w kafejce.
 
 ---
 
-### Architektura pod maską: TTY, AMI BIOS i Astro
+### O czym będę tutaj pisać?
 
-Chciałem, aby sama strona wizualnie i technicznie oddawała ducha epoki, która mnie ukształtowała. Zrezygnowałem z gotowych CMS-ów na rzecz nowoczesnego, statycznego frameworka **Astro**, stawiając na szybkość, czysty HTML i pliki Markdown:
+Zamiast udawać kolejny portal informacyjny, który na siłę goni za newsami i powiela notki prasowe, chcę, żeby to miejsce było po prostu moim autorskim notatnikiem. Pogadamy tu o:
 
-* **AMI BIOS Boot Overlay** — sekwencja rozruchowa stylizowana na klasyczny American Megatrends BIOS v4.02 z lat 90. Wylicza pamięć, skanuje strukturę katalogów (`./database`, `./hardware`, `./software`, `./gear`) i reaguje na spację na PC lub tapnięcie palcem na telefonie (pauza/wznowienie).
-* **Telemetria taktyczna HUD** — w stopce zaimplementowałem precyzyjne algorytmy solarne NOAA i fazy księżyca w czasie rzeczywistym dla współrzędnych Jarosławia.
-* **Wyszukiwarka Grep / Terminal Shell** — pole wyszukiwania działające błyskawicznie w locie w estetyce konsoli uniksowej.
-* **Przełącznik widoków** — możliwość przeglądania wpisów w postaci nowoczesnych kart (`[VIEW: CARDS]`) lub surowego, uniksowego drzewa plików (`[VIEW: TREE]`).
+1. **Popkulturze (`./database`)** — szczerze i bez owijania w bawełnę o filmach, książkach sci-fi, grach, które właśnie ukończyłem, czy anime, które warto obejrzeć. Po prostu moja prywatna opinia, jak przy pogawędce z dobrym znajomym.
+2. **Sprzęcie i gadżetach (`./hardware`)** — o komputerach, podzespołach, smartwatchach i wszelkich urządzeniach, które sam kupię albo będę miał okazję przetestować na własnej skórze.
+3. **Programach i systemach (`./software`)** — o ciekawych rozwiązaniach w systemach operacyjnych, Linuksie, pracy w konsoli, automatyzacji i małych, sprytnych narzędziach ułatwiających codzienne życie.
+4. **Motoryzacji i mechanice (`./gear`)** — o ciekawych premierach ze świata motoryzacji, nowinkach technicznych na dwóch i czterech kołach oraz czystej, mechanicznej frajdzie z jazdy.
+
+---
+
+### Jak powstała ta strona?
+
+Chciałem, żeby sama strona wyglądała i działała inaczej niż większość współczesnych witryn. Zamiast stawiać ją na ciężkich, gotowych szablonach, zbudowałem ją od zera na frameworku **Astro**. Dzięki temu jest niesamowicie lekka, szybka i opiera się na zwykłych plikach tekstowych.
+
+Wystylizowałem ją w surowym klimacie starych terminali i komputerów:
+* **Ekran startowy BIOS** — sekwencja wzorowana na starych płytach głównych z lat 90. Wylicza pamięć i skanuje katalogi. Jeśli nie chcesz czekać, możesz ją pominąć klawiszem ESC, a na smartfonie wystarczy tapnąć palcem w ekran, żeby ją spauzować.
+* **Wyszukiwarka w konsoli** — działa błyskawicznie w locie, wystarczy wpisać słowo kluczowe w linii poleceń.
+* **Zmiana widoku** — możesz przeglądać archiwum tradycyjnie w formie kafelków (`[VIEW: CARDS]`) albo w surowym widoku drzewa plików (`[VIEW: TREE]`).
+* **Telemetria w stopce** — na samym dole strony działa mały skrypt, który na żywo wylicza godziny wschodu i zachodu słońca oraz fazę księżyca dla moich okolic (Jarosław).
 
 Zapraszam do eksploracji. System działa, rozgość się w moim cyfrowym kącie!

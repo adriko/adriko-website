@@ -15,8 +15,6 @@ Dlatego powstało **adriko.net**. To po prostu mój prywatny, cyfrowy kąt w sie
 
 Moja zajawka na fantastykę i technologię nie wzięła się znikąd. Jestem z rocznika '87, więc dzieciństwo spędziłem z nosem przy kineskopowym telewizorze. Kasety VHS oglądało się u mnie do zajechania taśmy — w kółko leciał duszny *Obcy*, *Terminator 2* z niezniszczalnym T-800 czy *Powrót do Przyszłości*. 
 
-Gdzieś obok zawsze kręciła się też **Godzilla**. Od małego czułem dziwną więź z tym potężnym gadem i na filmach bez wahania trzymałem jego stronę. Zawsze uważałem go za postać tragicznie niezrozumianą przez ludzi — podobała mi się zarówno wizja antycznego strażnika Ziemi, jak i mroczna geneza bestii zrodzonej w atomowej pożodze powojennych eksperymentów jądrowych.
-
 A potem, w 1999 roku, do kin wjechał **Matrix** i wywrócił wszystko do góry nogami. Ten film zmienił dla mnie absolutnie wszystko. Spływający po zielonych kineskopach cyfrowy deszcz, czarne konsole, komendy uniksowe, budki telefoniczne i mroczne, hakerskie podziemie walczące z bezdusznym systemem — to właśnie tam na dobre narodziła się moja fascynacja terminalami, wierszem poleceń i cyberpunkową estetyką.
 
 ---
@@ -30,7 +28,7 @@ Kiedy wyłączało się magnetowid, pałeczkę przejmowała popołudniowa telewi
 * **MacGyver** — facet, który ze scyzoryka, spinacza i baterii potrafił zmajstrować cokolwiek, ucząc szacunku do majsterkowania i kombinowania.
 * **Podwodny grom (Thunder in Paradise)** — Hulk Hogan za sterami futurystycznej motorówki bojowej naszpikowanej elektroniką.
 
-Do tego dochodziły kreskówki. Na legendarnej Polonii 1 chłonąłem wielkie mechy w *Generale Daimosie*, po szkole leciały *Transformersy*, bezbłędne *Motomyszy z Marsa* i kultowe *Beast Wars* (czyli emitowane u nas *Kosmiczne Wojny*, gdzie roboty zamieniały się w dinozaury i drapieżniki). A punktualnie o 15:00 na Polsacie rządził jeden tytuł: **Batman: The Animated Series**. Mroczny klimat Gotham w stylu retro-art deco, czerwone niebo i genialny podkład muzyczny sprawiły, że Gacek do dzisiaj jest moim absolutnie ulubionym komiksowym bohaterem.
+Do tego dochodziły kreskówki. Na legendarnej Polonii 1 chłonąłem wielkie mechy w *Generale Daimosie*, po szkole leciały *Transformersy*, bezbłędne *Motomyszy z Marsa* i kultowe *Beast Wars* (czyli emitowane u nas *Kosmiczne Wojny*, gdzie roboty zamieniały się w dinozaury i drapieżniki). A punktualnie o 15:00 na Polsacie rządził jeden tytuł: **Batman: The Animated Series**. Mroczny klimat Gotham w stylu retro-art deco, czerwone niebo i genialny podkład muzyczny sprawiły, że Batman do dzisiaj jest moim absolutnie ulubionym komiksowym bohaterem.
 
 ---
 

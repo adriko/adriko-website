@@ -21,7 +21,7 @@ Kiedy wyłączało się magnetowid, pałeczkę przejmowała telewizja, która wt
 * **MacGyver** — facet, który ze scyzoryka, spinacza biurowego i baterii potrafił zmajstrować cokolwiek, ucząc szacunku do majsterkowania i kombinowania.
 * **Podwodny grom (Thunder in Paradise)** — Hulk Hogan za sterami futurystycznej, naszpikowanej elektroniką motorówki bojowej.
 
-Do tego dochodziły kreskówki. Na legendarnej Polonii 1 chłonąłem wielkie mechy w *Generale Daimosie*, po szkole leciały *Transformersy*, bezbłędne *Motomyszy z Marsa* i kultowe *Beast Wars* (czyli emitowane u nas *Kosmiczne Wojny*, gdzie roboty zamieniały się w dinozaury i drapieżniki). A punktualnie o 15:00 na Polsacie rządził jeden tytuł: **Batman: The Animated Series**. Mroczny klimat Gotham w stylu retro-art deco, czerwone niebo i genialny podkład muzyczny sprawiły, że Gacek do dzisiaj jest moim absolutnie ulubionym komiksowym bohaterem.
+Do tego dochodziły kreskówki. Na legendarnej Polonii 1 chłonąłem wielkie mechy w *Generale Daimosie*, po szkole leciały *Transformersy*, bezbłędne *Motomyszy z Marsa* i kultowe *Beast Wars* (czyli emitowane u nas *Kosmiczne Wojny*, gdzie roboty zamieniały się w dinozaury i drapieżniki). A punktualnie o 15:00 na Polsacie rządził jeden tytuł: **Batman: The Animated Series**. Mroczny klimat Gotham w stylu retro-art deco, czerwone niebo i genialny podkład muzyczny sprawiły, że Batman do dzisiaj jest moim absolutnie ulubionym komiksowym bohaterem.
 
 ---
 

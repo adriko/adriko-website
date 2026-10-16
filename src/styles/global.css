@@ -488,3 +488,28 @@ hr {
     margin: 0 !important;
   }
 }
+
+/* ========================================================
+   PRZEŁĄCZNIK WIDOKÓW CARDS / TREE (Aktywny neon T-800)
+   ======================================================== */
+.btn-terminator.active {
+  background: #ff1a1a !important;
+  color: #0b0a0a !important;
+  border-color: #ff1a1a !important;
+  box-shadow: 0 0 14px rgba(255, 26, 26, 0.75), 0 0 24px rgba(255, 26, 26, 0.35) !important;
+}
+
+#view-cards-btn:not(.active),
+#view-tree-btn:not(.active) {
+  background: #130e0e !important;
+  border: 1px solid #331515 !important;
+  color: #ff2222 !important;
+  box-shadow: none !important;
+}
+
+#view-cards-btn:not(.active):hover,
+#view-tree-btn:not(.active):hover {
+  border-color: #ff1a1a !important;
+  color: #ff4d4d !important;
+  background: #1e1111 !important;
+}

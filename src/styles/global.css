@@ -9,19 +9,19 @@
   --font-stack: "JetBrains Mono", monospace;
   --mono-font-stack: "JetBrains Mono", monospace;
 
-  /* Motyw: Terminator Black & Neon Red */
-  --background-color: #060606;
+  /* Motyw: T-800 Deep Carbon Graphite */
+  --background-color: #100e0e;
   --page-width: 76em;
-  --font-color: #e5e5e5;
-  --invert-font-color: #060606;
+  --font-color: #dedede;
+  --invert-font-color: #100e0e;
 
-  /* Czerwień T-800 */
+  /* Czerwień T-800 i neony */
   --primary-color: #ff1a1a;
-  --secondary-color: #331010;
+  --secondary-color: #2b1313;
   --error-color: #ff3333;
-  --progress-bar-background: #1a0808;
+  --progress-bar-background: #1c1111;
   --progress-bar-fill: #ff1a1a;
-  --code-bg-color: #0f0a0a;
+  --code-bg-color: #161010;
 }
 
 /* Wymuszenie czcionki */
@@ -37,7 +37,7 @@ body {
   flex-direction: column;
 }
 
-/* Bezpieczny kontener z marginesami bocznymi na mobilkach */
+/* Bezpieczny kontener z marginesami bocznymi na urządzeniach mobilnych */
 .container {
   max-width: var(--page-width);
   margin: 0 auto;
@@ -49,22 +49,22 @@ body {
   min-height: 100vh;
 }
 
-/* Reset podświetleń terminal.css dla odnośników */
+/* Reset podświetleń terminal.css dla odnośników z neonową poświatą */
 a, a:visited {
-  color: #ff1a1a;
+  color: #ff2a2a;
   text-decoration: none;
   background: transparent !important;
-  transition: all 0.15s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 a:hover, a:focus {
   background: transparent !important;
   color: #ff4d4d !important;
   text-decoration: underline !important;
-  text-shadow: 0 0 8px rgba(255, 26, 26, 0.6);
+  text-shadow: 0 0 10px rgba(255, 26, 26, 0.75), 0 0 20px rgba(255, 26, 26, 0.35);
 }
 
-/* Karty wpisów */
+/* Karty wpisów na grafitowym tle z głęboką poświatą */
 .terminal-card > header {
   background-color: transparent !important;
   color: inherit !important;
@@ -73,15 +73,17 @@ a:hover, a:focus {
 }
 
 .terminal-card {
-  border: 1px solid #221111 !important;
-  background: #0b0707 !important;
+  border: 1px solid #2a1616 !important;
+  background: #161111 !important;
   border-radius: 2px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
 }
 
 .terminal-card:hover {
   border-color: #ff1a1a !important;
-  box-shadow: 0 0 15px rgba(255, 26, 26, 0.15);
+  box-shadow: 0 0 16px rgba(255, 26, 26, 0.25), 0 0 32px rgba(255, 26, 26, 0.1);
+  transform: translateY(-1px);
 }
 
 /* 3. NAWIGACJA GÓRNA */
@@ -89,7 +91,7 @@ a:hover, a:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #221111;
+  border-bottom: 1px solid #261414;
   padding: 1.2rem 0;
   margin-bottom: 2.2rem;
   flex-wrap: nowrap;
@@ -113,19 +115,19 @@ a:hover, a:focus {
 }
 
 .brand:hover span {
-  color: #ff1a1a;
-  text-shadow: 0 0 8px rgba(255, 26, 26, 0.7);
+  color: #ff2a2a;
+  text-shadow: 0 0 10px rgba(255, 26, 26, 0.8);
 }
 
 .brand svg {
   display: block;
   stroke: #ff1a1a;
-  filter: drop-shadow(0 0 4px rgba(255, 26, 26, 0.5));
+  filter: drop-shadow(0 0 6px rgba(255, 26, 26, 0.65));
   transition: all 0.2s ease;
 }
 
 .brand:hover svg {
-  filter: drop-shadow(0 0 8px rgba(255, 26, 26, 0.9));
+  filter: drop-shadow(0 0 12px rgba(255, 26, 26, 0.95));
   transform: scale(1.05);
 }
 
@@ -148,99 +150,106 @@ a:hover, a:focus {
 }
 
 .nav-links a {
-  color: #777777 !important;
+  color: #8c8282 !important;
   font-size: 0.78rem;
   white-space: nowrap;
+  transition: color 0.15s ease, text-shadow 0.15s ease;
 }
 
-.nav-links a:hover {
-  color: #ff1a1a !important;
+.nav-links a:hover,
+.nav-links a.active {
+  color: #ff3333 !important;
+  text-shadow: 0 0 8px rgba(255, 26, 26, 0.5);
   text-decoration: none !important;
 }
 
-/* Przyciski i formularze */
+/* Przyciski i formularze z neonowym akcentem */
 .btn-terminator, button[type="submit"] {
-  background: transparent !important;
+  background: #171010 !important;
   border: 1px solid #ff1a1a !important;
-  color: #ff1a1a !important;
+  color: #ff2a2a !important;
   font-family: inherit;
   font-weight: bold;
   cursor: pointer;
+  box-shadow: 0 0 8px rgba(255, 26, 26, 0.25);
   transition: all 0.2s ease;
 }
 
 .btn-terminator:hover, button[type="submit"]:hover {
   background: #ff1a1a !important;
-  color: #060606 !important;
-  box-shadow: 0 0 14px rgba(255, 26, 26, 0.6);
+  color: #0d0a0a !important;
+  box-shadow: 0 0 18px rgba(255, 26, 26, 0.75), 0 0 30px rgba(255, 26, 26, 0.35);
 }
 
 .btn-terminator.disabled {
-  opacity: 0.25;
+  opacity: 0.3;
   cursor: not-allowed;
   pointer-events: none;
   border-color: #442222 !important;
   color: #777777 !important;
+  box-shadow: none !important;
 }
 
 input {
-  background: #0f0a0a !important;
-  border: 1px solid #331515 !important;
+  background: #140f0f !important;
+  border: 1px solid #2e1616 !important;
   color: #ffffff !important;
 }
 
 input:focus {
   border-color: #ff1a1a !important;
-  box-shadow: 0 0 10px rgba(255, 26, 26, 0.4) !important;
+  box-shadow: 0 0 12px rgba(255, 26, 26, 0.4) !important;
 }
 
 fieldset {
-  border: 1px solid #2a1212 !important;
+  border: 1px solid #2a1616 !important;
 }
 
 hr {
   border: 0;
-  border-top: 1px dashed #2a1212;
+  border-top: 1px dashed #2a1616;
 }
 
 /* ========================================================
-   WYSZUKIWARKA W STYLU GREP (Rozjaśniony, czytelny placeholder)
+   KONSOLA WYSZUKIWANIA I CLI (Grafit z czerwoną poświatą)
    ======================================================== */
 .grep-wrapper {
   display: flex;
   align-items: center;
-  background: #090505;
-  border: 1px solid #221111;
+  background: #140f0f;
+  border: 1px solid #2d1616;
   border-radius: 2px;
-  padding: 0.45rem 0.75rem;
+  padding: 0.5rem 0.85rem;
   margin: 1.25rem 0 2rem 0;
   gap: 0.6rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .grep-wrapper:focus-within {
   border-color: #ff1a1a;
-  box-shadow: 0 0 12px rgba(255, 26, 26, 0.2);
+  box-shadow: 0 0 16px rgba(255, 26, 26, 0.35), 0 0 28px rgba(255, 26, 26, 0.15);
 }
 
 .grep-prefix {
   font-size: 0.8rem;
   white-space: nowrap;
   user-select: none;
-  color: #855555;
+  color: #8f5a5a;
 }
 
 .grep-prompt-user {
   color: #ff3333;
   font-weight: bold;
+  text-shadow: 0 0 6px rgba(255, 51, 51, 0.4);
 }
 
 .grep-prompt-path {
-  color: #888888;
+  color: #8a7a7a;
 }
 
 .grep-cmd {
-  color: #ff6666;
+  color: #ff5555;
   font-weight: 600;
 }
 
@@ -256,16 +265,14 @@ hr {
   outline: none !important;
 }
 
-/* Rozjaśniony, dobrze widoczny placeholder */
 .grep-input::placeholder {
-  color: #856666;
+  color: #7d5b5b;
 }
 
-/* Przycisk clear w terminalu - ostylowany na ciemno */
 .grep-clear-btn {
-  background: #090505 !important;
+  background: #180f0f !important;
   border: 1px solid #ff1a1a !important;
-  color: #ff1a1a !important;
+  color: #ff2a2a !important;
   font-family: inherit !important;
   font-size: 0.75rem !important;
   font-weight: bold !important;
@@ -274,21 +281,21 @@ hr {
   padding: 2px 6px !important;
   border-radius: 2px;
   display: none;
-  box-shadow: 0 0 6px rgba(255, 26, 26, 0.2);
+  box-shadow: 0 0 8px rgba(255, 26, 26, 0.3);
   transition: all 0.15s ease;
 }
 
 .grep-clear-btn:hover {
   background: #ff1a1a !important;
-  color: #060606 !important;
-  box-shadow: 0 0 12px rgba(255, 26, 26, 0.6) !important;
+  color: #0e0a0a !important;
+  box-shadow: 0 0 14px rgba(255, 26, 26, 0.8) !important;
 }
 
 .grep-status-bar {
   font-size: 0.8rem;
   margin-top: -1.25rem;
   margin-bottom: 1.5rem;
-  color: #855555;
+  color: #8c5858;
   display: none;
 }
 
@@ -297,21 +304,23 @@ hr {
    ======================================================== */
 .tree-container {
   font-family: var(--font-stack);
-  background: #080505;
-  border: 1px solid #221111;
+  background: #140f0f;
+  border: 1px solid #2a1616;
   padding: 1.5rem;
   border-radius: 2px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
   overflow-x: auto;
 }
 
 .tree-root {
-  color: #ff1a1a;
+  color: #ff2a2a;
   font-weight: bold;
   margin-bottom: 0.75rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   white-space: nowrap;
+  text-shadow: 0 0 6px rgba(255, 42, 42, 0.35);
 }
 
 .tree-item {
@@ -326,31 +335,31 @@ hr {
 }
 
 .tree-item:hover {
-  background: #190a0a !important;
+  background: #231414 !important;
 }
 
 .tree-branch {
-  color: #552222;
+  color: #5d2626;
   user-select: none;
   flex-shrink: 0;
 }
 
 .tree-date {
-  color: #774444;
+  color: #8c5252;
   font-size: 0.8rem;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .tree-filename {
-  color: #eee;
+  color: #e5e5e5;
   font-size: 0.9rem;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .tree-comment {
-  color: #666;
+  color: #7d7070;
   font-size: 0.8rem;
   margin-left: 0.25rem;
   white-space: nowrap;
@@ -367,7 +376,7 @@ hr {
   left: 0;
   height: 2px;
   background: #ff1a1a;
-  box-shadow: 0 0 8px #ff1a1a, 0 0 12px rgba(255, 26, 26, 0.7);
+  box-shadow: 0 0 8px #ff1a1a, 0 0 16px rgba(255, 26, 26, 0.85);
   width: 0%;
   z-index: 99999;
   transition: width 0.05s ease-out;
@@ -380,7 +389,7 @@ hr {
   gap: 1rem;
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px dashed #2a1212;
+  border-top: 1px dashed #2a1616;
   flex-wrap: wrap;
 }
 
@@ -389,17 +398,18 @@ hr {
   font-size: 0.82rem;
   white-space: nowrap;
   text-decoration: none !important;
+  box-shadow: 0 0 8px rgba(255, 26, 26, 0.2);
 }
 
 /* ========================================================
-   STOPKA TAKTYCZNA HUD (Poprawiona czytelność)
+   STOPKA TAKTYCZNA HUD
    ======================================================== */
 .tactical-footer {
   margin-top: 4rem;
   padding: 1.75rem 0 1.25rem 0;
-  border-top: 1px solid #1a0b0b;
+  border-top: 1px solid #241212;
   font-size: 0.72rem;
-  color: #8c6060;
+  color: #946868;
   user-select: none;
 }
 
@@ -416,7 +426,7 @@ hr {
 }
 
 .hud-sep {
-  color: #552828;
+  color: #5c2d2d;
 }
 
 /* ========================================================
@@ -459,7 +469,6 @@ hr {
     font-size: 0.75rem;
   }
 
-  /* Poprawka rozstawienia dolnych przycisków nawigacyjnych na smartfonach */
   .post-nav-bar {
     flex-direction: column !important;
     gap: 0.75rem !important;

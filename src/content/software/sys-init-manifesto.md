@@ -1,9 +1,8 @@
 ---
 title: "SYS_INIT // Geneza adriko.net: od Deus Ex i Terminatora po cyfrowy bunkier"
-description: "Inauguracyjny wpis na adriko.net. Czym jest ten projekt, skąd wzięła się fascynacja retrotechnologią i cyberpunkiem oraz jak zbudowany jest tutejszy interfejs."
-pubDate: 2026-10-16
-category: "software"
+date: "2026-10-16"
 tags: ["manifesto", "cyberpunk", "retro", "deus-ex", "astro", "terminal"]
+description: "Inauguracyjny wpis na adriko.net. Czym jest ten projekt, skąd wzięła się fascynacja retrotechnologią i cyberpunkiem oraz jak zbudowany jest tutejszy interfejs."
 ---
 
 Współczesny internet bywa męczący. Zdominowany przez algorytmiczne tablice, powtarzalne layouty i bezduszny, masowy clickbait, stracił gdzieś ten surowy, fascynujący charakter, którym zarażał na przełomie tysiącleci. 

@@ -9,19 +9,19 @@
   --font-stack: "JetBrains Mono", monospace;
   --mono-font-stack: "JetBrains Mono", monospace;
 
-  /* Motyw: Wyraźny grafit węglowy (Dark Carbon / Cyberpunk Slate) */
-  --background-color: #181515;
+  /* Motyw: Dyskretny obsydianowy grafit (Obsidian Terminal) */
+  --background-color: #0b0a0a;
   --page-width: 76em;
   --font-color: #dedede;
-  --invert-font-color: #181515;
+  --invert-font-color: #0b0a0a;
 
-  /* Czerwień T-800 i neony */
+  /* Czerwień T-800 */
   --primary-color: #ff1a1a;
-  --secondary-color: #331515;
+  --secondary-color: #2b1111;
   --error-color: #ff3333;
-  --progress-bar-background: #251818;
+  --progress-bar-background: #1a0c0c;
   --progress-bar-fill: #ff1a1a;
-  --code-bg-color: #201919;
+  --code-bg-color: #120e0e;
 }
 
 /* Wymuszenie czcionki */
@@ -37,7 +37,7 @@ body {
   flex-direction: column;
 }
 
-/* Bezpieczny kontener z marginesami bocznymi na urządzeniach mobilnych */
+/* Bezpieczny kontener z marginesami bocznymi na mobilkach */
 .container {
   max-width: var(--page-width);
   margin: 0 auto;
@@ -49,22 +49,22 @@ body {
   min-height: 100vh;
 }
 
-/* Reset podświetleń terminal.css dla odnośników z neonową poświatą */
+/* Reset podświetleń terminal.css dla odnośników */
 a, a:visited {
-  color: #ff2a2a;
+  color: #ff2222;
   text-decoration: none;
   background: transparent !important;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 a:hover, a:focus {
   background: transparent !important;
   color: #ff4d4d !important;
   text-decoration: underline !important;
-  text-shadow: 0 0 10px rgba(255, 26, 26, 0.75), 0 0 20px rgba(255, 26, 26, 0.35);
+  text-shadow: 0 0 8px rgba(255, 26, 26, 0.6);
 }
 
-/* Karty wpisów – wyraźnie odcięte od tła */
+/* Karty wpisów – subtelne, ciemne, niewpadające w brąz */
 .terminal-card > header {
   background-color: transparent !important;
   color: inherit !important;
@@ -73,17 +73,16 @@ a:hover, a:focus {
 }
 
 .terminal-card {
-  border: 1px solid #361c1c !important;
-  background: #221b1b !important;
+  border: 1px solid #221212 !important;
+  background: #110e0e !important;
   border-radius: 2px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+  box-shadow: none !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .terminal-card:hover {
   border-color: #ff1a1a !important;
-  box-shadow: 0 0 16px rgba(255, 26, 26, 0.3), 0 0 32px rgba(255, 26, 26, 0.12);
-  transform: translateY(-1px);
+  box-shadow: 0 0 14px rgba(255, 26, 26, 0.2) !important;
 }
 
 /* 3. NAWIGACJA GÓRNA */
@@ -91,7 +90,7 @@ a:hover, a:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #331919;
+  border-bottom: 1px solid #221212;
   padding: 1.2rem 0;
   margin-bottom: 2.2rem;
   flex-wrap: nowrap;
@@ -115,19 +114,19 @@ a:hover, a:focus {
 }
 
 .brand:hover span {
-  color: #ff2a2a;
-  text-shadow: 0 0 10px rgba(255, 26, 26, 0.8);
+  color: #ff2222;
+  text-shadow: 0 0 8px rgba(255, 26, 26, 0.7);
 }
 
 .brand svg {
   display: block;
   stroke: #ff1a1a;
-  filter: drop-shadow(0 0 6px rgba(255, 26, 26, 0.65));
+  filter: drop-shadow(0 0 5px rgba(255, 26, 26, 0.5));
   transition: all 0.2s ease;
 }
 
 .brand:hover svg {
-  filter: drop-shadow(0 0 12px rgba(255, 26, 26, 0.95));
+  filter: drop-shadow(0 0 10px rgba(255, 26, 26, 0.85));
   transform: scale(1.05);
 }
 
@@ -150,64 +149,62 @@ a:hover, a:focus {
 }
 
 .nav-links a {
-  color: #9c8e8e !important;
+  color: #887d7d !important;
   font-size: 0.78rem;
   white-space: nowrap;
-  transition: color 0.15s ease, text-shadow 0.15s ease;
+  transition: color 0.15s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: #ff3333 !important;
-  text-shadow: 0 0 8px rgba(255, 26, 26, 0.5);
+  color: #ff2222 !important;
   text-decoration: none !important;
 }
 
-/* Przyciski i formularze z neonowym akcentem */
+/* Przyciski i formularze */
 .btn-terminator, button[type="submit"] {
-  background: #241818 !important;
+  background: #130e0e !important;
   border: 1px solid #ff1a1a !important;
-  color: #ff2a2a !important;
+  color: #ff2222 !important;
   font-family: inherit;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 0 8px rgba(255, 26, 26, 0.25);
   transition: all 0.2s ease;
 }
 
 .btn-terminator:hover, button[type="submit"]:hover {
   background: #ff1a1a !important;
-  color: #120d0d !important;
-  box-shadow: 0 0 18px rgba(255, 26, 26, 0.75), 0 0 30px rgba(255, 26, 26, 0.35);
+  color: #0b0a0a !important;
+  box-shadow: 0 0 14px rgba(255, 26, 26, 0.6);
 }
 
 .btn-terminator.disabled {
-  opacity: 0.3;
+  opacity: 0.25;
   cursor: not-allowed;
   pointer-events: none;
-  border-color: #4a2828 !important;
-  color: #777777 !important;
+  border-color: #3b1b1b !important;
+  color: #666666 !important;
   box-shadow: none !important;
 }
 
 input {
-  background: #1f1818 !important;
-  border: 1px solid #3a1e1e !important;
+  background: #110e0e !important;
+  border: 1px solid #2a1414 !important;
   color: #ffffff !important;
 }
 
 input:focus {
   border-color: #ff1a1a !important;
-  box-shadow: 0 0 12px rgba(255, 26, 26, 0.45) !important;
+  box-shadow: 0 0 10px rgba(255, 26, 26, 0.35) !important;
 }
 
 fieldset {
-  border: 1px solid #361c1c !important;
+  border: 1px solid #241212 !important;
 }
 
 hr {
   border: 0;
-  border-top: 1px dashed #361c1c;
+  border-top: 1px dashed #241212;
 }
 
 /* ========================================================
@@ -216,36 +213,34 @@ hr {
 .grep-wrapper {
   display: flex;
   align-items: center;
-  background: #201919;
-  border: 1px solid #381e1e;
+  background: #0f0c0c;
+  border: 1px solid #241212;
   border-radius: 2px;
-  padding: 0.5rem 0.85rem;
+  padding: 0.45rem 0.75rem;
   margin: 1.25rem 0 2rem 0;
   gap: 0.6rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .grep-wrapper:focus-within {
   border-color: #ff1a1a;
-  box-shadow: 0 0 16px rgba(255, 26, 26, 0.35), 0 0 28px rgba(255, 26, 26, 0.15);
+  box-shadow: 0 0 12px rgba(255, 26, 26, 0.25);
 }
 
 .grep-prefix {
   font-size: 0.8rem;
   white-space: nowrap;
   user-select: none;
-  color: #9c6363;
+  color: #8a5858;
 }
 
 .grep-prompt-user {
   color: #ff3333;
   font-weight: bold;
-  text-shadow: 0 0 6px rgba(255, 51, 51, 0.4);
 }
 
 .grep-prompt-path {
-  color: #948686;
+  color: #827575;
 }
 
 .grep-cmd {
@@ -266,13 +261,13 @@ hr {
 }
 
 .grep-input::placeholder {
-  color: #8c6767;
+  color: #7d5e5e;
 }
 
 .grep-clear-btn {
-  background: #261616 !important;
+  background: #140d0d !important;
   border: 1px solid #ff1a1a !important;
-  color: #ff2a2a !important;
+  color: #ff2222 !important;
   font-family: inherit !important;
   font-size: 0.75rem !important;
   font-weight: bold !important;
@@ -281,21 +276,21 @@ hr {
   padding: 2px 6px !important;
   border-radius: 2px;
   display: none;
-  box-shadow: 0 0 8px rgba(255, 26, 26, 0.3);
+  box-shadow: 0 0 6px rgba(255, 26, 26, 0.2);
   transition: all 0.15s ease;
 }
 
 .grep-clear-btn:hover {
   background: #ff1a1a !important;
-  color: #120d0d !important;
-  box-shadow: 0 0 14px rgba(255, 26, 26, 0.8) !important;
+  color: #0b0a0a !important;
+  box-shadow: 0 0 12px rgba(255, 26, 26, 0.7) !important;
 }
 
 .grep-status-bar {
   font-size: 0.8rem;
   margin-top: -1.25rem;
   margin-bottom: 1.5rem;
-  color: #9c6363;
+  color: #8c5858;
   display: none;
 }
 
@@ -304,23 +299,21 @@ hr {
    ======================================================== */
 .tree-container {
   font-family: var(--font-stack);
-  background: #201919;
-  border: 1px solid #361c1c;
+  background: #0f0c0c;
+  border: 1px solid #221212;
   padding: 1.5rem;
   border-radius: 2px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
   overflow-x: auto;
 }
 
 .tree-root {
-  color: #ff2a2a;
+  color: #ff1a1a;
   font-weight: bold;
   margin-bottom: 0.75rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   white-space: nowrap;
-  text-shadow: 0 0 6px rgba(255, 42, 42, 0.35);
 }
 
 .tree-item {
@@ -335,31 +328,31 @@ hr {
 }
 
 .tree-item:hover {
-  background: #2d1d1d !important;
+  background: #1e1111 !important;
 }
 
 .tree-branch {
-  color: #6d2f2f;
+  color: #552222;
   user-select: none;
   flex-shrink: 0;
 }
 
 .tree-date {
-  color: #9e5d5d;
+  color: #824848;
   font-size: 0.8rem;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .tree-filename {
-  color: #efefef;
+  color: #e5e5e5;
   font-size: 0.9rem;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .tree-comment {
-  color: #8c7e7e;
+  color: #736767;
   font-size: 0.8rem;
   margin-left: 0.25rem;
   white-space: nowrap;
@@ -376,7 +369,7 @@ hr {
   left: 0;
   height: 2px;
   background: #ff1a1a;
-  box-shadow: 0 0 8px #ff1a1a, 0 0 16px rgba(255, 26, 26, 0.85);
+  box-shadow: 0 0 8px #ff1a1a, 0 0 12px rgba(255, 26, 26, 0.7);
   width: 0%;
   z-index: 99999;
   transition: width 0.05s ease-out;
@@ -389,7 +382,7 @@ hr {
   gap: 1rem;
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px dashed #361c1c;
+  border-top: 1px dashed #241212;
   flex-wrap: wrap;
 }
 
@@ -398,7 +391,6 @@ hr {
   font-size: 0.82rem;
   white-space: nowrap;
   text-decoration: none !important;
-  box-shadow: 0 0 8px rgba(255, 26, 26, 0.2);
 }
 
 /* ========================================================
@@ -407,9 +399,9 @@ hr {
 .tactical-footer {
   margin-top: 4rem;
   padding: 1.75rem 0 1.25rem 0;
-  border-top: 1px solid #301717;
+  border-top: 1px solid #1c0e0e;
   font-size: 0.72rem;
-  color: #a37272;
+  color: #8c6060;
   user-select: none;
 }
 
@@ -426,7 +418,7 @@ hr {
 }
 
 .hud-sep {
-  color: #6a3434;
+  color: #552626;
 }
 
 /* ========================================================

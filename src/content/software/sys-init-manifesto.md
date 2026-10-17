@@ -2,12 +2,12 @@
 title: "SYS_INIT // Skąd się wziął adriko.net: kafejki, Deus Ex i mój własny kąt w sieci"
 date: "2026-10-16"
 tags: ["manifesto", "retro", "deus-ex", "matrix", "half-life", "streethawk", "batman", "nostalgia", "gry", "duron", "terminal"]
-description: "Skąd wziął się pomysł na tę stronę, wspomnienia rocznika '87 z KITT-em, Street Hawkiem, Matrixem, grami i kafejkami, możliwości tutejszego terminala CLI oraz o czym będę tutaj pisać."
+description: "Skąd wziął się pomysł na tę stronę, pomost między klimatem retro a technologią jutra, wspomnienia rocznika '87, możliwości tutejszego terminala CLI oraz plany na adriko.net."
 ---
 
 Cześć! Jeśli tu trafiłeś, to pewnie też masz już trochę dość tego, jak wygląda dzisiejszy internet. Wszędzie te same szablony, tablice zalane reklamami, algorytmy wciskające clickbaity i ani krzty duszy. Ogromnie brakuje mi tamtego klimatu sieci z przełomu wieków — czasów, kiedy strony robiło się z czystej pasji, a internet był miejscem fascynujących odkryć, a nie wielką machiną do robienia wyświetleń.
 
-Dlatego powstało **adriko.net**. To po prostu mój prywatny, cyfrowy kąt w sieci, w którym zbieram rzeczy, które naprawdę mnie kręcą: technologię, gry, stare dobre sci-fi i wszystko, co ma w sobie odrobinę cyberpunkowego klimatu.
+Dlatego powstało **adriko.net**. To po prostu mój prywatny, cyfrowy kąt w sieci. I choć bije od niego silny sentyment do czasów, kiedy technologia miała duszę i namacalny charakter, ta strona nie jest cyfrowym skansenem. Łączę tu nostalgię za dawnymi latami z żywą fascynacją współczesnością i technologiczną przyszłością. Zbieram wszystko, co naprawdę mnie kręci: sprzęt, systemy, gry, dobre sci-fi i projekty z odrobiną cyberpunkowego klimatu.
 
 ---
 
@@ -52,12 +52,14 @@ Wreszcie w 2001 roku nadszedł ten wielki dzień: rodzice kupili mi pierwszy por
 
 ### O czym będę tutaj pisać?
 
-Zamiast udawać kolejny portal informacyjny, który na siłę goni za newsami i powiela notki prasowe, chcę, żeby to miejsce było po prostu moim autorskim notatnikiem. Pogadamy tu o:
+Zamiast udawać kolejny portal informacyjny, który na siłę goni za newsami i powiela bezduszne notki prasowe, chcę, żeby to miejsce było po prostu moim autorskim notatnikiem. 
 
-1. **Popkulturze (`./database`)** — szczerze i bez owijania w bawełnę o filmach, książkach sci-fi, komiksach, grach, które właśnie ukończyłem, czy anime, które warto obejrzeć. Po prostu moja prywatna opinia, jak przy pogawędce ze starym znajomym.
-2. **Sprzęcie i gadżetach (`./hardware`)** — o komputerach, podzespołach, smartwatchach i wszelkich urządzeniach, które sam kupię albo będę miał okazję przetestować na własnej skórze.
-3. **Programach i systemach (`./software`)** — o ciekawych rozwiązaniach w systemach operacyjnych, Linuksie, pracy w konsoli, automatyzacji i małych, sprytnych narzędziach ułatwiających codzienne życie.
-4. **Motoryzacji i mechanice (`./gear`)** — o najciekawszych premierach ze świata motoryzacji, nowinkach technicznych na dwóch i czterech kołach oraz czystej, mechanicznej frajdzie z jazdy.
+Nie zamykam się w jednej epoce. Prawdziwa pasja polega na łączeniu kropek: od sentymentu do klasycznych pecetów, przez współczesne narzędzia programistyczne i systemowe, aż po to, co dopiero rysuje się na horyzoncie technologicznego jutra. Dlatego na **adriko.net** retro naturalnie przeplata się z teraźniejszością i przyszłością. Pogadamy tu o:
+
+1. **Popkulturze (`./database`)** — szczerze i bez owijania w bawełnę o filmach, książkach sci-fi, komiksach, grach (od nieśmiertelnych klasyków po nowości, które właśnie ukończyłem) czy anime, które warto poznać. Po prostu moja prywatna opinia, jak przy pogawędce ze starym znajomym.
+2. **Motoryzacji i mechanice (`./gear`)** — o najciekawszych premierach ze świata motoryzacji, nowinkach technicznych na dwóch i czterech kołach, czystej mechanicznej frajdzie z jazdy oraz kierunku, w jakim ewoluują współczesne maszyny.
+3. **Sprzęcie i gadżetach (`./hardware`)** — o współczesnych komputerach, podzespołach, smartwatchach i nowych technologiach, które sam kupię lub przetestuję na własnej skórze, ale też o majsterkowaniu i dłubaniu w starym, kultowym żelazie.
+4. **Programach i systemach (`./software`)** — o ciekawych rozwiązaniach w systemach operacyjnych, Linuksie, pracy w konsoli, automatyzacji i nowoczesnych narzędziach ułatwiających codzienne życie — łącząc uniksowe korzenie z oprogramowaniem nowej generacji.
 
 ---
 
@@ -78,7 +80,7 @@ Największą frajdę daje jednak wbudowana konsola na stronie głównej — **SY
 * **`crypto <symbol>`** — ściąga w czasie rzeczywistym aktualny kurs kryptowalut z Binance (np. `crypto btc` albo `crypto eth`).
 * **`fx <waluta>`** — sprawdza oficjalny średni kurs walut z NBP (np. `fx usd`, `fx eur`, `fx chf`).
 * **`ping [target]`** — bada czas odpowiedzi i opóźnienie do serwera (np. `ping cloudflare`).
-* **`cat <katalog>`** — natychmiast przenosi do wybranego działu (`database`, `hardware`, `software`, `gear`).
+* **`cat <katalog>`** — natychmiast przenosi do wybranego działu (`database`, `gear`, `hardware`, `software`).
 * **`clear`** — czyści konsolę i resetuje filtry.
 
 Koniecznie przetestuj te komendy na stronie głównej!

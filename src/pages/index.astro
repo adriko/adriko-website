@@ -25,28 +25,24 @@ const allEntries = [
     section: 'database',
     ext: getExtension('database'),
     url: `/database/${getSlug(e)}`,
-    displayMeta: e.data.creator ? `${e.data.creator} [${e.data.rating || 'REC'}]` : (e.data.rating || 'MEDIA'),
   })),
   ...gearEntries.map((e: any) => ({
     ...e,
     section: 'gear',
     ext: getExtension('gear'),
     url: `/gear/${getSlug(e)}`,
-    displayMeta: 'FIELD_GEAR',
   })),
   ...hwEntries.map((e: any) => ({
     ...e,
     section: 'hardware',
     ext: getExtension('hardware'),
     url: `/hardware/${getSlug(e)}`,
-    displayMeta: 'SYS_HARDWARE',
   })),
   ...swEntries.map((e: any) => ({
     ...e,
     section: 'software',
     ext: getExtension('software'),
     url: `/software/${getSlug(e)}`,
-    displayMeta: 'SYS_SOFTWARE',
   })),
 ].sort((a: any, b: any) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 

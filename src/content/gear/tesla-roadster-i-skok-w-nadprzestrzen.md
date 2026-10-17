@@ -27,11 +27,11 @@ W środku oczywiście nie siedział żaden człowiek – cała sekwencja była w
 
 ### Cztery wersje Roadstera: od szybkiego auta po rakietę
 
-Po samym pokazie Tesla wypuściła konkrety na temat tego, co właściwie będzie można kupić (o ile kogoś na to stać):
+Po samym pokazie Tesla wypuściła konkrety na temat tego, co właściwie będzie można kupić:
 
 * **Wersja Base:** „Zwykły”, piekielnie szybki elektryk do jazdy na co dzień, bez kosmicznych bajerów.
 * **Wersja Performance:** Dostaje wspomniane wentylatory dociskowe pod podwoziem. Trzyma się drogi w zakrętach jak przyklejona i robi 0-100 km/h w jakieś 1,6 sekundy.
-* **Wersja Thrust:** Wentylatory plus dysze gazowe z tyłu. Zamiast czekać, aż opony złapią trakcję na asfalcie, dostajesz kopa od dysz rakietowych. Przyspieszenie do setki poniżej sekundy i przeciążenie rzędu 3G (dla porównania: w aucie trzymanie rąk na kierownicy staje się nagle trzy razy cięższe).
+* **Wersja Thrust:** Wentylatory plus dysze gazowe z tyłu. Zamiast czekać, aż opony złapią trakcję na asfalcie, dostajesz kopa od dysz rakietowych. Przyspieszenie do setki poniżej sekundy i przeciążenie rzędu 3G (dla porównania: kierowcy F1 są regularnie poddawani przeciążeniom rzędu 4-6G).
 * **Wersja Rocket:** Dokładnie ten jednomiejscowy potwór z prezentacji, który potrafi skakać. Przyspieszenie 0-100 km/h w 0,6 sekundy – wynik, po którym przeciętnego człowieka rozbolałaby głowa.
 
 ### Gdzie jest haczyk?

@@ -9,8 +9,7 @@ Jeśli mignęło Wam w ostatnich dniach nagranie z nową Teslą Roadster, to pew
 
 Na filmie widać samochód, który najpierw bez trudu wjeżdża na pionową ścianę i zastyga do góry kołami, a chwilę później najeżdża na rampę, wyskakuje w powietrze, robi czystą beczkę nad rzędem innych aut i miękko ląduje. Pierwsze skojarzenie? DeLorean z *Powrotu do przyszłości*. Zaraz potem przychodzi jednak myśl, że w erze dzisiejszych komputerów i generatorów wideo stworzenie takiego fotorealistycznego fejka zajmuje parę godzin.
 
-> „Potrzebujemy publiczności, żeby udowodnić, że to nie jest AI ani CGI. Powiedzcie ludziom, że widzieliście to na własne oczy”.  
-> — Elon Musk na prezentacji w McGregor
+Sam Elon Musk zaczął prezentację od słów, że musiał zaprosić na poligon tłum żywych ludzi, bo inaczej nikt w internecie by nie uwierzył, że to nie jest komputerowa animacja: *„Potrzebujemy publiczności, żeby udowodnić, że to nie jest AI ani CGI. Powiedzcie ludziom, że widzieliście to na własne oczy”*. 
 
 I tu pojawia się największy szok: **to działo się naprawdę**. Na scenie stał prawdziwy, jeżdżący prototyp. 
 
@@ -18,11 +17,9 @@ I tu pojawia się największy szok: **to działo się naprawdę**. Na scenie sta
 
 Żeby auto mogło wykonać taki numer, Tesla połączyła dwie skrajne technologie – jedną ze świata wyścigów, a drugą prosto z rakiet kosmicznych SpaceX.
 
-1. **Jazda po ścianie i do góry kołami**  
-   Samochód ma pod podłogą zamontowany potężny układ wentylatorów z elastycznymi fartuchami przy samej ziemi. Działa to jak gigantyczny odkurzacz przemysłowy – wysysa powietrze spod auta i tworzy tak potężną próżnię, że generuje ponad 4 tony docisku. Dzięki temu samochód jest dosłownie przyssany do nawierzchni. Mógłby jechać po suficie tunelu i nie spadnie, bo podciśnienie trzyma go mocniej niż grawitacja ciągnie w dół.
+1. **Jazda po ścianie i do góry kołami** — Samochód ma pod podłogą zamontowany potężny układ wentylatorów z elastycznymi fartuchami przy samej ziemi. Działa to jak gigantyczny odkurzacz przemysłowy – wysysa powietrze spod auta i tworzy tak potężną próżnię, że generuje ponad 4 tony docisku. Dzięki temu samochód jest dosłownie przyssany do nawierzchni. Mógłby jechać po suficie tunelu i nie spadnie, bo podciśnienie trzyma go mocniej niż grawitacja ciągnie w dół.
 
-2. **Skok i obrót w locie**  
-   Jak zmusić 1,5-tonowe auto do zrobienia fikołka w powietrzu bez rampy wybuchowej? Tesla wyrzuciła fotel pasażera, a w jego miejsce wstawiła potężne butle ze sprężonym azotem pod chorym ciśnieniem 10 000 PSI. Wokół karoserii ukryto dysze manewrowe – dokładnie takie same, jakich SpaceX używa do sterowania kapsułami w kosmosie. W ułamku sekundy dysze wystrzeliwują sprężony gaz w odpowiednich kierunkach. Nie ma tu ognia ani spalin, jest tylko potężny podmuch, który obraca auto w locie i wyhamowuje uderzenie przy lądowaniu. 
+2. **Skok i obrót w locie** — Jak zmusić 1,5-tonowe auto do zrobienia fikołka w powietrzu bez rampy wybuchowej? Tesla wyrzuciła fotel pasażera, a w jego miejsce wstawiła potężne butle ze sprężonym azotem pod chorym ciśnieniem 10 000 PSI. Wokół karoserii ukryto dysze manewrowe – dokładnie takie same, jakich SpaceX używa do sterowania kapsułami w kosmosie. W ułamku sekundy dysze wystrzeliwują sprężony gaz w odpowiednich kierunkach. Nie ma tu ognia ani spalin, jest tylko potężny podmuch, który obraca auto w locie i wyhamowuje uderzenie przy lądowaniu. 
 
 W środku oczywiście nie siedział żaden człowiek – cała sekwencja była w 100% zautomatyzowana przez komputer pokładowy, żeby nikt nie skręcił sobie karku.
 

@@ -7,7 +7,7 @@ description: "Skąd wziął się pomysł na tę stronę, pomost między klimatem
 
 Cześć! Jeśli tu trafiłeś, to pewnie też masz już trochę dość tego, jak wygląda dzisiejszy internet. Wszędzie te same szablony, tablice zalane reklamami, algorytmy wciskające clickbaity i ani krzty duszy. Ogromnie brakuje mi tamtego klimatu sieci z przełomu wieków — czasów, kiedy strony robiło się z czystej pasji, a internet był miejscem fascynujących odkryć, a nie wielką machiną do robienia wyświetleń.
 
-> **adriko.net** nie jest cyfrowym skansenem. To prywatny kąt w sieci łączący nostalgię za dawnymi latami z żywą fascynacją współczesnością i technologią jutra. Zbieram tu wszystko, co naprawdę mnie kręci: sprzęt, systemy, motoryzację, gry i dobre sci-fi.
+Dlatego powstało **adriko.net**. To po prostu mój prywatny, cyfrowy kąt w sieci. I choć bije od niego silny sentyment do czasów, kiedy technologia miała duszę i namacalny charakter, ta strona nie jest cyfrowym skansenem. Łączę tu nostalgię za dawnymi latami z żywą fascynacją współczesnością i technologiczną przyszłością. Zbieram wszystko, co naprawdę mnie kręci: sprzęt, systemy, motoryzację, gry i dobre sci-fi.
 
 ### Rocznik '87, kasety VHS i kinowe fundamenty
 

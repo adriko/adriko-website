@@ -653,29 +653,57 @@ hr {
   line-height: 1;
 }
 
-/* Listy numerowane (ol): czerwone indeksy numeryczne */
+/* Listy numerowane (ol): T-800 cyfry w jednej linii z tekstem punktu */
 .post-content ol {
-  padding-left: 1.4rem;
-  margin: 1.25rem 0 1.5rem 0;
-  color: #bfb6b6;
+  list-style: none !important;
+  counter-reset: post-counter !important;
+  padding-left: 0 !important;
+  margin: 1.25rem 0 1.5rem 0 !important;
 }
 
 .post-content ol > li {
-  margin-bottom: 0.65rem;
-  line-height: 1.65;
+  counter-increment: post-counter !important;
+  position: relative !important;
+  padding-left: 2.2rem !important;
+  margin-bottom: 1.25rem !important;
+  line-height: 1.65 !important;
+  color: #bfb6b6;
 }
 
-.post-content ol > li::marker {
-  color: #ff1a1a;
-  font-weight: bold;
+/* Wymuszenie pozycji cyfry obok nagłówka punktu (nadpisanie display:block z terminal.css) */
+.post-content ol > li::before {
+  content: counter(post-counter) "." !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  display: inline-block !important;
+  color: #ff1a1a !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  line-height: 1.65 !important;
 }
 
-/* Akcent na początku punktów listy (np. pogrubiona nazwa wersji) */
-.post-content li > strong:first-child {
+.post-content ol > li > p {
+  margin-bottom: 0.5rem;
+}
+
+.post-content ol > li > p:first-child {
+  margin-top: 0 !important;
+}
+
+/* Akcent na początku punktów listy (np. pogrubiona nazwa punktu / wersji) */
+.post-content li > strong:first-child,
+.post-content li > p:first-child > strong:first-child {
   color: #ff4d4d;
 }
 
-/* Cytaty i sentencje (blockquote): taktyczny blok danych */
+/* Cytaty i sentencje (blockquote): czysty boks bez powielających się znaków > z terminal.css */
+.post-content blockquote::before,
+.post-content blockquote::after {
+  content: none !important;
+  display: none !important;
+}
+
 .post-content blockquote {
   background: #120808 !important;
   border: 1px solid #2a1212 !important;

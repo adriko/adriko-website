@@ -37,45 +37,7 @@ body {
   flex-direction: column;
 }
 
-/* ========================================================
-   SUBTELNY FILTR KINESKOPOWY CRT (Scanlines + Winieta)
-   ======================================================== */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9998;
-  /* Linie skanowania z mikro-luminescencją widoczne na czarnym tle */
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.03) 0px,
-    rgba(255, 255, 255, 0.03) 1px,
-    rgba(0, 0, 0, 0.5) 2px,
-    rgba(0, 0, 0, 0.5) 3px
-  );
-  opacity: 0.75;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  /* Symulacja zakrzywionego szkła CRT: wewnętrzny cień tuby kineskopu */
-  box-shadow: 
-    inset 0 0 80px rgba(0, 0, 0, 0.95),
-    inset 0 0 20px rgba(255, 26, 26, 0.15);
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 26, 26, 0.015) 0%,
-    rgba(0, 0, 0, 0.25) 75%,
-    rgba(0, 0, 0, 0.75) 100%
-  );
-}
-
-/* Bezpieczny kontener z marginesami bocznymi na mobilkach */
+/* Bezpieczny kontener z marginesami bocznymi na urządzeniach mobilnych */
 .container {
   max-width: var(--page-width);
   margin: 0 auto;
@@ -102,7 +64,7 @@ a:hover, a:focus {
   text-shadow: 0 0 8px rgba(255, 26, 26, 0.6);
 }
 
-/* Karty wpisów – subtelne, ciemne, niewpadające w brąz */
+/* Karty wpisów – czyste, techniczne tło */
 .terminal-card > header {
   background-color: transparent !important;
   color: inherit !important;
@@ -246,7 +208,7 @@ hr {
 }
 
 /* ========================================================
-   KONSOLA WYSZUKIWANIA I CLI
+   KONSOLA WYSZUKIWANIA I CLI (Z MIGAJĄCYM KURSOREM █)
    ======================================================== */
 .grep-wrapper {
   display: flex;
@@ -288,7 +250,7 @@ hr {
   font-weight: 600;
 }
 
-/* Blokowy kursor w stylu konsoli BIOS / VT100 */
+/* Blokowy kursor w stylu terminala Unix / VT100 */
 .cli-block-cursor {
   display: inline-block;
   color: #ff1a1a;
@@ -298,7 +260,8 @@ hr {
   user-select: none;
   animation: crt-blink 1s steps(1) infinite;
   text-shadow: 0 0 8px rgba(255, 26, 26, 0.85);
-  margin-left: 3px;
+  margin-left: 4px;
+  margin-right: 4px;
 }
 
 @keyframes crt-blink {
@@ -310,7 +273,7 @@ hr {
   }
 }
 
-/* Schowaj kursor blokowy, gdy pole jest aktywne i użytkownik pisze */
+/* Ukrycie kursora dekoracyjnego podczas aktywnego wpisywania */
 .grep-wrapper:focus-within .cli-block-cursor {
   display: none;
 }
@@ -328,7 +291,7 @@ hr {
   caret-color: #ff1a1a !important;
 }
 
-/* Rozjaśniony, czytelny placeholder */
+/* Czytelny, rozjaśniony placeholder */
 .grep-input::placeholder {
   color: #945858 !important;
   opacity: 1 !important;
@@ -375,7 +338,7 @@ hr {
 }
 
 /* ========================================================
-   WIDOK DRZEWA UNIX (Tree View) - RESPONSYWNY & CZYTELNY
+   WIDOK DRZEWA UNIX (Tree View)
    ======================================================== */
 .tree-container {
   font-family: var(--font-stack);
@@ -556,11 +519,25 @@ hr {
 
 @media (max-width: 640px) {
   .tree-container {
-    padding: 1rem 0.75rem;
+    padding: 0.85rem 0.5rem;
   }
 
   .grep-prefix {
     font-size: 0.75rem;
+  }
+
+  .tree-item {
+    gap: 0.35rem;
+    padding: 0.25rem 0.2rem;
+    font-size: 0.76rem;
+  }
+
+  .tree-date {
+    font-size: 0.72rem;
+  }
+
+  .tree-filename {
+    font-size: 0.78rem;
   }
 
   .post-nav-bar {

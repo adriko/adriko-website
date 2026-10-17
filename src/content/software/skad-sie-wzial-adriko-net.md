@@ -13,7 +13,7 @@ Dlatego powstało **adriko.net**. To po prostu mój prywatny, cyfrowy kąt w sie
 
 Moja zajawka na fantastykę i technologię nie wzięła się znikąd. Jestem z rocznika '87, więc dzieciństwo spędziłem z nosem przy kineskopowym telewizorze. Kasety VHS oglądało się u mnie do zajechania taśmy — w kółko leciały takie klasyki jak *Obcy*, *Terminator* czy *Powrót do przyszłości*. 
 
-A potem, w 1999 roku, do kin wjechał **Matrix** i wywrócił mój świat do góry nogami. Ten film zmienił dla mnie absolutnie wszystko. Spływający po kineskopach ekranów zielony, cyfrowy deszcz, czarne konsole, komendy uniksowe i mroczne, hakerskie podziemie walczące z bezdusznym systemem — to właśnie tam na dobre narodziła się moja fascynacja terminalami, wierszem poleceń i cyberpunkową estetyką.
+A potem, w 1999 roku, do kin trafił **Matrix** i wywrócił mój świat do góry nogami. Ten film zmienił dla mnie absolutnie wszystko. Spływający po ekranach zielony, cyfrowy deszcz, czarne konsole, komendy uniksowe i mroczne, hakerskie podziemie walczące z bezdusznym systemem — to właśnie tam na dobre narodziła się moja fascynacja terminalami, wierszem poleceń i cyberpunkową estetyką.
 
 ### Technologiczny sznyt telewizji: od Nieustraszonego po Batmana
 

@@ -1,5 +1,5 @@
 ---
-title: "Nowa Tesla Roadster skacze nad autami: jak to w ogóle działa i o co w tym chodzi?"
+title: "Tesla Roadster i skok w nadprzestrzeń: inżynieryjny spektakl czy zasłona dymna?"
 date: "2026-10-17"
 tags: ["gear", "tesla", "roadster", "elon-musk", "motoryzacja", "ciekawostki"]
 description: "Widzieliście ten 3-minutowy filmik, w którym Tesla Roadster robi beczkę w powietrzu? Wyjaśniam po ludzku, jak to zrobili, jakie wersje wejdą do sprzedaży i gdzie tkwi haczyk."

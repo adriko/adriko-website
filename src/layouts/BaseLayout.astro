@@ -98,7 +98,6 @@ const counts = {
     <div class="container">
       <header class="terminal-nav">
         <a href="/" class="brand">
-          <!-- Wariant C: T-800 Hunter -->
           <svg
             width="26"
             height="26"
@@ -174,7 +173,7 @@ const counts = {
         <slot />
       </main>
 
-      <!-- Stopka taktyczna HUD (Retro-Futurism T-800 & Orbital Telemetry) -->
+      <!-- Stopka taktyczna HUD & Orbital Telemetry -->
       <footer class="tactical-footer">
         <div class="hud-container">
           <span class="hud-item">[ HUB // ADRIKO.NET ]</span>
@@ -344,59 +343,80 @@ const counts = {
         if (sessionStorage.getItem("adriko_booted") === "true") {
           if (bootScreen) bootScreen.style.display = "none";
         } else {
-          // Usunięte zbędne spacje, idealne wyrównanie kolumn
           const bootSequence = [
             {
-              text: "CPU: VIRTUAL RISC-V CORE @ 4.2 GHz // ARCH: x86_64-UNIX",
-              delay: 230,
+              html: 'PROCESSOR: HARDENED RISC-V RV64GC @ 4.20 GHz // PLATFORM: RV64-UNIX',
+              delay: 220,
               color: "#ff3333",
             },
             {
-              text: "BIOS MEMORY CHECK: 131072 KB RAM OK [0 ERROR(S)]",
-              delay: 240,
+              html: 'MEMORY PROBE: 33554432 KB RAM ALLOCATED [0 FAULTS DETECTED]',
+              delay: 230,
+              color: "#d0d0d0",
             },
             {
-              text: "INITIALIZING BUS & STORAGE CONTROLLERS... [DONE]",
-              delay: 240,
-            },
-            { text: "MOUNTING VIRTUAL FILESYSTEM /sys/root/...", delay: 280 },
-            {
-              text: ` -> SCANNING ${"./database".padEnd(12, " ")} [RECORDS: ${counts.database}] ... [OK]`,
-              delay: 200,
-            },
-            {
-              text: ` -> SCANNING ${"./gear".padEnd(12, " ")} [RECORDS: ${counts.gear}] ... [OK]`,
+              html: 'BUS CONTROLLERS & NVMe STORAGE SUBSYSTEMS... <span style="color: #5ab35a;">[DONE]</span>',
               delay: 220,
+              color: "#d0d0d0",
             },
             {
-              text: ` -> SCANNING ${"./hardware".padEnd(12, " ")} [RECORDS: ${counts.hardware}] ... [OK]`,
-              delay: 200,
+              html: 'MOUNTING VIRTUAL ROOT FILESYSTEM /sys/root/... <span style="color: #5ab35a;">[OK]</span>',
+              delay: 250,
+              color: "#d0d0d0",
             },
             {
-              text: ` -> SCANNING ${"./software".padEnd(12, " ")} [RECORDS: ${counts.software}] ... [OK]`,
-              delay: 200,
-            },
-            { text: "ESTABLISHING ORBITAL TELEMETRY LINK...", delay: 260 },
-            {
-              text: ` -> TARGET GRID: 50.0197° N, 22.6781° E [JAROSŁAW, PL]`,
-              delay: 200,
+              html: ` -> CATALOG ${"./database".padEnd(14, ".")} RECORDS: ${String(counts.database).padStart(2, "0")} <span style="color: #5ab35a;">[OK]</span>`,
+              delay: 180,
+              color: "#9e5959",
             },
             {
-              text: ` -> ENVIRONMENTAL: ${solarStr} // LUNA: ${phase} [${ill}%]`,
+              html: ` -> CATALOG ${"./gear".padEnd(14, ".")} RECORDS: ${String(counts.gear).padStart(2, "0")} <span style="color: #5ab35a;">[OK]</span>`,
+              delay: 180,
+              color: "#9e5959",
+            },
+            {
+              html: ` -> CATALOG ${"./hardware".padEnd(14, ".")} RECORDS: ${String(counts.hardware).padStart(2, "0")} <span style="color: #5ab35a;">[OK]</span>`,
+              delay: 180,
+              color: "#9e5959",
+            },
+            {
+              html: ` -> CATALOG ${"./software".padEnd(14, ".")} RECORDS: ${String(counts.software).padStart(2, "0")} <span style="color: #5ab35a;">[OK]</span>`,
+              delay: 180,
+              color: "#9e5959",
+            },
+            {
+              html: 'ESTABLISHING ORBITAL TELEMETRY LINK... <span style="color: #5ab35a;">[DONE]</span>',
               delay: 240,
+              color: "#d0d0d0",
             },
             {
-              text: ` -> STATUS: SECURE TLS 1.3 CONNECTION // ADRIKO.NET ONLINE`,
-              delay: 240,
-            },
-            { text: "LOADING USER PROFILE: OPERATOR@ADRIKO", delay: 200 },
-            {
-              text: "ALL SUBSYSTEMS NOMINAL. LAUNCHING TTY HUD INTERFACE...\n",
-              delay: 320,
+              html: ' -> BASE POSITION: 50.0197° N, 22.6781° E [JAROSŁAW BASE NODE]',
+              delay: 180,
+              color: "#9e5959",
             },
             {
-              text: ">>> SYSTEM READY. WELCOME BACK, OPERATOR.",
-              delay: 400,
+              html: ` -> EPHEMERIS: ${solarStr} // LUNA: ${phase} [${ill}%]`,
+              delay: 220,
+              color: "#9e5959",
+            },
+            {
+              html: ' -> CARRIER LINK: TLS 1.3 ENCRYPTED // ADRIKO.NET <span style="color: #5ab35a; font-weight: bold;">ONLINE</span>',
+              delay: 220,
+              color: "#d0d0d0",
+            },
+            {
+              html: 'OPERATOR CREDENTIALS: OPERATOR@ADRIKO <span style="color: #5ab35a;">[AUTHORIZED]</span>',
+              delay: 200,
+              color: "#d0d0d0",
+            },
+            {
+              html: 'ALL SUBSYSTEMS NOMINAL. LAUNCHING TTY HUD INTERFACE...\n',
+              delay: 280,
+              color: "#ff3333",
+            },
+            {
+              html: '>>> SYSTEM READY. WELCOME BACK, OPERATOR.',
+              delay: 360,
               color: "#ffffff",
             },
           ];
@@ -436,7 +456,7 @@ const counts = {
             finishBoot();
           });
 
-          bootScreen?.addEventListener("click", (e) => {
+          bootScreen?.addEventListener("click", () => {
             togglePause();
           });
 
@@ -460,7 +480,7 @@ const counts = {
             const item = bootSequence[currentLine];
             const lineEl = document.createElement("div");
             if (item.color) lineEl.style.color = item.color;
-            lineEl.textContent = item.text;
+            lineEl.innerHTML = item.html;
             bootLog?.appendChild(lineEl);
 
             if (bootScreen) bootScreen.scrollTop = bootScreen.scrollHeight;

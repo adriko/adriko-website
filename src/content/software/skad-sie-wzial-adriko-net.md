@@ -11,7 +11,7 @@ Dlatego powstało **adriko.net**. To po prostu mój prywatny, cyfrowy kąt w sie
 
 ### Rocznik '87, kasety VHS i kinowe fundamenty
 
-Moja zajawka na fantastykę i technologię nie wzięła się znikąd. Jestem z rocznika '87, więc dzieciństwo spędziłem z nosem przy kineskopowym telewizorze. Kasety VHS oglądało się u mnie do zajechania taśmy — w kółko leciał duszny *Obcy*, *Terminator 2* z niezniszczalnym T-800 czy *Powrót do Przyszłości*. 
+Moja zajawka na fantastykę i technologię nie wzięła się znikąd. Jestem z rocznika '87, więc dzieciństwo spędziłem z nosem przy kineskopowym telewizorze. Kasety VHS oglądało się u mnie do zajechania taśmy — w kółko leciał duszny *Obcy*, *Terminator 2* z niezniszczalnym T-800 czy *Powrót do przyszłości*. 
 
 A potem, w 1999 roku, do kin wjechał **Matrix** i wywrócił mój świat do góry nogami. Ten film zmienił dla mnie absolutnie wszystko. Spływający po zielonych kineskopach cyfrowy deszcz, czarne konsole, komendy uniksowe, budki telefoniczne i mroczne, hakerskie podziemie walczące z bezdusznym systemem — to właśnie tam na dobre narodziła się moja fascynacja terminalami, wierszem poleceń i cyberpunkową estetyką.
 

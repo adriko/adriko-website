@@ -90,10 +90,10 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
     </div>
   </section>
 
-  <!-- UNIWERSALNY TERMINAL CLI -->
+  <!-- UNIWERSALNY TERMINAL CLI Z MIGAJĄCYM KURSOREM BLOKOWYM █ -->
   <div class="grep-wrapper">
     <div class="grep-prefix">
-      <span class="grep-prompt-user">operator@adriko</span>:<span class="grep-prompt-path">~</span>$ <span class="grep-cmd">sh:</span>
+      <span class="grep-prompt-user">operator@adriko</span>:<span class="grep-prompt-path">~</span>$ <span class="grep-cmd">sh:</span><span class="cli-block-cursor" aria-hidden="true">█</span>
     </div>
     <input 
       type="text" 
@@ -117,7 +117,7 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
 
   <div id="grep-status" class="grep-status-bar"></div>
 
-  <!-- WIDOK 1: KARTY -->
+  <!-- WIDOK 1: KARTY (Zoptymalizowany kontrast i czytelność) -->
   <div id="cards-view">
     <div style="display: flex; flex-direction: column; gap: 1.15rem;">
       {allEntries.map((entry: any) => {
@@ -135,11 +135,11 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
                 <span style="color: #ff3333; font-size: 0.76rem; font-weight: bold; background: #1a0808; padding: 1px 6px; border: 1px solid #331212;">
                   ./{entry.section}
                 </span>
-                <span style="color: #774444; font-size: 0.8rem; letter-spacing: 0.05em;">
+                <span style="color: #8e5252; font-size: 0.8rem; letter-spacing: 0.05em;">
                   [{entry.data.date}]
                 </span>
               </div>
-              <span style="color: #885555; font-size: 0.78rem;">
+              <span style="color: #a36868; font-size: 0.78rem; text-shadow: 0 0 4px rgba(255, 60, 60, 0.2);">
                 // {entry.displayMeta}
               </span>
             </div>
@@ -159,7 +159,7 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
             {entry.data.tags.length > 0 && (
               <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
                 {entry.data.tags.map((tag: string) => (
-                  <span style="color: #664444; font-size: 0.74rem;">#{tag}</span>
+                  <span style="color: #8c5252; font-size: 0.76rem; letter-spacing: 0.03em;">#{tag}</span>
                 ))}
               </div>
             )}
@@ -169,7 +169,7 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
     </div>
   </div>
 
-  <!-- WIDOK 2: DRZEWO UNIX (Porządek alfabetyczny: database, gear, hardware, software) -->
+  <!-- WIDOK 2: DRZEWO UNIX (Płynny scroll i brak łamania linii) -->
   <div id="tree-view" class="tree-container" style="display: none;">
     <div class="tree-root">
       &gt; /sys/root/
@@ -187,7 +187,7 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
 
           <div style="margin-left: 1.15rem; display: flex; flex-direction: column; gap: 0.25rem;">
             {entriesInSec.length === 0 ? (
-              <div style="color: #3d1b1b; font-style: italic; font-size: 0.8rem; padding: 0.2rem 0.5rem;">
+              <div style="color: #6e3535; font-style: italic; font-size: 0.8rem; padding: 0.2rem 0.5rem; white-space: nowrap;">
                 └── [EMPTY_CATALOG]
               </div>
             ) : (
@@ -319,7 +319,7 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
   btnCards?.addEventListener('click', () => setView('cards'));
   btnTree?.addEventListener('click', () => setView('tree'));
 
-  // Wyczyszczenie starego zapisu i domyślny start w trybie CARDS
+  // Domyślny start w trybie CARDS
   localStorage.removeItem('adriko_website_view');
   setView(sessionStorage.getItem('adriko_website_view') || 'cards');
 

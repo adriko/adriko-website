@@ -5,7 +5,7 @@ tags: ["manifesto", "retro", "deus-ex", "matrix", "half-life", "terminator", "al
 description: "Skąd wziął się pomysł na tę stronę, pomost między klimatem retro a technologią jutra, wspomnienia rocznika '87, możliwości tutejszego terminala CLI oraz plany na adriko.net."
 ---
 
-Cześć! Jeśli tu trafiłeś, to pewnie też masz już trochę dość tego, jak wygląda dzisiejszy internet. Wszędzie te same szablony, tablice zalane reklamami, algorytmy wciskające clickbaity i ani krzty duszy. Ogromnie brakuje mi tamtego klimatu sieci z przełomu wieków — czasów, kiedy strony robiło się z czystej pasji, a internet był miejscem fascynujących odkryć, a nie wielką machiną do robienia wyświetleń.
+Cześć! Jeśli tu trafiłeś, to pewnie też masz już trochę dość tego, jak wygląda dzisiejszy internet. Wszędzie te same szablony, tablice zalane reklamami, algorytmy wciskające tanie sensacje i ani krztyny duszy. Ogromnie brakuje mi tamtego klimatu sieci z przełomu wieków — czasów, kiedy strony robiło się z czystej pasji, a internet był miejscem fascynujących odkryć, a nie wielką machiną do robienia wyświetleń.
 
 Dlatego powstało **adriko.net**. To po prostu mój prywatny, cyfrowy kąt w sieci. I choć bije od niego silny sentyment do czasów, kiedy technologia miała duszę i namacalny charakter, ta strona nie jest cyfrowym skansenem. Łączę tu nostalgię za dawnymi latami z żywą fascynacją współczesnością i technologiczną przyszłością. Zbieram wszystko, co naprawdę mnie kręci: sprzęt, systemy, motoryzację, gry i dobre sci-fi.
 
@@ -43,9 +43,9 @@ Wreszcie w 2001 roku nadszedł ten wielki dzień: rodzice kupili mi pierwszy por
 
 ### O czym będę tutaj pisać?
 
-Zamiast udawać kolejny portal informacyjny, który na siłę goni za newsami i powiela bezduszne notki prasowe, chcę, żeby to miejsce było po prostu moim autorskim notatnikiem. 
+Zamiast udawać kolejny portal informacyjny, który na siłę goni za sensacjami i powiela bezduszne notki prasowe, chcę, żeby to miejsce było po prostu moim autorskim notatnikiem. 
 
-Nie zamykam się w jednej epoce. Prawdziwa pasja polega na łączeniu kropek: od sentymentu do klasycznych pecetów, przez współczesne narzędzia programistyczne i systemowe, aż po to, co dopiero rysuje się na horyzoncie. Pogadamy tu o:
+Nie zamykam się w jednej epoce. Prawdziwa pasja polega na składaniu pojedynczych elementów w całość: od sentymentu do klasycznych pecetów, przez współczesne narzędzia programistyczne i systemowe, aż po to, co dopiero rysuje się na horyzoncie. Pogadamy tu o:
 
 1. **Popkulturze (`./database`)** — szczerze i bez owijania w bawełnę o filmach, książkach sci-fi, komiksach, grach (od nieśmiertelnych klasyków po nowości, które właśnie ukończyłem) czy anime, które warto poznać. Po prostu moja prywatna opinia, jak przy pogawędce ze starym znajomym.
 2. **Motoryzacji i mechanice (`./gear`)** — o najciekawszych premierach ze świata motoryzacji, nowinkach technicznych na dwóch i czterech kołach, czystej mechanicznej frajdzie z jazdy oraz kierunku, w jakim ewoluują współczesne maszyny.
@@ -60,7 +60,7 @@ Wystylizowałem ją w surowym klimacie starych terminali i komputerów:
 
 * **Ekran startowy BIOS** — sekwencja wzorowana na płytach głównych z lat 90. Wylicza pamięć i skanuje katalogi. Możesz ją pominąć klawiszem `ESC`, a na smartfonie wystarczy tapnąć palcem w ekran, żeby ją spauzować.
 * **Zmiana widoku** — możesz przeglądać archiwum w formie kafelków (`[VIEW: CARDS]`) albo w surowym widoku drzewa plików (`[VIEW: TREE]`).
-* **Telemetria w stopce** — na dole strony działa skrypt wyliczający na żywo godziny wschodu i zachodu słońca oraz fazę księżyca dla moich okolic (Jarosław).
+* **Telemetria w stopce** — na dole strony działa skrypt wyliczający na żywo godziny wschodu i zachodu Słońca oraz fazę Księżyca dla moich okolic (Jarosław).
 
 Największą frajdę daje jednak wbudowana konsola na stronie głównej — **SYSTEM CLI v2.0**. Działa jak klasyczny `grep` filtrujący wpisy w locie, a po wpisaniu `help` zamienia się w małe centrum dowodzenia:
 

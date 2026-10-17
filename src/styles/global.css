@@ -40,26 +40,39 @@ body {
 /* ========================================================
    SUBTELNY FILTR KINESKOPOWY CRT (Scanlines + Winieta)
    ======================================================== */
-body::after {
+body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9998;
-  background: 
-    repeating-linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0) 0px,
-      rgba(0, 0, 0, 0) 2px,
-      rgba(0, 0, 0, 0.22) 3px,
-      rgba(0, 0, 0, 0.22) 4px
-    ),
-    radial-gradient(
-      circle at center,
-      rgba(0, 0, 0, 0) 65%,
-      rgba(0, 0, 0, 0.42) 100%
-    );
-  opacity: 0.55;
+  /* Linie skanowania z mikro-luminescencją widoczne na czarnym tle */
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 1px,
+    rgba(0, 0, 0, 0.5) 2px,
+    rgba(0, 0, 0, 0.5) 3px
+  );
+  opacity: 0.75;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  /* Symulacja zakrzywionego szkła CRT: wewnętrzny cień tuby kineskopu */
+  box-shadow: 
+    inset 0 0 80px rgba(0, 0, 0, 0.95),
+    inset 0 0 20px rgba(255, 26, 26, 0.15);
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 26, 26, 0.015) 0%,
+    rgba(0, 0, 0, 0.25) 75%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
 }
 
 /* Bezpieczny kontener z marginesami bocznymi na mobilkach */

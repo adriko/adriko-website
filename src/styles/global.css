@@ -581,3 +581,123 @@ hr {
   color: #ff4d4d !important;
   background: #1e1111 !important;
 }
+
+/* ========================================================
+   TYPOGRAFIA WPISÓW (.post-content) - CYBERDYNE HUD
+   ======================================================== */
+
+/* Zwykły akapit: optymalna czytelność, ciepły grafit o odpowiednim świetle */
+.post-content {
+  color: #bfb6b6;
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.post-content p {
+  color: #bfb6b6;
+  margin-bottom: 1.35rem;
+}
+
+/* Śródtytuły H2 i H3: czysta biel z lewym czerwonym akcentem terminala */
+.post-content h2,
+.post-content h3 {
+  color: #ffffff !important;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-top: 2.6rem;
+  margin-bottom: 1.1rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid #ff1a1a;
+  line-height: 1.4;
+}
+
+.post-content h2 {
+  font-size: 1.28rem;
+}
+
+.post-content h3 {
+  font-size: 1.12rem;
+  border-color: #cc2222;
+}
+
+/* Pogrubienia: jasna stal/biel zamiast szarości, od razu łapie oko */
+.post-content strong,
+.post-content b {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Listy nienumerowane (ul): stylizowany terminalowy grot › zamiast zwykłej kropki */
+.post-content ul {
+  list-style: none !important;
+  padding-left: 0.4rem !important;
+  margin: 1.25rem 0 1.5rem 0 !important;
+}
+
+.post-content ul > li {
+  position: relative;
+  padding-left: 1.35rem;
+  margin-bottom: 0.65rem;
+  line-height: 1.65;
+  color: #bfb6b6;
+}
+
+.post-content ul > li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  top: -0.05rem;
+  color: #ff1a1a;
+  font-weight: bold;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+/* Listy numerowane (ol): czerwone indeksy numeryczne */
+.post-content ol {
+  padding-left: 1.4rem;
+  margin: 1.25rem 0 1.5rem 0;
+  color: #bfb6b6;
+}
+
+.post-content ol > li {
+  margin-bottom: 0.65rem;
+  line-height: 1.65;
+}
+
+.post-content ol > li::marker {
+  color: #ff1a1a;
+  font-weight: bold;
+}
+
+/* Akcent na początku punktów listy (np. pogrubiona nazwa wersji) */
+.post-content li > strong:first-child {
+  color: #ff4d4d;
+}
+
+/* Cytaty i sentencje (blockquote): taktyczny blok danych */
+.post-content blockquote {
+  background: #120808 !important;
+  border: 1px solid #2a1212 !important;
+  border-left: 3px solid #ff1a1a !important;
+  margin: 1.75rem 0 !important;
+  padding: 0.85rem 1.25rem !important;
+  color: #e5dada !important;
+  font-style: italic;
+  border-radius: 2px;
+}
+
+.post-content blockquote p {
+  margin-bottom: 0;
+  color: inherit;
+}
+
+/* Wstawki kodu w treści (inline code) */
+.post-content code:not(pre code) {
+  background: #180d0d;
+  color: #ff5555;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-size: 0.88em;
+  border: 1px solid #331414;
+}

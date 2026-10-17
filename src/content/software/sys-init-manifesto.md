@@ -1,5 +1,5 @@
 ---
-title: "SYS_INIT // Skąd się wziął adriko.net: kafejki, Deus Ex i mój własny kąt w sieci"
+title: "Skąd się wziął adriko.net: kafejki, Deus Ex i mój własny kąt w sieci"
 date: "2026-10-16"
 tags: ["manifesto", "retro", "deus-ex", "matrix", "half-life", "streethawk", "batman", "nostalgia", "gry", "duron", "terminal"]
 description: "Skąd wziął się pomysł na tę stronę, pomost między klimatem retro a technologią jutra, wspomnienia rocznika '87, możliwości tutejszego terminala CLI oraz plany na adriko.net."

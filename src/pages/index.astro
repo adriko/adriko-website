@@ -126,17 +126,12 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
             data-search={searchPayload}
             style="padding: 1.15rem;"
           >
-            <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.35rem;">
-              <div style="display: flex; align-items: center; gap: 0.6rem;">
-                <span style="color: #ff3333; font-size: 0.76rem; font-weight: bold; background: #1a0808; padding: 1px 6px; border: 1px solid #331212;">
-                  ./{entry.section}
-                </span>
-                <span style="color: #8e5252; font-size: 0.8rem; letter-spacing: 0.05em;">
-                  [{entry.data.date}]
-                </span>
-              </div>
-              <span style="color: #a36868; font-size: 0.78rem; text-shadow: 0 0 4px rgba(255, 60, 60, 0.2);">
-                // {entry.displayMeta}
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.35rem;">
+              <span style="color: #ff3333; font-size: 0.76rem; font-weight: bold; background: #1a0808; padding: 1px 6px; border: 1px solid #331212;">
+                ./{entry.section}
+              </span>
+              <span style="color: #8e5252; font-size: 0.8rem; letter-spacing: 0.05em;">
+                [{entry.data.date}]
               </span>
             </div>
 

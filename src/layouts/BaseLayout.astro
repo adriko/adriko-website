@@ -6,12 +6,14 @@ interface Props {
   title?: string;
   activeNav?: "database" | "gear" | "hardware" | "software" | "index";
   showLogout?: boolean;
+  isHome?: boolean;
 }
 
 const {
   title = "adriko // SYSTEM_HUB",
   activeNav = "index",
   showLogout = false,
+  isHome = false,
 } = Astro.props;
 
 // Pobranie rzeczywistej liczby wpisów w kolekcjach na poziomie serwera
@@ -38,6 +40,15 @@ const counts = {
       content="adriko.net // Cyfrowy bunkier, retro-futurystyczny terminal, baza wiedzy i archiwum technologiczne."
     />
 
+    <!-- Blokada mignięcia BIOS-u, jeśli sesja już go odtworzyła -->
+    {isHome && (
+      <script is:inline>
+        if (sessionStorage.getItem("adriko_booted") === "true") {
+          document.documentElement.classList.add("booted");
+        }
+      </script>
+    )}
+
     <!-- Ikona SVG z wymuszeniem odświeżenia cache -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
     <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg?v=3" />
@@ -53,47 +64,49 @@ const counts = {
     />
   </head>
   <body class="terminal">
-    <!-- RETRO BIOS / KERNEL BOOT OVERLAY -->
-    <div
-      id="boot-screen"
-      class="boot-overlay"
-      data-counts={JSON.stringify(counts)}
-    >
-      <div class="boot-header-bar">
-        <div
-          style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;"
-        >
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#ff1a1a"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            style="filter: drop-shadow(0 0 5px rgba(255, 26, 26, 0.75)); flex-shrink: 0;"
+    <!-- RETRO BIOS / KERNEL BOOT OVERLAY (Tylko na stronie głównej) -->
+    {isHome && (
+      <div
+        id="boot-screen"
+        class="boot-overlay"
+        data-counts={JSON.stringify(counts)}
+      >
+        <div class="boot-header-bar">
+          <div
+            style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;"
           >
-            <path
-              d="M5 4 L7 10 L3 12 L7 16 L12 21 L17 16 L21 12 L17 10 L19 4 L14 7 L12 5 L10 7 Z"
-            ></path>
-            <line x1="7" y1="11" x2="10" y2="12"></line>
-            <line x1="17" y1="11" x2="14" y2="12"></line>
-          </svg>
-          <span
-            style="color: #ff3333; font-weight: bold; letter-spacing: 0.05em;"
-            >[ADRIKO BIOS // v4.02]</span
-          >
-          <span id="boot-status-msg" style="color: #aa5555; font-size: 0.75rem;"
-            >[SPACE/TAP: PAUSE | ESC: SKIP]</span
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ff1a1a"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="filter: drop-shadow(0 0 5px rgba(255, 26, 26, 0.75)); flex-shrink: 0;"
+            >
+              <path
+                d="M5 4 L7 10 L3 12 L7 16 L12 21 L17 16 L21 12 L17 10 L19 4 L14 7 L12 5 L10 7 Z"
+              ></path>
+              <line x1="7" y1="11" x2="10" y2="12"></line>
+              <line x1="17" y1="11" x2="14" y2="12"></line>
+            </svg>
+            <span
+              style="color: #ff3333; font-weight: bold; letter-spacing: 0.05em;"
+              >[ADRIKO BIOS // v4.02]</span
+            >
+            <span id="boot-status-msg" style="color: #aa5555; font-size: 0.75rem;"
+              >[SPACE/TAP: PAUSE | ESC: SKIP]</span
+            >
+          </div>
+          <button id="boot-skip-btn" class="boot-skip-trg" type="button"
+            >[SKIP / ESC]</button
           >
         </div>
-        <button id="boot-skip-btn" class="boot-skip-trg" type="button"
-          >[SKIP / ESC]</button
-        >
+        <div id="boot-log" class="boot-terminal-body"></div>
       </div>
-      <div id="boot-log" class="boot-terminal-body"></div>
-    </div>
+    )}
 
     <div class="container">
       <header class="terminal-nav">
@@ -190,6 +203,10 @@ const counts = {
     </div>
 
     <style>
+      html.booted #boot-screen {
+        display: none !important;
+      }
+
       .boot-overlay {
         position: fixed;
         inset: 0;
@@ -340,156 +357,159 @@ const counts = {
         else if (cycleFraction >= 0.03 && cycleFraction < 0.22)
           phase = "WAX_CRES";
 
-        if (sessionStorage.getItem("adriko_booted") === "true") {
-          if (bootScreen) bootScreen.style.display = "none";
-        } else {
-          const bootSequence = [
-            {
-              html: 'PROCESSOR: HARDENED RISC-V RV64GC @ 4.20 GHz // PLATFORM: RV64-UNIX',
-              delay: 220,
-              color: "#ff3333",
-            },
-            {
-              html: 'MEMORY PROBE: 33554432 KB RAM ALLOCATED [0 FAULTS DETECTED]',
-              delay: 230,
-              color: "#d0d0d0",
-            },
-            {
-              html: 'BUS CONTROLLERS & NVMe STORAGE SUBSYSTEMS... <span style="color: #5ab35a;">[DONE]</span>',
-              delay: 220,
-              color: "#d0d0d0",
-            },
-            {
-              html: 'MOUNTING VIRTUAL ROOT FILESYSTEM /sys/root/... <span style="color: #5ab35a;">[OK]</span>',
-              delay: 250,
-              color: "#d0d0d0",
-            },
-            {
-              html: ` -> CATALOG ${"./database".padEnd(14, ".")} RECORDS: ${String(counts.database).padStart(2, "0")} <span style="color: #5ab35a;">[OK]</span>`,
-              delay: 180,
-              color: "#9e5959",
-            },
-            {
-              html: ` -> CATALOG ${"./gear".padEnd(14, ".")} RECORDS: ${String(counts.gear).padStart(2, "0")} <span style="color: #5ab35a;">[OK]</span>`,
-              delay: 180,
-              color: "#9e5959",
-            },
-            {
-              html: ` -> CATALOG ${"./hardware".padEnd(14, ".")} RECORDS: ${String(counts.hardware).padStart(2, "0")} <span style="color: #5ab35a;">[OK]</span>`,
-              delay: 180,
-              color: "#9e5959",
-            },
-            {
-              html: ` -> CATALOG ${"./software".padEnd(14, ".")} RECORDS: ${String(counts.software).padStart(2, "0")} <span style="color: #5ab35a;">[OK]</span>`,
-              delay: 180,
-              color: "#9e5959",
-            },
-            {
-              html: 'ESTABLISHING ORBITAL TELEMETRY LINK... <span style="color: #5ab35a;">[DONE]</span>',
-              delay: 240,
-              color: "#d0d0d0",
-            },
-            {
-              html: ' -> BASE POSITION: 50.0197° N, 22.6781° E [JAROSŁAW BASE NODE]',
-              delay: 180,
-              color: "#9e5959",
-            },
-            {
-              html: ` -> EPHEMERIS: ${solarStr} // LUNA: ${phase} [${ill}%]`,
-              delay: 220,
-              color: "#9e5959",
-            },
-            {
-              html: ' -> CARRIER LINK: TLS 1.3 ENCRYPTED // ADRIKO.NET <span style="color: #5ab35a; font-weight: bold;">ONLINE</span>',
-              delay: 220,
-              color: "#d0d0d0",
-            },
-            {
-              html: 'OPERATOR CREDENTIALS: OPERATOR@ADRIKO <span style="color: #5ab35a;">[AUTHORIZED]</span>',
-              delay: 200,
-              color: "#d0d0d0",
-            },
-            {
-              html: 'ALL SUBSYSTEMS NOMINAL. LAUNCHING TTY HUD INTERFACE...\n',
-              delay: 280,
-              color: "#ff3333",
-            },
-            {
-              html: '>>> SYSTEM READY. WELCOME BACK, OPERATOR.',
-              delay: 360,
-              color: "#ffffff",
-            },
-          ];
+        // SEKWENCJA BIOS STARTUJE TYLKO GDY BOOT SCREEN ISTNIEJE W DOM
+        if (bootScreen) {
+          if (sessionStorage.getItem("adriko_booted") === "true") {
+            bootScreen.style.display = "none";
+          } else {
+            const bootSequence = [
+              {
+                html: 'PROCESSOR: HARDENED RISC-V RV64GC @ 4.20 GHz // PLATFORM: RV64-UNIX',
+                delay: 220,
+                color: "#ff3333",
+              },
+              {
+                html: 'MEMORY PROBE: 33554432 KB RAM ALLOCATED [0 FAULTS DETECTED]',
+                delay: 230,
+                color: "#d0d0d0",
+              },
+              {
+                html: 'BUS CONTROLLERS & NVMe STORAGE SUBSYSTEMS... <span style="color: #5ab35a;">[DONE]</span>',
+                delay: 220,
+                color: "#d0d0d0",
+              },
+              {
+                html: 'MOUNTING VIRTUAL ROOT FILESYSTEM /sys/root/... <span style="color: #5ab35a;">[OK]</span>',
+                delay: 250,
+                color: "#d0d0d0",
+              },
+              {
+                html: ` -> CATALOG ${"./database".padEnd(14, ".")} RECORDS: ${String(counts.database).padStart(2, "0")} <span style="color: #5ab35a;">[OK]</span>`,
+                delay: 180,
+                color: "#9e5959",
+              },
+              {
+                html: ` -> CATALOG ${"./gear".padEnd(14, ".")} RECORDS: ${String(counts.gear).padStart(2, "0")} <span style="color: #5ab35a;">[OK]</span>`,
+                delay: 180,
+                color: "#9e5959",
+              },
+              {
+                html: ` -> CATALOG ${"./hardware".padEnd(14, ".")} RECORDS: ${String(counts.hardware).padStart(2, "0")} <span style="color: #5ab35a;">[OK]</span>`,
+                delay: 180,
+                color: "#9e5959",
+              },
+              {
+                html: ` -> CATALOG ${"./software".padEnd(14, ".")} RECORDS: ${String(counts.software).padStart(2, "0")} <span style="color: #5ab35a;">[OK]</span>`,
+                delay: 180,
+                color: "#9e5959",
+              },
+              {
+                html: 'ESTABLISHING ORBITAL TELEMETRY LINK... <span style="color: #5ab35a;">[DONE]</span>',
+                delay: 240,
+                color: "#d0d0d0",
+              },
+              {
+                html: ' -> BASE POSITION: 50.0197° N, 22.6781° E [JAROSŁAW BASE NODE]',
+                delay: 180,
+                color: "#9e5959",
+              },
+              {
+                html: ` -> EPHEMERIS: ${solarStr} // LUNA: ${phase} [${ill}%]`,
+                delay: 220,
+                color: "#9e5959",
+              },
+              {
+                html: ' -> CARRIER LINK: TLS 1.3 ENCRYPTED // ADRIKO.NET <span style="color: #5ab35a; font-weight: bold;">ONLINE</span>',
+                delay: 220,
+                color: "#d0d0d0",
+              },
+              {
+                html: 'OPERATOR CREDENTIALS: OPERATOR@ADRIKO <span style="color: #5ab35a;">[AUTHORIZED]</span>',
+                delay: 200,
+                color: "#d0d0d0",
+              },
+              {
+                html: 'ALL SUBSYSTEMS NOMINAL. LAUNCHING TTY HUD INTERFACE...\n',
+                delay: 280,
+                color: "#ff3333",
+              },
+              {
+                html: '>>> SYSTEM READY. WELCOME BACK, OPERATOR.',
+                delay: 360,
+                color: "#ffffff",
+              },
+            ];
 
-          let currentLine = 0;
-          let isPaused = false;
-          let timerId = null;
+            let currentLine = 0;
+            let isPaused = false;
+            let timerId = null;
 
-          function finishBoot() {
-            if (timerId) clearTimeout(timerId);
-            sessionStorage.setItem("adriko_booted", "true");
-            if (bootScreen) {
-              bootScreen.style.opacity = "0";
-              bootScreen.style.transition = "opacity 0.35s ease-out";
-              setTimeout(() => {
-                bootScreen.style.display = "none";
-              }, 350);
-            }
-          }
-
-          function togglePause() {
-            isPaused = !isPaused;
-            if (statusMsg) {
-              if (isPaused) {
-                statusMsg.textContent = "[SYSTEM PAUSED - TAP/SPACE TO RESUME]";
-                statusMsg.style.color = "#ffaa00";
-              } else {
-                statusMsg.textContent = "[SPACE/TAP: PAUSE | ESC: SKIP]";
-                statusMsg.style.color = "#aa5555";
-                runSequence();
+            function finishBoot() {
+              if (timerId) clearTimeout(timerId);
+              sessionStorage.setItem("adriko_booted", "true");
+              if (bootScreen) {
+                bootScreen.style.opacity = "0";
+                bootScreen.style.transition = "opacity 0.35s ease-out";
+                setTimeout(() => {
+                  bootScreen.style.display = "none";
+                }, 350);
               }
             }
-          }
 
-          skipBtn?.addEventListener("click", (e) => {
-            e.stopPropagation();
-            finishBoot();
-          });
+            function togglePause() {
+              isPaused = !isPaused;
+              if (statusMsg) {
+                if (isPaused) {
+                  statusMsg.textContent = "[SYSTEM PAUSED - TAP/SPACE TO RESUME]";
+                  statusMsg.style.color = "#ffaa00";
+                } else {
+                  statusMsg.textContent = "[SPACE/TAP: PAUSE | ESC: SKIP]";
+                  statusMsg.style.color = "#aa5555";
+                  runSequence();
+                }
+              }
+            }
 
-          bootScreen?.addEventListener("click", () => {
-            togglePause();
-          });
-
-          window.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") {
+            skipBtn?.addEventListener("click", (e) => {
+              e.stopPropagation();
               finishBoot();
-            } else if (e.key === " " || e.code === "Space") {
-              e.preventDefault();
+            });
+
+            bootScreen?.addEventListener("click", () => {
               togglePause();
+            });
+
+            window.addEventListener("keydown", (e) => {
+              if (e.key === "Escape") {
+                finishBoot();
+              } else if (e.key === " " || e.code === "Space") {
+                e.preventDefault();
+                togglePause();
+              }
+            });
+
+            function runSequence() {
+              if (isPaused) return;
+
+              if (currentLine >= bootSequence.length) {
+                timerId = setTimeout(finishBoot, 800);
+                return;
+              }
+
+              const item = bootSequence[currentLine];
+              const lineEl = document.createElement("div");
+              if (item.color) lineEl.style.color = item.color;
+              lineEl.innerHTML = item.html;
+              bootLog?.appendChild(lineEl);
+
+              if (bootScreen) bootScreen.scrollTop = bootScreen.scrollHeight;
+
+              currentLine++;
+              timerId = setTimeout(runSequence, item.delay);
             }
-          });
 
-          function runSequence() {
-            if (isPaused) return;
-
-            if (currentLine >= bootSequence.length) {
-              timerId = setTimeout(finishBoot, 800);
-              return;
-            }
-
-            const item = bootSequence[currentLine];
-            const lineEl = document.createElement("div");
-            if (item.color) lineEl.style.color = item.color;
-            lineEl.innerHTML = item.html;
-            bootLog?.appendChild(lineEl);
-
-            if (bootScreen) bootScreen.scrollTop = bootScreen.scrollHeight;
-
-            currentLine++;
-            timerId = setTimeout(runSequence, item.delay);
+            timerId = setTimeout(runSequence, 250);
           }
-
-          timerId = setTimeout(runSequence, 250);
         }
 
         if (!sessionStorage.getItem("adriko_session_start")) {

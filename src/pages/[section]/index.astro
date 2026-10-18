@@ -111,12 +111,15 @@ const sectionDesc = sectionDescriptions[section] || 'SEKTOR DANYCH CYFROWYCH.';
             data-search={searchPayload}
             style="padding: 1.15rem;"
           >
-            <!-- SYNTAKTYCZNA BELKA METADANYCH (DIR + TIMESTAMP) -->
-            <div style="font-size: 0.78rem; letter-spacing: 0.05em; margin-bottom: 0.45rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-              <span style="color: #ff3333; font-weight: 600;">DIR: ./{section}/</span>
-              <span style="color: #441a1a;">//</span>
-              <span style="color: #8e5252;">TIMESTAMP: [{entry.data.date}]</span>
-            </div>
+            <!-- SYNTAKTYCZNA BELKA METADANYCH (TIMESTAMP) -->
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.45rem;">
+  <span style="color: #ff3333; font-size: 0.76rem; font-weight: bold; background: #1a0808; padding: 1px 6px; border: 1px solid #331212;">
+    ./{section}
+  </span>
+  <span style="color: #8e5252; font-size: 0.8rem; letter-spacing: 0.05em;">
+    [{entry.data.date}]
+  </span>
+</div>
 
             <h3 style="margin: 0.4rem 0 0.45rem 0;">
               <a href={url} style="color: #ffffff; font-size: 1.15rem; display: inline-block;">

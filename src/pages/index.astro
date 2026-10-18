@@ -113,12 +113,12 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
 
   <div id="grep-status" class="grep-status-bar"></div>
 
-  <!-- WIDOK 1: KARTY (Zoptymalizowany kontrast i czytelność) -->
+  <!-- WIDOK 1: KARTY (SYNTAKTYCZNY UKŁAD RETRO-TERMINALA) -->
   <div id="cards-view">
     <div style="display: flex; flex-direction: column; gap: 1.15rem;">
       {allEntries.map((entry: any) => {
         const slug = getSlug(entry);
-        const searchPayload = `${entry.data.title} ${entry.data.description || ''} ${entry.data.tags.join(' ')} ${entry.section} ${slug}`.toLowerCase();
+        const searchPayload = `${entry.data.title} ${entry.data.description || ''} ${(entry.data.tags || []).join(' ')} ${entry.section} ${slug}`.toLowerCase();
         
         return (
           <article 
@@ -126,12 +126,13 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
             data-search={searchPayload}
             style="padding: 1.15rem;"
           >
-            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.35rem;">
+            <!-- SYNTAKTYCZNA BELKA METADANYCH (TIMESTAMP) -->
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.45rem;">
               <span style="color: #ff3333; font-size: 0.76rem; font-weight: bold; background: #1a0808; padding: 1px 6px; border: 1px solid #331212;">
-                ./{entry.section}
+              ./{entry.section}
               </span>
               <span style="color: #8e5252; font-size: 0.8rem; letter-spacing: 0.05em;">
-                [{entry.data.date}]
+              [{entry.data.date}]
               </span>
             </div>
 
@@ -147,10 +148,12 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
               </p>
             )}
 
-            {entry.data.tags.length > 0 && (
-              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+            <!-- SYNTAKTYCZNA SEKCJA TAGÓW -->
+            {entry.data.tags && entry.data.tags.length > 0 && (
+              <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.45rem; font-size: 0.76rem; letter-spacing: 0.04em;">
+                <span style="color: #664444; font-weight: 600;">TAGS:</span>
                 {entry.data.tags.map((tag: string) => (
-                  <span style="color: #8c5252; font-size: 0.76rem; letter-spacing: 0.03em;">#{tag}</span>
+                  <span style="color: #8c5252;">[{tag}]</span>
                 ))}
               </div>
             )}
@@ -185,7 +188,7 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
               entriesInSec.map((item: any, iIdx: number) => {
                 const isLastItem = iIdx === entriesInSec.length - 1;
                 const slug = getSlug(item);
-                const searchPayload = `${item.data.title} ${item.data.description || ''} ${item.data.tags.join(' ')} ${item.section} ${slug}`.toLowerCase();
+                const searchPayload = `${item.data.title} ${item.data.description || ''} ${(item.data.tags || []).join(' ')} ${item.section} ${slug}`.toLowerCase();
 
                 return (
                   <a 
@@ -333,7 +336,6 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
     const raw = query.trim();
     let term = raw.toLowerCase();
 
-    // Użytkownik dopiero wpisał samo słowo 'grep' - nie czyść widoku do zera
     if (term === 'grep' || term === 'grep ') {
       cliClear.style.display = 'inline-block';
       grepStatus.style.display = 'block';
@@ -352,7 +354,6 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
       return;
     }
 
-    // Jeśli użyto komendy grep ze spacją, np. "grep tesla" -> wyszukaj "tesla"
     if (term.startsWith('grep ')) {
       term = term.slice(5).trim();
     }

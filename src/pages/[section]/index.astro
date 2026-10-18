@@ -3,7 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const sections = ['database', 'hardware', 'software', 'gear'] as const;
+  // Pełna kolejność alfabetyczna: database -> gear -> hardware -> software
+  const sections = ['database', 'gear', 'hardware', 'software'] as const;
   return sections.map((section) => ({
     params: { section },
     props: { section },
@@ -16,9 +17,9 @@ const getSlug = (entry: any) => entry.slug || entry.id.replace(/\.[^/.]+$/, '');
 const getExtension = (sec: string) => {
   switch (sec) {
     case 'database': return '.dat';
+    case 'gear': return '.loadout';
     case 'hardware': return '.spec';
     case 'software': return '.sys';
-    case 'gear': return '.loadout';
     default: return '.dat';
   }
 };
@@ -32,10 +33,10 @@ const entries = rawEntries.map((e: any) => ({
 })).sort((a: any, b: any) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
 const sectionDescriptions: Record<string, string> = {
-  database: 'MEDIA & LORE ARCHIVE // BOOKS, FILMS, ANIME, GAMES CANON',
-  hardware: 'PHYSICAL COMPUTING // SILICON, RETRO PC, CHIPS & WORKSTATIONS',
-  software: 'SYSTEMS & CODE // LINUX KERNEL, CLI UTILITIES, AI & NETWORKS',
-  gear: 'OPERATIONAL LOADOUT // VEHICLES, FIREARMS, BALLISTICS, DRONES & EDC',
+  database: 'MEDIA & LORE ARCHIVE // BOOKS, FILMS, ANIME & GAMES',
+  gear: 'MACHINES & LOADOUT // VEHICLES, GADGETS & TACTICAL EDC',
+  hardware: 'RIGS & SILICON // RETRO RIGS, PC BUILDS & WORKSTATIONS',
+  software: 'SYSTEMS & CODE // OS, WEB DESIGN, APPS & SCRIPTS',
 };
 ---
 
@@ -67,7 +68,7 @@ const sectionDescriptions: Record<string, string> = {
       type="text" 
       id="cli-input" 
       class="grep-input" 
-      placeholder="Type search pattern or command ('help', 'specs', 'weather tokyo', 'crypto btc', 'cat database')..." 
+      placeholder="Type search pattern or command ('help', 'specs', 'weather tokyo', 'crypto btc', 'cat gear')..." 
       autocomplete="off"
       spellcheck="false"
     />
@@ -256,7 +257,7 @@ weather [city]    : Orbital weather telemetry (defaults to Jarosław base)
 crypto <symbol>   : Realtime crypto exchange feed via Binance (e.g. crypto btc, crypto eth)
 fx <currency>     : Official fiat exchange rate via NBP (e.g. fx usd, fx eur, fx chf)
 ping [target]     : Probe latency round-trip time (e.g. ping cloudflare)
-cat <section>     : Jump to catalog (database, hardware, software, gear)
+cat <section>     : Jump to catalog (database, gear, hardware, software)
 clear             : Flush console output and reset filters
 grep <pattern>    : Filter filesystem by text pattern`;
         break;
@@ -428,11 +429,11 @@ SUBSYSTEM_STATUS  : ATMOSPHERIC SENSORS NOMINAL`;
         break;
 
       case 'cat':
-        if (['database', 'hardware', 'software', 'gear'].includes(arg)) {
+        if (['database', 'gear', 'hardware', 'software'].includes(arg)) {
           cliOutputContent.textContent = `// REDIRECTING TO /${arg}...`;
           setTimeout(() => { window.location.href = `/${arg}`; }, 300);
         } else {
-          cliOutputContent.textContent = `// ERROR: UNKNOWN TARGET "${arg}". Available targets: database, hardware, software, gear`;
+          cliOutputContent.textContent = `// ERROR: UNKNOWN TARGET "${arg}". Available targets: database, gear, hardware, software`;
         }
         break;
 

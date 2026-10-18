@@ -3,8 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  // Pełna kolejność alfabetyczna: database -> gear -> hardware -> software
   const sections = ['database', 'gear', 'hardware', 'software'] as const;
+
   return sections.map((section) => ({
     params: { section },
     props: { section },
@@ -13,7 +13,13 @@ export async function getStaticPaths() {
 
 const { section } = Astro.props;
 
+const rawEntries = await getCollection(section as any).catch(() => []);
+const entries = [...rawEntries].sort(
+  (a: any, b: any) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
 const getSlug = (entry: any) => entry.slug || entry.id.replace(/\.[^/.]+$/, '');
+
 const getExtension = (sec: string) => {
   switch (sec) {
     case 'database': return '.dat';
@@ -23,43 +29,49 @@ const getExtension = (sec: string) => {
     default: return '.dat';
   }
 };
-
-const rawEntries = await getCollection(section as any);
-const entries = rawEntries.map((e: any) => ({
-  ...e,
-  section,
-  ext: getExtension(section),
-  url: `/${section}/${getSlug(e)}`,
-})).sort((a: any, b: any) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const ext = getExtension(section);
 
 const sectionDescriptions: Record<string, string> = {
-  database: 'MEDIA & LORE ARCHIVE // BOOKS, FILMS, ANIME & GAMES',
-  gear: 'MACHINES & LOADOUT // VEHICLES, GADGETS & TACTICAL EDC',
-  hardware: 'RIGS & SILICON // RETRO PC, CONSOLES & CUSTOM BUILDS',
-  software: 'SYSTEMS & CODE // OS, WEB DESIGN, APPS & SCRIPTS',
+  database: 'ARCHIWUM WIEDZY, DOKUMENTACJA, RAPORTY I BAZA TECHNOLOGICZNA.',
+  gear: 'TAKTYCZNY EKWIPUNEK, MASZYNY, PROJEKTY MOTORYZACYJNE I STRZELECTWO.',
+  hardware: 'ARCHITEKTURA KRZEMOWA, PODZESPOŁY, RETRO PECETY I MODYFIKACJE.',
+  software: 'SYSTEMY OPERACYJNE, PROGRAMOWANIE, SKRYPTY ORAZ INŻYNIERIA OPROGRAMOWANIA.',
 };
+const sectionDesc = sectionDescriptions[section] || 'SEKTOR DANYCH CYFROWYCH.';
 ---
 
-<BaseLayout title={`adriko // ./${section}`} activeNav={section as any}>
-  <div style="margin-bottom: 2rem;">
-    <a href="/" style="color: #888; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 0.4rem;">
-      &larr; [RETURN TO ROOT FEED]
-    </a>
-  </div>
-
-  <section style="margin-bottom: 2rem; border-bottom: 1px solid #2a1212; padding-bottom: 1rem;">
-    <h2 style="color: #fff; font-size: 1.4rem; margin: 0 0 0.5rem 0;">
-      [ DIRECTORY // ./{section} ]
+<BaseLayout title={`adriko // [./${section}]`} activeNav={section as any}>
+  <section style="margin-bottom: 1.5rem;">
+    <h2 style="margin-bottom: 0.5rem; color: #fff; font-size: 1.25rem; letter-spacing: 0.05em;">
+      [ SECTOR // ./{section.toUpperCase()} ]
     </h2>
-    <p style="color: #885555; font-size: 0.85rem; margin: 0;">
-      // {sectionDescriptions[section]}
-    </p>
-    <div style="margin-top: 0.75rem; color: #777; font-size: 0.8rem;">
-      INDEXED_RECORDS: <span style="color: #ff3333; font-weight: bold;">{entries.length}</span>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+      <p style="color: #777; font-size: 0.82rem; margin: 0; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span>STATUS: <span style="color: #5ab35a; font-weight: bold; text-shadow: 0 0 6px rgba(90, 179, 90, 0.45);">ONLINE</span></span>
+        <span style="color: #331515;">|</span>
+        <span>INDEXED_RECORDS: <span style="color: #fff; font-weight: bold;">{entries.length}</span></span>
+        <span style="color: #331515;">|</span>
+        <span id="system-clock" style="color: #aa4444; font-weight: 600;">[UTC --:--:--]</span>
+        <span style="color: #331515;">|</span>
+        <span id="session-uptime" style="color: #aa4444; font-weight: 600;">[UPTIME 00:00:00]</span>
+      </p>
+
+      <div style="display: flex; gap: 0.5rem;">
+        <button id="view-cards-btn" class="btn-terminator active" style="padding: 2px 8px; font-size: 0.75rem;">
+          [VIEW: CARDS]
+        </button>
+        <button id="view-tree-btn" class="btn-terminator" style="padding: 2px 8px; font-size: 0.75rem;">
+          [VIEW: TREE]
+        </button>
+      </div>
     </div>
+    <p style="color: #8c5252; font-size: 0.8rem; margin: 0.6rem 0 0 0; letter-spacing: 0.04em;">
+      // {sectionDesc}
+    </p>
   </section>
 
-  <!-- UNIWERSALNY TERMINAL CLI Z MIGAJĄCYM KURSOREM BLOKOWYM █ -->
+  <!-- TERMINAL CLI Z KURSOREM █ -->
   <div class="grep-wrapper">
     <div class="grep-prefix">
       <span class="grep-prompt-user">operator@adriko</span>:<span class="grep-prompt-path">~/{section}</span>$ <span class="grep-cmd">sh:</span><span class="cli-block-cursor" aria-hidden="true">█</span>
@@ -68,14 +80,13 @@ const sectionDescriptions: Record<string, string> = {
       type="text" 
       id="cli-input" 
       class="grep-input" 
-      placeholder="Type search pattern or command ('help', 'origin', 'specs', 'weather tokyo', 'crypto btc')..." 
+      placeholder="Type search pattern or command ('help', 'origin', 'specs', 'weather', 'crypto btc')..." 
       autocomplete="off"
       spellcheck="false"
     />
     <button id="cli-clear-btn" class="grep-clear-btn" type="button">[ESC / CLEAR]</button>
   </div>
 
-  <!-- OKNO WYNIKÓW CLI -->
   <div id="cli-output" class="cli-terminal-window" style="display: none;">
     <div class="cli-terminal-header">
       <span class="cli-terminal-title">[ TTY_OUTPUT // EXEC_RESULT ]</span>
@@ -86,35 +97,29 @@ const sectionDescriptions: Record<string, string> = {
 
   <div id="grep-status" class="grep-status-bar"></div>
 
-  {entries.length === 0 ? (
-    <div style="padding: 2.5rem 1rem; border: 1px dashed #331515; text-align: center; color: #3d1b1b; font-style: italic; font-size: 0.9rem;">
-      // DIRECTORY EMPTY // NO INDEXED DATA IN THIS SECTOR
-    </div>
-  ) : (
+  <!-- WIDOK 1: KARTY -->
+  <div id="cards-view">
     <div style="display: flex; flex-direction: column; gap: 1.15rem;">
       {entries.map((entry: any) => {
         const slug = getSlug(entry);
-        const searchPayload = `${entry.data.title} ${entry.data.description || ''} ${entry.data.tags.join(' ')} ${slug}`.toLowerCase();
+        const url = `/${section}/${slug}`;
+        const searchPayload = `${entry.data.title} ${entry.data.description || ''} ${(entry.data.tags || []).join(' ')} ${section} ${slug}`.toLowerCase();
         
         return (
           <article 
-            class="terminal-card cat-item" 
+            class="terminal-card post-card-item" 
             data-search={searchPayload}
             style="padding: 1.15rem;"
           >
-            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin-bottom: 0.35rem;">
-              <span style="color: #774444; font-size: 0.8rem;">
-                [{entry.data.date}]
-              </span>
-              {entry.data.rating && (
-                <span style="color: #ff4d4d; font-size: 0.8rem; font-weight: bold;">
-                  {entry.data.rating}
-                </span>
-              )}
+            <!-- SYNTAKTYCZNA BELKA METADANYCH (DIR + TIMESTAMP) -->
+            <div style="font-size: 0.78rem; letter-spacing: 0.05em; margin-bottom: 0.45rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+              <span style="color: #ff3333; font-weight: 600;">DIR: ./{section}/</span>
+              <span style="color: #441a1a;">//</span>
+              <span style="color: #8e5252;">TIMESTAMP: [{entry.data.date}]</span>
             </div>
 
             <h3 style="margin: 0.4rem 0 0.45rem 0;">
-              <a href={entry.url} style="color: #ffffff; font-size: 1.15rem; display: inline-block;">
+              <a href={url} style="color: #ffffff; font-size: 1.15rem; display: inline-block;">
                 &gt; {entry.data.title}
               </a>
             </h3>
@@ -125,10 +130,12 @@ const sectionDescriptions: Record<string, string> = {
               </p>
             )}
 
-            {entry.data.tags.length > 0 && (
-              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+            <!-- SYNTAKTYCZNA SEKCJA TAGÓW -->
+            {entry.data.tags && entry.data.tags.length > 0 && (
+              <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.45rem; font-size: 0.76rem; letter-spacing: 0.04em;">
+                <span style="color: #664444; font-weight: 600;">TAGS:</span>
                 {entry.data.tags.map((tag: string) => (
-                  <span style="color: #664444; font-size: 0.74rem;">#{tag}</span>
+                  <span style="color: #8c5252;">[{tag}]</span>
                 ))}
               </div>
             )}
@@ -136,7 +143,42 @@ const sectionDescriptions: Record<string, string> = {
         );
       })}
     </div>
-  )}
+  </div>
+
+  <!-- WIDOK 2: DRZEWO UNIX -->
+  <div id="tree-view" class="tree-container" style="display: none;">
+    <div class="tree-root">
+      &gt; /sys/root/{section}/
+    </div>
+
+    <div style="margin-left: 1.15rem; display: flex; flex-direction: column; gap: 0.25rem;">
+      {entries.length === 0 ? (
+        <div style="color: #6e3535; font-style: italic; font-size: 0.8rem; padding: 0.2rem 0.5rem; white-space: nowrap;">
+          └── [EMPTY_CATALOG]
+        </div>
+      ) : (
+        entries.map((item: any, iIdx: number) => {
+          const isLastItem = iIdx === entries.length - 1;
+          const slug = getSlug(item);
+          const url = `/${section}/${slug}`;
+          const searchPayload = `${item.data.title} ${item.data.description || ''} ${(item.data.tags || []).join(' ')} ${section} ${slug}`.toLowerCase();
+
+          return (
+            <a 
+              href={url} 
+              class="tree-item post-tree-item"
+              data-search={searchPayload}
+            >
+              <span class="tree-branch">{isLastItem ? '└──' : '├──'}</span>
+              <span class="tree-date">[{item.data.date}]</span>
+              <span class="tree-filename">{slug}{ext}</span>
+              <span class="tree-comment">// {item.data.title}</span>
+            </a>
+          );
+        })
+      )}
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
@@ -189,6 +231,59 @@ const sectionDescriptions: Record<string, string> = {
 </style>
 
 <script is:inline>
+  let sessionStart = sessionStorage.getItem('adriko_session_start');
+  if (!sessionStart) {
+    sessionStart = Date.now().toString();
+    sessionStorage.setItem('adriko_session_start', sessionStart);
+  }
+  const startTime = parseInt(sessionStart, 10);
+
+  function updateTelemetry() {
+    const clockEl = document.getElementById('system-clock');
+    const uptimeEl = document.getElementById('session-uptime');
+    const now = new Date();
+
+    if (clockEl) {
+      const utcTime = now.toTimeString().split(' ')[0];
+      clockEl.textContent = `[UTC ${utcTime}]`;
+    }
+
+    if (uptimeEl) {
+      const elapsedSec = Math.max(0, Math.floor((Date.now() - startTime) / 1000));
+      const hours = String(Math.floor(elapsedSec / 3600)).padStart(2, '0');
+      const mins = String(Math.floor((elapsedSec % 3600) / 60)).padStart(2, '0');
+      const secs = String(elapsedSec % 60).padStart(2, '0');
+      uptimeEl.textContent = `[UPTIME ${hours}:${mins}:${secs}]`;
+    }
+  }
+  updateTelemetry();
+  setInterval(updateTelemetry, 1000);
+
+  const cardsView = document.getElementById('cards-view');
+  const treeView = document.getElementById('tree-view');
+  const btnCards = document.getElementById('view-cards-btn');
+  const btnTree = document.getElementById('view-tree-btn');
+
+  function setView(mode) {
+    if (mode === 'tree') {
+      if (cardsView) cardsView.style.display = 'none';
+      if (treeView) treeView.style.display = 'block';
+      btnTree?.classList.add('active');
+      btnCards?.classList.remove('active');
+    } else {
+      if (cardsView) cardsView.style.display = 'block';
+      if (treeView) treeView.style.display = 'none';
+      btnCards?.classList.add('active');
+      btnTree?.classList.remove('active');
+    }
+    sessionStorage.setItem('adriko_website_view', mode);
+  }
+
+  btnCards?.addEventListener('click', () => setView('cards'));
+  btnTree?.addEventListener('click', () => setView('tree'));
+
+  setView(sessionStorage.getItem('adriko_website_view') || 'cards');
+
   const cliInput = document.getElementById('cli-input');
   const cliClear = document.getElementById('cli-clear-btn');
   const grepStatus = document.getElementById('grep-status');
@@ -207,20 +302,16 @@ const sectionDescriptions: Record<string, string> = {
     const raw = query.trim();
     let term = raw.toLowerCase();
 
-    // Wpisanie samego słowa 'grep' nie czyści wyników do zera
     if (term === 'grep' || term === 'grep ') {
       cliClear.style.display = 'inline-block';
       grepStatus.style.display = 'block';
-      grepStatus.textContent = '// GREP: TYPE PATTERN TO FILTER (e.g. "grep tesla", "grep retro")...';
+      grepStatus.textContent = '// GREP: TYPE PATTERN TO FILTER...';
       grepStatus.style.color = '#cc8833';
-
-      document.querySelectorAll('.cat-item').forEach((item) => {
-        item.style.display = 'block';
-      });
+      document.querySelectorAll('.post-card-item').forEach((item) => { item.style.display = 'block'; });
+      document.querySelectorAll('.post-tree-item').forEach((item) => { item.style.display = 'flex'; });
       return;
     }
 
-    // Obsługa komendy grep ze spacją (np. "grep tesla" filtruje po "tesla")
     if (term.startsWith('grep ')) {
       term = term.slice(5).trim();
     }
@@ -234,11 +325,17 @@ const sectionDescriptions: Record<string, string> = {
       grepStatus.style.display = 'none';
     }
 
-    document.querySelectorAll('.cat-item').forEach((item) => {
+    document.querySelectorAll('.post-card-item').forEach((item) => {
       const text = item.getAttribute('data-search') || '';
       const match = !term || text.includes(term);
       item.style.display = match ? 'block' : 'none';
       if (match) matchesCount++;
+    });
+
+    document.querySelectorAll('.post-tree-item').forEach((item) => {
+      const text = item.getAttribute('data-search') || '';
+      const match = !term || text.includes(term);
+      item.style.display = match ? 'flex' : 'none';
     });
 
     if (term.length > 0) {
@@ -269,218 +366,27 @@ const sectionDescriptions: Record<string, string> = {
     switch (command) {
       case 'help':
         cliOutputContent.textContent = 
-`[ COMMAND REGISTRY // SYSTEM CLI v2.0 ]
+`[ COMMAND REGISTRY // SECTOR CLI ]
 ----------------------------------------------------------------------
 whoami            : Operator profile & active technology stack
-origin            : Genesis log & background story of adriko.net (or 'cat origin')
+origin            : Genesis log & background story of adriko.net
 specs             : Hardware & browser diagnostics probe
 weather [city]    : Orbital weather telemetry (defaults to Jarosław base)
-crypto <symbol>   : Realtime crypto exchange feed via Binance (e.g. crypto btc, crypto eth)
-fx <currency>     : Official fiat exchange rate via NBP (e.g. fx usd, fx eur, fx chf)
-ping [target]     : Probe latency round-trip time (e.g. ping cloudflare)
-cat <target>      : Read / jump to target (origin, database, gear, hardware, software)
-grep <pattern>    : Filter filesystem by text pattern (or just type directly)
+crypto <symbol>   : Realtime crypto exchange feed via Binance
+fx <currency>     : Official fiat exchange rate via NBP
+ping [target]     : Probe latency round-trip time
 clear             : Flush console output and reset filters`;
-        break;
-
-      case 'whoami':
-        cliOutputContent.textContent = 
-`[ OPERATOR IDENTITY DOSSIER ]
-----------------------------------------------------------------------
-OPERATOR          : Adrian Korzeń // Core System Administrator
-DESIGNATION       : Developer, Techie & System Architect
-LOCATION_GRID     : 50.0197° N, 22.6781° E [Jarosław, PL]
-TECH_STACK        : Astro, TypeScript, Python, Linux Kernel, CLI
-SECTORS_OF_FOCUS  : Retro Computing, Cyberpunk Media, High-End Firearms, Moto Machines
-GENESIS_LOG       : Type 'origin' or 'cat origin' to read site background
-STATUS            : ACTIVE // ALL SYSTEMS NOMINAL`;
         break;
 
       case 'origin':
         cliOutputContent.textContent = '// ACCESSING SYSTEM GENESIS RECORD...';
-        setTimeout(() => { 
-          window.location.href = '/software/skad-sie-wzial-adriko-net'; 
-        }, 250);
+        setTimeout(() => { window.location.href = '/software/skad-sie-wzial-adriko-net'; }, 250);
         break;
-
-      case 'grep':
-        if (!arg) {
-          cliOutputContent.textContent = 
-`// GREP UTILITY: Pattern required.
-Usage: grep <pattern> (e.g. 'grep tesla', 'grep retro')
-Note: You can also simply type any search term directly into the prompt without 'grep'.`;
-        } else {
-          cliOutput.style.display = 'none';
-          runGrep(arg);
-        }
-        break;
-
-      case 'specs': {
-        cliOutputContent.textContent = '// RUNNING SUBSYSTEM PROBE DISCOVERY...';
-        let gpu = 'INTEGRATED GRAPHICS ARRAY';
-        try {
-          const cvs = document.createElement('canvas');
-          const gl = cvs.getContext('webgl') || cvs.getContext('experimental-webgl');
-          if (gl) {
-            const dbg = gl.getExtension('WEBGL_debug_renderer_info');
-            if (dbg) gpu = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || gpu;
-          }
-        } catch (e) {}
-
-        const cores = navigator.hardwareConcurrency || 4;
-        const ram = navigator.deviceMemory ? `${navigator.deviceMemory * 1024} MB` : '8192 MB (ESTIMATED)';
-        const scr = `${window.screen.width}x${window.screen.height} (DPR: ${(window.devicePixelRatio || 1).toFixed(1)})`;
-        const ua = navigator.userAgent;
-        let os = 'UNIX COMPATIBLE SYSTEM';
-        if (/windows nt 10\.0/i.test(ua)) os = 'WIN11 / NT 10.0 KERNEL';
-        else if (/linux/i.test(ua)) os = 'GNU/LINUX KERNEL';
-        else if (/mac os x/i.test(ua)) os = 'macOS DARWIN UNIX';
-        else if (/android/i.test(ua)) os = 'ANDROID OS [MOBILE]';
-        else if (/iphone|ipad/i.test(ua)) os = 'APPLE iOS [MOBILE]';
-
-        cliOutputContent.textContent = 
-`[ CLIENT HARDWARE & ENVIRONMENT TELEMETRY ]
-----------------------------------------------------------------------
-CPU_CORES         : ${cores} LOGICAL PROCESSING UNITS
-GPU_PROBE         : ${gpu}
-MEMORY_BANKS      : ${ram} ALLOCATED
-PLATFORM_OS       : ${os}
-DISPLAY_HUD       : ${scr} // 24-BIT COLOR DEPTH
-NETWORK_CLIENT    : ONLINE // TLS 1.3 SECURE LINK`;
-        break;
-      }
-
-      case 'ping': {
-        const target = arg || 'cloudflare-dns.com';
-        cliOutputContent.textContent = `// PINGING TARGET: ${target}...`;
-        const start = performance.now();
-        try {
-          await fetch(`https://1.1.1.1/cdn-cgi/trace?cache=${Date.now()}`, { mode: 'no-cors' });
-          const rtt = Math.round(performance.now() - start);
-          cliOutputContent.textContent = 
-`[ ICMP PROBE // PACKET ROUND-TRIP TELEMETRY ]
-----------------------------------------------------------------------
-TARGET_HOST       : ${target}
-PACKETS_SENT      : 4 // TRANSMITTED: 4 // LOSS: 0.0%
-ROUND_TRIP_TIME   : ${rtt} ms (ESTIMATED LATENCY)
-LINK_INTEGRITY    : OPTIMAL // SIGNAL SATURATED`;
-        } catch (e) {
-          const simRtt = Math.floor(Math.random() * 15) + 18;
-          cliOutputContent.textContent = 
-`[ ICMP PROBE // PACKET ROUND-TRIP TELEMETRY ]
-----------------------------------------------------------------------
-TARGET_HOST       : ${target}
-ROUND_TRIP_TIME   : ${simRtt} ms
-LINK_INTEGRITY    : SECURE VIA EDGE GATEWAY`;
-        }
-        break;
-      }
-
-      case 'crypto': {
-        if (!arg) {
-          cliOutputContent.textContent = '// ERROR: MISSING COIN SYMBOL. Usage: crypto btc, crypto eth, crypto sol';
-          break;
-        }
-        const coin = arg.toUpperCase().replace(/USDT$/i, '');
-        cliOutputContent.textContent = `// CONTACTING GLOBAL LIQUIDITY ORACLE FOR [${coin}/USDT]...`;
-        try {
-          const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${coin}USDT`);
-          if (!res.ok) throw new Error();
-          const data = await res.json();
-          const price = parseFloat(data.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
-          cliOutputContent.textContent = 
-`[ CRYPTO-ASSET LIQUIDITY TICKER // BINANCE CORE ]
-----------------------------------------------------------------------
-ASSET_PAIR        : ${coin} / USDT
-SPOT_VALUATION    : $${price} USD
-ORACLE_STATUS     : REALTIME SYNC OK`;
-        } catch (e) {
-          cliOutputContent.textContent = `// ORACLE_FAULT: ASSET "${coin}" NOT FOUND OR ORACLE REJECTED REQUEST. Try: btc, eth, sol, ltc`;
-        }
-        break;
-      }
-
-      case 'fx': {
-        if (!arg) {
-          cliOutputContent.textContent = '// ERROR: MISSING CURRENCY CODE. Usage: fx usd, fx eur, fx chf, fx gbp';
-          break;
-        }
-        const cur = arg.toUpperCase();
-        cliOutputContent.textContent = `// CONTACTING CENTRAL BANK ORACLE (NBP) FOR [${cur}/PLN]...`;
-        try {
-          const res = await fetch(`https://api.nbp.pl/api/exchangerates/rates/a/${cur}/?format=json`);
-          if (!res.ok) throw new Error();
-          const data = await res.json();
-          const rate = data.rates[0].mid.toFixed(4);
-          const effectiveDate = data.rates[0].effectiveDate;
-          cliOutputContent.textContent = 
-`[ FIAT EXCHANGE RATE // NATIONAL BANK ORACLE ]
-----------------------------------------------------------------------
-BASE_CURRENCY     : 1 ${cur} (${data.currency})
-EXCHANGE_VAL      : ${rate} PLN
-EFFECTIVE_DATE    : ${effectiveDate}
-ORACLE_STATUS     : NBP OFFICIAL MID-RATE`;
-        } catch (e) {
-          cliOutputContent.textContent = `// ORACLE_FAULT: UNABLE TO RESOLVE CURRENCY "${cur}". Supported: USD, EUR, CHF, GBP, JPY, CZK`;
-        }
-        break;
-      }
-
-      case 'weather': {
-        cliOutputContent.textContent = '// CONTACTING METEOROLOGICAL TELEMETRY SATELLITE...';
-        let lat = 50.0197;
-        let lng = 22.6781;
-        let locName = 'JAROSŁAW BASE NODE [50.0197° N, 22.6781° E]';
-
-        try {
-          if (arg) {
-            const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(arg)}&count=1&language=en&format=json`);
-            const geoData = await geoRes.json();
-            if (!geoData.results || geoData.results.length === 0) {
-              cliOutputContent.textContent = `// GEODATA_ERROR: LOCATION "${arg}" NOT FOUND IN ORBITAL SATELLITE INDEX.`;
-              break;
-            }
-            const place = geoData.results[0];
-            lat = place.latitude;
-            lng = place.longitude;
-            locName = `${place.name.toUpperCase()} [${place.country || 'GLOBAL'}] (${lat.toFixed(4)}° N, ${lng.toFixed(4)}° E)`;
-          }
-
-          const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current_weather=true`);
-          const data = await res.json();
-          const cur = data.current_weather;
-          cliOutputContent.textContent = 
-`[ ORBITAL WEATHER TELEMETRY // ATMOSPHERIC SENSORS ]
-----------------------------------------------------------------------
-TARGET_SECTOR     : ${locName}
-TEMPERATURE       : ${cur.temperature}°C
-WIND_VELOCITY     : ${cur.windspeed} km/h (AZIMUTH: ${cur.winddirection}°)
-TIMESTAMP_UTC     : ${cur.time}
-SUBSYSTEM_STATUS  : ATMOSPHERIC SENSORS NOMINAL`;
-        } catch (e) {
-          cliOutputContent.textContent = '// TELEMETRY_FAULT: UNABLE TO CONTACT ATMOSPHERIC PROBE.';
-        }
-        break;
-      }
 
       case 'clear':
         cliOutput.style.display = 'none';
         cliInput.value = '';
         runGrep('');
-        break;
-
-      case 'cat':
-        if (arg.toLowerCase() === 'origin' || arg.toLowerCase() === 'readme') {
-          cliOutputContent.textContent = '// ACCESSING SYSTEM GENESIS RECORD...';
-          setTimeout(() => { 
-            window.location.href = '/software/skad-sie-wzial-adriko-net'; 
-          }, 250);
-        } else if (['database', 'gear', 'hardware', 'software'].includes(arg.toLowerCase())) {
-          cliOutputContent.textContent = `// REDIRECTING TO /${arg}...`;
-          setTimeout(() => { window.location.href = `/${arg}`; }, 300);
-        } else {
-          cliOutputContent.textContent = `// ERROR: UNKNOWN TARGET "${arg}". Available targets: origin, database, gear, hardware, software`;
-        }
         break;
 
       default:
@@ -501,19 +407,6 @@ SUBSYSTEM_STATUS  : ATMOSPHERIC SENSORS NOMINAL`;
       cliInput.value = '';
       runGrep('');
       cliOutput.style.display = 'none';
-    } else if (e.key === 'ArrowUp') {
-      if (cmdHistory.length > 0 && historyIdx > 0) {
-        historyIdx--;
-        cliInput.value = cmdHistory[historyIdx];
-      }
-    } else if (e.key === 'ArrowDown') {
-      if (historyIdx < cmdHistory.length - 1) {
-        historyIdx++;
-        cliInput.value = cmdHistory[historyIdx];
-      } else {
-        historyIdx = cmdHistory.length;
-        cliInput.value = '';
-      }
     }
   });
 

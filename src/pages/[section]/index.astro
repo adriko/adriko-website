@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
   const sections = ['database', 'gear', 'hardware', 'software'] as const;
@@ -111,13 +111,14 @@ const sectionDesc = sectionDescriptions[section] || 'SEKTOR DANYCH CYFROWYCH.';
             data-search={searchPayload}
             style="padding: 1.15rem;"
           >
-            <!-- SYNTAKTYCZNA BELKA METADANYCH (TIMESTAMP) -->
-            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.45rem;">
+            <!-- PLAKIETKA KATEGORII + TIMESTAMP -->
+<div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.45rem; flex-wrap: wrap;">
   <span style="color: #ff3333; font-size: 0.76rem; font-weight: bold; background: #1a0808; padding: 1px 6px; border: 1px solid #331212;">
     ./{section}
   </span>
+  <span style="color: #441a1a;">//</span>
   <span style="color: #8e5252; font-size: 0.8rem; letter-spacing: 0.05em;">
-    [{entry.data.date}]
+    TIMESTAMP: [{entry.data.date}]
   </span>
 </div>
 

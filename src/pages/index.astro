@@ -126,15 +126,16 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
             data-search={searchPayload}
             style="padding: 1.15rem;"
           >
-            <!-- SYNTAKTYCZNA BELKA METADANYCH (TIMESTAMP) -->
-            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.45rem;">
-              <span style="color: #ff3333; font-size: 0.76rem; font-weight: bold; background: #1a0808; padding: 1px 6px; border: 1px solid #331212;">
-              ./{entry.section}
-              </span>
-              <span style="color: #8e5252; font-size: 0.8rem; letter-spacing: 0.05em;">
-              [{entry.data.date}]
-              </span>
-            </div>
+            <!-- PLAKIETKA KATEGORII + TIMESTAMP -->
+<div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.45rem; flex-wrap: wrap;">
+  <span style="color: #ff3333; font-size: 0.76rem; font-weight: bold; background: #1a0808; padding: 1px 6px; border: 1px solid #331212;">
+    ./{entry.section}
+  </span>
+  <span style="color: #441a1a;">//</span>
+  <span style="color: #8e5252; font-size: 0.8rem; letter-spacing: 0.05em;">
+    TIMESTAMP: [{entry.data.date}]
+  </span>
+</div>
 
             <h3 style="margin: 0.4rem 0 0.45rem 0;">
               <a href={entry.url} style="color: #ffffff; font-size: 1.15rem; display: inline-block;">

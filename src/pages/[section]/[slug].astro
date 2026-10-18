@@ -1,19 +1,20 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection, render } from 'astro:content';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const sections = ['database', 'gear', 'hardware', 'software'] as const;
+  const sections = ["database", "gear", "hardware", "software"] as const;
   const paths: any[] = [];
 
   for (const section of sections) {
     const entries = await getCollection(section as any);
     const sorted = [...entries].sort(
-      (a: any, b: any) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime()
+      (a: any, b: any) =>
+        new Date(a.data.date).getTime() - new Date(b.data.date).getTime(),
     );
 
     sorted.forEach((entry: any, index: number) => {
-      const slug = entry.slug || entry.id.replace(/\.[^/.]+$/, '');
+      const slug = entry.slug || entry.id.replace(/\.[^/.]+$/, "");
       const prevEntry = index > 0 ? sorted[index - 1] : null;
       const nextEntry = index < sorted.length - 1 ? sorted[index + 1] : null;
 
@@ -37,9 +38,9 @@ export async function getStaticPaths() {
 
 const { entry, section, prevEntry, nextEntry } = Astro.props;
 
-const getSlug = (e: any) => e.slug || e.id.replace(/\.[^/.]+$/, '');
+const getSlug = (e: any) => e.slug || e.id.replace(/\.[^/.]+$/, "");
 
-const rawContent = entry.body || '';
+const rawContent = entry.body || "";
 const wordCount = rawContent.trim() ? rawContent.trim().split(/\s+/).length : 0;
 const readTime = Math.max(1, Math.ceil(wordCount / 200));
 
@@ -51,8 +52,8 @@ const { Content } = await render(entry);
   <div id="reading-progress" class="reading-progress-bar"></div>
 
   <div style="margin-bottom: 2rem;">
-    <a 
-      href={`/${section}`} 
+    <a
+      href={`/${section}`}
       style="color: #888; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.4rem;"
     >
       &larr; RETURN TO ./{section}
@@ -65,7 +66,8 @@ const { Content } = await render(entry);
     <span style="color: #ff3333; font-size: 0.76rem; font-weight: bold; background: #1a0808; padding: 1px 6px; border: 1px solid #331212;">
       ./{section}
     </span>
-    <span style="color: #8e5252;">[{entry.data.date}]</span>
+    <span style="color: #441a1a;">//</span>
+    <span style="color: #8e5252;">TIMESTAMP: [{entry.data.date}]</span>
     <span style="color: #441a1a;">//</span>
     <span style="color: #775555;">WORDS: {wordCount}</span>
     <span style="color: #441a1a;">//</span>
@@ -82,46 +84,77 @@ const { Content } = await render(entry);
     </div>
 
     <!-- SYNTAKTYCZNA SEKCJA TAGÓW -->
-    {entry.data.tags && entry.data.tags.length > 0 && (
-      <div style="margin-top: 2.5rem; padding-top: 1rem; border-top: 1px dashed #221212; display: flex; align-items: center; flex-wrap: wrap; gap: 0.45rem; font-size: 0.78rem; letter-spacing: 0.04em;">
-        <span style="color: #664444; font-weight: 600;">TAGS:</span>
-        {entry.data.tags.map((tag: string) => (
-          <span style="color: #8c5252;">[{tag}]</span>
-        ))}
-      </div>
-    )}
+    {
+      entry.data.tags && entry.data.tags.length > 0 && (
+        <div style="margin-top: 2.5rem; padding-top: 1rem; border-top: 1px dashed #221212; display: flex; align-items: center; flex-wrap: wrap; gap: 0.45rem; font-size: 0.78rem; letter-spacing: 0.04em;">
+          <span style="color: #664444; font-weight: 600;">TAGS:</span>
+          {entry.data.tags.map((tag: string) => (
+            <span style="color: #8c5252;">[{tag}]</span>
+          ))}
+        </div>
+      )
+    }
 
     <!-- PIONOWA NAWIGACJA STACK -->
     <nav class="post-nav-bar" aria-label="Nawigacja wpisów">
-      {prevEntry ? (
-        <a href={`/${section}/${getSlug(prevEntry)}`} class="btn-terminator post-nav-btn">
-          &lt; [PREV: {prevEntry.data.title.length > 25 ? prevEntry.data.title.slice(0, 25) + '...' : prevEntry.data.title}]
-        </a>
-      ) : (
-        <span class="btn-terminator post-nav-btn disabled">&lt; [PREV: NONE]</span>
-      )}
+      {
+        prevEntry ? (
+          <a
+            href={`/${section}/${getSlug(prevEntry)}`}
+            class="btn-terminator post-nav-btn"
+          >
+            &lt; [PREV:{" "}
+            {prevEntry.data.title.length > 25
+              ? prevEntry.data.title.slice(0, 25) + "..."
+              : prevEntry.data.title}
+            ]
+          </a>
+        ) : (
+          <span class="btn-terminator post-nav-btn disabled">
+            &lt; [PREV: NONE]
+          </span>
+        )
+      }
 
-      <a href={`/${section}`} class="btn-terminator post-nav-btn" style="border-color: #ff1a1a; color: #ff1a1a;">
+      <a
+        href={`/${section}`}
+        class="btn-terminator post-nav-btn"
+        style="border-color: #ff1a1a; color: #ff1a1a;"
+      >
         [INDEX]
       </a>
 
-      {nextEntry ? (
-        <a href={`/${section}/${getSlug(nextEntry)}`} class="btn-terminator post-nav-btn">
-          [NEXT: {nextEntry.data.title.length > 25 ? nextEntry.data.title.slice(0, 25) + '...' : nextEntry.data.title}] &gt;
-        </a>
-      ) : (
-        <span class="btn-terminator post-nav-btn disabled">[NEXT: NONE] &gt;</span>
-      )}
+      {
+        nextEntry ? (
+          <a
+            href={`/${section}/${getSlug(nextEntry)}`}
+            class="btn-terminator post-nav-btn"
+          >
+            [NEXT:{" "}
+            {nextEntry.data.title.length > 25
+              ? nextEntry.data.title.slice(0, 25) + "..."
+              : nextEntry.data.title}
+            ] &gt;
+          </a>
+        ) : (
+          <span class="btn-terminator post-nav-btn disabled">
+            [NEXT: NONE] &gt;
+          </span>
+        )
+      }
     </nav>
   </article>
 </BaseLayout>
 
 <script is:inline>
-  window.addEventListener('scroll', () => {
-    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  window.addEventListener("scroll", () => {
+    const winScroll =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    const height =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
     const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-    const bar = document.getElementById('reading-progress');
-    if (bar) bar.style.width = scrolled + '%';
+    const bar = document.getElementById("reading-progress");
+    if (bar) bar.style.width = scrolled + "%";
   });
 </script>

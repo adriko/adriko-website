@@ -95,7 +95,7 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
       type="text" 
       id="cli-input" 
       class="grep-input" 
-      placeholder="Type search pattern or command ('help', 'specs', 'weather tokyo', 'crypto btc', 'fx usd')..." 
+      placeholder="Type search pattern or command ('help', 'origin', 'specs', 'weather tokyo', 'crypto btc')..." 
       autocomplete="off"
       spellcheck="false"
     />
@@ -330,7 +330,33 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
   let historyIdx = -1;
 
   function runGrep(query) {
-    const term = query.trim().toLowerCase();
+    const raw = query.trim();
+    let term = raw.toLowerCase();
+
+    // Użytkownik dopiero wpisał samo słowo 'grep' - nie czyść widoku do zera
+    if (term === 'grep' || term === 'grep ') {
+      cliClear.style.display = 'inline-block';
+      grepStatus.style.display = 'block';
+      grepStatus.textContent = '// GREP: TYPE PATTERN TO FILTER (e.g. "grep tesla", "grep retro")...';
+      grepStatus.style.color = '#cc8833';
+
+      document.querySelectorAll('.post-card-item').forEach((item) => {
+        item.style.display = 'block';
+      });
+      document.querySelectorAll('.tree-sec-group').forEach((secGroup) => {
+        secGroup.style.display = 'block';
+        secGroup.querySelectorAll('.post-tree-item').forEach((item) => {
+          item.style.display = 'flex';
+        });
+      });
+      return;
+    }
+
+    // Jeśli użyto komendy grep ze spacją, np. "grep tesla" -> wyszukaj "tesla"
+    if (term.startsWith('grep ')) {
+      term = term.slice(5).trim();
+    }
+
     let matchesCount = 0;
 
     if (term.length > 0) {
@@ -389,14 +415,15 @@ const sectionsList = ['database', 'gear', 'hardware', 'software'] as const;
 `[ COMMAND REGISTRY // SYSTEM CLI v2.0 ]
 ----------------------------------------------------------------------
 whoami            : Operator profile & active technology stack
+origin            : Genesis log & background story of adriko.net (or 'cat origin')
 specs             : Hardware & browser diagnostics probe
 weather [city]    : Orbital weather telemetry (defaults to Jarosław base)
 crypto <symbol>   : Realtime crypto exchange feed via Binance (e.g. crypto btc, crypto eth)
 fx <currency>     : Official fiat exchange rate via NBP (e.g. fx usd, fx eur, fx chf)
 ping [target]     : Probe latency round-trip time (e.g. ping cloudflare)
-cat <section>     : Jump to catalog (database, gear, hardware, software)
-clear             : Flush console output and reset filters
-grep <pattern>    : Filter filesystem by text pattern`;
+cat <target>      : Read / jump to target (origin, database, gear, hardware, software)
+grep <pattern>    : Filter filesystem by text pattern (or just type directly)
+clear             : Flush console output and reset filters`;
         break;
 
       case 'whoami':
@@ -408,7 +435,27 @@ DESIGNATION       : Developer, Techie & System Architect
 LOCATION_GRID     : 50.0197° N, 22.6781° E [Jarosław, PL]
 TECH_STACK        : Astro, TypeScript, Python, Linux Kernel, CLI
 SECTORS_OF_FOCUS  : Retro Computing, Cyberpunk Media, High-End Firearms, Moto Machines
+GENESIS_LOG       : Type 'origin' or 'cat origin' to read site background
 STATUS            : ACTIVE // ALL SYSTEMS NOMINAL`;
+        break;
+
+      case 'origin':
+        cliOutputContent.textContent = '// ACCESSING SYSTEM GENESIS RECORD...';
+        setTimeout(() => { 
+          window.location.href = '/software/skad-sie-wzial-adriko-net'; 
+        }, 250);
+        break;
+
+      case 'grep':
+        if (!arg) {
+          cliOutputContent.textContent = 
+`// GREP UTILITY: Pattern required.
+Usage: grep <pattern> (e.g. 'grep tesla', 'grep retro')
+Note: You can also simply type any search term directly into the prompt without 'grep'.`;
+        } else {
+          cliOutput.style.display = 'none';
+          runGrep(arg);
+        }
         break;
 
       case 'specs': {
@@ -566,11 +613,16 @@ SUBSYSTEM_STATUS  : ATMOSPHERIC SENSORS NOMINAL`;
         break;
 
       case 'cat':
-        if (['database', 'gear', 'hardware', 'software'].includes(arg)) {
+        if (arg.toLowerCase() === 'origin' || arg.toLowerCase() === 'readme') {
+          cliOutputContent.textContent = '// ACCESSING SYSTEM GENESIS RECORD...';
+          setTimeout(() => { 
+            window.location.href = '/software/skad-sie-wzial-adriko-net'; 
+          }, 250);
+        } else if (['database', 'gear', 'hardware', 'software'].includes(arg.toLowerCase())) {
           cliOutputContent.textContent = `// REDIRECTING TO /${arg}...`;
           setTimeout(() => { window.location.href = `/${arg}`; }, 300);
         } else {
-          cliOutputContent.textContent = `// ERROR: UNKNOWN TARGET "${arg}". Available targets: database, gear, hardware, software`;
+          cliOutputContent.textContent = `// ERROR: UNKNOWN TARGET "${arg}". Available targets: origin, database, gear, hardware, software`;
         }
         break;
 

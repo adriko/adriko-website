@@ -1,6 +1,7 @@
 ---
 title: "Cyberdyne ma dziś inne logo. Czego „Terminator” uczy nas o epoce AI"
 date: "2026-10-23"
+category: "film"
 tags: ["tech", "ai", "filmy", "terminator", "popkultura", "przemyslenia"]
 description: "Odświeżyłem sobie niedawno Terminatora 1 i 2. Zamiast nostalgicznego kina akcji z lat 80. i 90. zobaczyłem przerażająco trafny komentarz do tego, co dzieje się dzisiaj z generatywnym AI, algorytmami i Big Data."
 ---

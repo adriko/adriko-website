@@ -537,7 +537,7 @@ Wszystkie pozycje powinny zwrócić poprawne identyfikatory wersji oprogramowani
 
 ## Notatki na przyszłość: Eksploracja Hyprland i środowisk kafelkowych
 
-Obecna konfiguracja opiera się na dojrzałym środowisku KDE Plasma, które gwarantuje pełną stabilność podczas codziennej pracy nad zleceniami. Równocześnie bardzo intryguje mnie koncepcja pełnej obsługi pulpitu wyłącznie za pomocą skrótów klawiaturowych (_keyboard-driven workflow_) oraz automatycznego kafelkowania okien (_tiling window manager_).
+Obecna konfiguracja opiera się na dojrzałym środowisku KDE Plasma, które gwarantuje pełną stabilność podczas codziennej pracy. Równocześnie bardzo intryguje mnie koncepcja pełnej obsługi pulpitu wyłącznie za pomocą skrótów klawiaturowych (_keyboard-driven workflow_) oraz automatycznego kafelkowania okien (_tiling window manager_).
 
 Próba wdrożenia wtyczek tilingowych (takich jak Polonium) wewnątrz KDE Plasma pokazała, że hybrydowe rozwiązania potrafią kolidować z menedżerem okien KWin. Jeśli w przyszłości zdecyduję się na przejście na pełny tiling, logicznym krokiem będzie wdrożenie czystego ekosystemu dedykowanego pod ten styl pracy:
 

@@ -1,7 +1,7 @@
 ---
 title: "CachyOS na osobnym dysku: oddzielam pracę od gier (instalacja i dev-stack)"
 description: "Praktyczny przewodnik instalacji CachyOS (Arch Linux) na osobnym dysku M.2 obok Windows 11. Dlaczego wybrałem CachyOS zamiast Ubuntu czy Fedory, przygotowanie pendrive'a w Rufusie, bezpieczny dual-boot i konfiguracja minimalistycznego środowiska deweloperskiego."
-pubDate: 2026-10-31
+date: "2026-10-31"
 author: "Adrian"
 tags:
   [

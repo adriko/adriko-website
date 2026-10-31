@@ -115,37 +115,37 @@ CachyOS korzysta ze specjalnie zoptymalizowanych jąder kompilowanych pod instru
 
 ## 5. Wybory w instalatorze (Minimalizm, Btrfs i Limine)
 
-1. Włączamy komputer i od razu wciskamy klawisz **F11** (_Boot Menu_ płyty MSI) [03:08].
-2. Wybieramy pozycję z nośnikiem USB poprzedzoną przedrostkiem **UEFI: [Nazwa Pendrive'a]** [03:31].
-3. W menu rozruchowym wybieramy domyślną pozycję **CachyOS default** [03:37].
-4. Po załadowaniu środowiska live w oknie powitalnym _CachyOS Hello_ klikamy przycisk **Launch Installer** [04:04].
+1. Włączamy komputer i od razu wciskamy klawisz **F11** (_Boot Menu_ płyty MSI).
+2. Wybieramy pozycję z nośnikiem USB poprzedzoną przedrostkiem **UEFI: [Nazwa Pendrive'a]**.
+3. W menu rozruchowym wybieramy domyślną pozycję **CachyOS default**.
+4. Po załadowaniu środowiska live w oknie powitalnym _CachyOS Hello_ klikamy przycisk **Launch Installer**.
 
 ### Parametry instalacji krok po kroku:
 
 - **Język i lokalizacja (Welcome & Location):**
-  - W oknie początkowym jako język systemu wybieramy **American English** [04:35] (ułatwia to diagnozowanie ewentualnych błędów w terminalu).
-  - W sekcji _Location_ ustawiamy strefę czasową: Region: **Europe**, Zone: **Warsaw** [04:46].
+  - W oknie początkowym jako język systemu wybieramy **American English** (ułatwia to diagnozowanie ewentualnych błędów w terminalu).
+  - W sekcji _Location_ ustawiamy strefę czasową: Region: **Europe**, Zone: **Warsaw**.
 - **Układ klawiatury (Keyboard):**
-  - Wybieramy układ **Polish (default)** [04:50].
+  - Wybieramy układ **Polish (default)**.
 - **Menedżer rozruchu (Bootloader):**
   - Wybieramy **Limine**. To niezwykle szybki, nowoczesny i minimalistyczny bootloader, który bezproblemowo obsługuje konfiguracje wielodyskowe oraz bezpośredni rozruch kernela.
 - **Partycjonowanie dysku (Partitions):**
-  - Wybieramy opcję **Erase disk** (_Wyczyść dysk_) [06:27].
-  - **KRYTYCZNE:** Bezwzględnie upewnij się w rozwijanej liście nośników u góry, że wybrałeś właściwy dysk **WD 512 GB**, a nie Kingston 1 TB z Windowsem! [06:22]
+  - Wybieramy opcję **Erase disk** (_Wyczyść dysk_).
+  - **KRYTYCZNE:** Bezwzględnie upewnij się w rozwijanej liście nośników u góry, że wybrałeś właściwy dysk **WD 512 GB**, a nie Kingston 1 TB z Windowsem!
   - **System plików:** Zaznaczamy **Btrfs**. Zapewnia domyślną kompresję `zstd` w locie oraz automatyczny układ podwoluminów przygotowany pod narzędzie Snapper.
   - **Pamięć wymiany (Swap):** Wybieramy **No Swap**. Skompresowaną pamięć wymiany w RAM (`zram`) CachyOS konfiguruje domyślnie na poziomie bazowym przez `systemd-zram-generator`. Przy 32 GB RAM fizyczna partycja wymiany na dysku NVMe jest zbędna i generuje jedynie niepotrzebne cykle zapisu komórek pamięci.
 - **Środowisko graficzne (Desktop):**
-  - Zaznaczamy **KDE Plasma** [07:04].
+  - Zaznaczamy **KDE Plasma**.
 - **Selekcja pakietów (Packages):**
-  - Kierujemy się zasadą czystej bazy — odznaczamy zbędne pakiety biurowe czy odtwarzacze multimedialne [07:09]. Zostawiamy jedynie pakiety podstawowe i ewentualne wsparcie druku (_Printing Support_), jeśli z niego korzystasz [07:14].
+  - Kierujemy się zasadą czystej bazy — odznaczamy zbędne pakiety biurowe czy odtwarzacze multimedialne. Zostawiamy jedynie pakiety podstawowe i ewentualne wsparcie druku (_Printing Support_), jeśli z niego korzystasz.
 - **Konfiguracja konta (Users):**
-  - _Your name:_ Wpisujemy imię i nazwisko użytkownika [07:26].
+  - _Your name:_ Wpisujemy imię i nazwisko użytkownika.
   - _Username:_ Podajemy nazwę użytkownika dla powłoki i katalogu domowego.
-  - _Password:_ Wprowadzamy oraz potwierdzamy silne hasło systemowe do logowania i poleceń administracyjnych `sudo` [07:31].
+  - _Password:_ Wprowadzamy oraz potwierdzamy silne hasło systemowe do logowania i poleceń administracyjnych `sudo`.
 - **Finalizacja (Summary & Install):**
-  - Weryfikujemy w oknie _Summary_ dysk docelowy oraz układ partycji [07:42].
-  - Klikamy **Install** -> **Install Now** [07:46].
-  - Po ukończeniu procesu instalacji zaznaczamy opcję **Restart now**, klikamy **Done** i wyjmujemy nośnik instalacyjny USB [08:06].
+  - Weryfikujemy w oknie _Summary_ dysk docelowy oraz układ partycji.
+  - Klikamy **Install** -> **Install Now**.
+  - Po ukończeniu procesu instalacji zaznaczamy opcję **Restart now**, klikamy **Done** i wyjmujemy nośnik instalacyjny USB.
 
 > **Ważne po instalacji:** Wejdź raz jeszcze do BIOS-u (`Delete`) i w sekcji `Settings → Boot → UEFI Hard Disk Drive BBS Priorities` upewnij się, że **Limine** lub dysk WD 512 GB znajduje się na pozycji **Boot Option #1**. Dzięki temu komputer zawsze wystartuje do menu wyboru systemu.
 

@@ -15,11 +15,11 @@ tags:
   ]
 ---
 
-Miałem prosty cel: definitywnie oddzielić środowisko do codziennej pracy i programowania od platformy rozrywkowej.
+Miałem prosty cel: definitywnie oddzielić środowisko do codziennej pracy i programowania od platformy do gier.
 
-Mój Windows 11 na dysku Kingston 1 TB zostaje maszyną czysto gamingową — dla mnie po godzinach oraz dla młodzieży, która wpada z wizytą i ma fazę na Robloxa. Z kolei do webdevu w Astro, pisania skryptów w Pythonie i projektów w Javie potrzebowałem systemu szybkiego, stabilnego, pozbawionego telemetrycznego szumu i zoptymalizowanego pod sprzęt.
+Mój Windows 11 na dysku Kingston 1 TB zostaje maszyną czysto gamingową — dla mnie po godzinach oraz dla chrześniaków, którzy wpadają z wizytą i mają fazę na Robloxa. Z kolei do tworzenia stron, pisania skryptów w Pythonie i projektów w Javie potrzebowałem czegoś zupełnie innego: systemu szybkiego, stabilnego, który nie marnuje zasobów komputera i nie robi niczego za moimi plecami.
 
-Równolegle pojawiła się u mnie silna potrzeba gruntownego poznania Linuksa i środowiska uniksowego od podszewki. Chciałem wyjść ze strefy komfortu ciągłego wyklikiwania wszystkiego w graficznych kreatorach, opanować pracę w terminalu, zrozumieć powłokę, potoki, aliasy i konfigurację opartą na czystych plikach tekstowych.
+Przy okazji chciałem wreszcie naprawdę poznać Linuksa. Zamiast ciągłego wyklikiwania wszystkiego myszką w okienkach, wolałem wejść do terminala, oswoić się z klawiaturą i zrozumieć, jak ten system naprawdę działa pod maską.
 
 Wybór padł na **CachyOS**. Poniżej zebrałem całą procedurę: od przygotowania nośnika instalacyjnego, przez konfigurację BIOS-u i dual-boota, aż po wdrożenie czystego stosu programistycznego.
 

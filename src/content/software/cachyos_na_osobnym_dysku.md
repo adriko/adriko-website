@@ -1,5 +1,5 @@
 ---
-title: "CachyOS na osobnym dysku: oddzielam pracę od gier (instalacja i dev-stack)"
+title: "CachyOS jako drugi system: oddzielam pracę od gier (instalacja i dev-stack)"
 description: "Praktyczny przewodnik instalacji CachyOS (Arch Linux) na osobnym dysku M.2 obok Windows 11. Dlaczego wybrałem CachyOS zamiast Ubuntu czy Fedory, przygotowanie pendrive'a w Rufusie, bezpieczny dual-boot i konfiguracja minimalistycznego środowiska deweloperskiego."
 date: "2026-10-31"
 author: "Adrian"
@@ -34,7 +34,7 @@ Zastosowałem najbezpieczniejszą metodę: **pełna fizyczna separacja na poziom
 - **Dysk 1 (Kingston NVMe 1 TB):** Windows 11, gry, platforma rozrywkowa.
 - **Dysk 2 (WD NVMe 512 GB):** CachyOS, projekty, repozytoria, narzędzia dev.
 
-Trafił mi się na OLX używany dysk M.2 NVMe Western Digital o pojemności 512 GB w świetnej cenie. Dodałem zapasowy radiator M.2 od _be quiet!_ i wpiąłem całość w wolny slot płyty głównej.
+Trafił mi się na OLX używany dysk M.2 NVMe Western Digital o pojemności 512 GB w świetnej cenie. Wyciągnąłem z szafy kupiony już ładnych kilka lat temu zapasowy radiator M.2 od _be quiet!_ i wpiąłem całość w wolny slot płyty głównej.
 
 ### Platforma sprzętowa:
 

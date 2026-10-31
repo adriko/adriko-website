@@ -2,7 +2,6 @@
 title: "CachyOS jako drugi system: oddzielam pracę od gier (instalacja i dev-stack)"
 description: "Praktyczny przewodnik instalacji CachyOS (Arch Linux) na osobnym dysku M.2 obok Windows 11. Dlaczego wybrałem CachyOS zamiast Ubuntu czy Fedory, przygotowanie pendrive'a w Rufusie, bezpieczny dual-boot i konfiguracja minimalistycznego środowiska deweloperskiego."
 date: "2026-10-31"
-author: "Adrian"
 tags:
   [
     "linux",
@@ -38,10 +37,10 @@ Trafił mi się na OLX używany dysk M.2 NVMe Western Digital o pojemności 512 
 
 ### Platforma sprzętowa:
 
-- **Procesor:** Intel Core i5-10600K @ 4.1 GHz
+- **Procesor:** Intel Core i5-10600K @ 4.1 GHz (Comet Lake)
 - **Płyta główna:** MSI Z490-A PRO
 - **Pamięć RAM:** HyperX Fury 32 GB (4x8 GB) DDR4 3200 MHz CL16
-- **Karta graficzna:** ASUS TUF Gaming GeForce RTX 3070 OC
+- **Karta graficzna:** ASUS TUF Gaming GeForce RTX 3070 OC (8 GB VRAM)
 - **Monitor:** LG 27” 1440p 144 Hz (DisplayPort)
 
 Drugi slot M.2 na płycie działa w standardzie PCIe 3.0 (poprzez chipset Z490), co w praktyce daje transfery rzędu 3000 MB/s — do kompilacji kodu, pracy z bazami danych i serwera deweloperskiego Astro jest to zapas prędkości aż nadto.
@@ -66,10 +65,10 @@ Arch to genialna szkoła Linuksa — system typu _rolling release_, menedżer `p
 
 ### Dlaczego CachyOS wygrywa:
 
-1. **Radykalna optymalizacja wydajności:** Pakiety i jądro w CachyOS są kompilowane ze specjalnymi flagami pod nowoczesne zestawy instrukcji procesorów (`x86-64-v3` oraz `x86-64-v4`). System wyciska maksimum z architektury procesora, co przekłada się na natychmiastową responsywność.
+1. **Radykalna optymalizacja wydajności:** Pakiety i jądro w CachyOS są kompilowane ze specjalnymi flagami pod nowoczesne zestawy instrukcji procesorów (`x86-64-v3` oraz `x86-64-v4`). Mój procesor Intel Core i5-10600K obsługuje maksymalnie standard **x86-64-v3** (AVX, AVX2, FMA3, BMI1, BMI2 — instrukcje `v4` wymagają AVX-512, których 10. generacja desktopowa fizycznie nie posiada). Instalator CachyOS automatycznie wykrywa te możliwości sprzętowe i podpina zoptymalizowane repozytoria `v3`, co zapewnia natychmiastową responsywność systemu.
 2. **Minimalizm i selekcja:** Instalator pozwala wybrać czyste środowisko KDE Plasma bez pakietów biurowych, gier czy zbędnych aplikacji w tle. Dostajesz czystą bazę, na której instalujesz tylko to, czego sam potrzebujesz.
 3. **Out-of-the-box pod karty Nvidia i Wayland:** Bezproblemowa obsługa najnowszych sterowników własnościowych Nvidia na sesji Wayland z obsługą 144 Hz i adaptacyjnego odświeżania (VRR).
-4. **Btrfs + Snapper w standardzie:** Bezobsługowa konfiguracja migawek systemu plików zintegrowana z menu startowym.
+4. **Btrfs + Snapper w standardzie:** Bezobsługowa konfiguracja migawek systemu plików zintegrowana bezpośrednio z menu startowym bootloadera.
 
 ---
 
@@ -77,25 +76,20 @@ Arch to genialna szkoła Linuksa — system typu _rolling release_, menedżer `p
 
 Zanim włożysz pendrive do portu USB, musisz zneutralizować mechanizmy blokujące Linuksa.
 
-### Krok 3.1: Wyłączenie Fast Startup i synchronizacja czasu w Windowsie
+### Krok 3.1: Wyłączenie Fast Startup i hibernacji w Windowsie
 
-Szybkie uruchamianie wprowadza jądro Windowsa w stan hibernacji, blokując partycje NTFS (tzw. _hibernation flag_). Z kolei zegar sprzętowy na płycie głównej powinien operować w standardzie UTC (tak jak robi to Linux), a nie w czasie lokalnym.
+Szybkie uruchamianie wprowadza jądro Windowsa w stan hibernacji, blokując partycje NTFS (tzw. _hibernation flag_), co uniemożliwia ich bezpieczne współdzielenie i może prowadzić do błędów systemu plików.
 
-Otwórz w Windowsie **PowerShell** lub **CMD** jako Administrator i wykonaj dwa polecenia:
+Otwórz w Windowsie **PowerShell** lub **Wiersz polecenia (CMD)** jako Administrator i wykonaj:
 
 ```cmd
-:: 1. Wyłączenie pliku hibernacji i mechanizmu Fast Startup
+:: Wyłączenie pliku hibernacji i mechanizmu Fast Startup
 powercfg /h off
-
-:: 2. Wymuszenie odczytu zegara sprzętowego płyty w standardzie UTC
-reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /t REG_DWORD /d 1 /f
 ```
-
-_Dzięki temu po przełączaniu systemów zegar w Windowsie i Linuksie zawsze zachowa poprawną godzinę bez konieczności stosowania przestarzałych modyfikacji w Linuksie._
 
 ### Krok 3.2: Wyłączenie Secure Boot w BIOS-ie płyty MSI
 
-CachyOS korzysta ze specjalnie zoptymalizowanych jąder kompilowanych pod instrukcje x86-64-v3 oraz zewnętrznych modułów sterownika Nvidia, które wymagają wyłączenia blokady Secure Boot.
+CachyOS korzysta ze specjalnie zoptymalizowanych jąder kompilowanych pod instrukcje x86-64-v3 oraz modułów sterownika własnościowego Nvidia, które wymagają wyłączenia weryfikacji podpisów Secure Boot.
 
 1. Zrestartuj komputer i wciskaj klawisz **Delete**, aby wejść do UEFI/BIOS płyty MSI.
 2. Przełącz widok na tryb zaawansowany klawiszem **F7** (_Advanced Mode_).
@@ -107,36 +101,51 @@ CachyOS korzysta ze specjalnie zoptymalizowanych jąder kompilowanych pod instru
 
 ## 4. Pobranie ISO i przygotowanie pendrive'a w programie Rufus
 
-1. Ze strony [cachyos.org](https://cachyos.org/) pobieramy najnowszy obraz ISO (wersja **KDE Plasma Edition**).
+1. Ze strony [cachyos.org/download](https://cachyos.org/download/) pobieramy obraz ISO. Warto wiedzieć, że CachyOS nie wydaje już osobnych obrazów pod konkretne środowiska graficzne — pobieramy jeden zunifikowany obraz: **CachyOS Desktop Edition** (drugi dostępny obraz, _Handheld Edition_, dedykowany jest konsolom przenośnym pokroju Steam Decka czy ROG Ally). Wybór środowiska KDE Plasma następuje dopiero w instalatorze.
 2. Pobieramy narzędzie **Rufus** na Windowsie.
 3. Wkładamy pendrive (min. 8 GB) i ustawiamy parametry:
    - **Urządzenie:** Twój pendrive.
    - **Wybór bootowania:** Wskaż pobrany plik `.iso` CachyOS.
-   - **Schemat partycjonowania:** **`GPT`** (krytyczne dla płyt z UEFI).
+   - **Schemat partycjonowania:** **`GPT`** (krytyczne dla nowoczesnych płyt z UEFI).
    - **Docelowy system:** **`UEFI (bez CSM)`**.
    - Po kliknięciu **Start**, jeśli Rufus wyświetli komunikat o trybie zapisu hybrydowego, wybierz **Zapisz w trybie obrazu DD** (_DD Image mode_). Zapewnia to bezbłędny rozruch dystrybucji opartych na Archu.
-4. Wpinamy przygotowany pendrive w tylny port płyty głównej komputera.
+4. Wpinamy przygotowany pendrive w tylny port USB na płycie głównej komputera.
 
 ---
 
 ## 5. Wybory w instalatorze (Minimalizm, Btrfs i Limine)
 
-1. Włączamy komputer i od razu wciskamy klawisz **F11** (_Boot Menu_ płyty MSI).
-2. Wybieramy pozycję z przedrostkiem `UEFI: [Nazwa Pendrive'a]`.
-3. W menu rozruchowym wybieramy pierwszą pozycję: **CachyOS**.
-4. W oknie powitalnym _CachyOS Hello_ klikamy **Launch Installer** i wybieramy **Online Installer**.
+1. Włączamy komputer i od razu wciskamy klawisz **F11** (_Boot Menu_ płyty MSI) [03:08].
+2. Wybieramy pozycję z nośnikiem USB poprzedzoną przedrostkiem **UEFI: [Nazwa Pendrive'a]** [03:31].
+3. W menu rozruchowym wybieramy domyślną pozycję **CachyOS default** [03:37].
+4. Po załadowaniu środowiska live w oknie powitalnym _CachyOS Hello_ klikamy przycisk **Launch Installer** [04:04].
 
-### Parametry instalacji:
+### Parametry instalacji krok po kroku:
 
-- **Środowisko graficzne:** **KDE Plasma**. Odznaczamy niepotrzebne pakiety biurowe czy odtwarzacze multimedialne.
-- **Bootloader:** **Limine**. Niezwykle szybki, lekki i przejrzysty bootloader, który bezproblemowo obsługuje konfiguracje wielodyskowe.
-- **System plików:** **Btrfs** z kompresją `zstd` i automatyczną strukturą podwolumenów pod narzędzie Snapper.
-- **Pamięć wymiany (Swap):** Wybieramy **zram** (lub **No Swap**). Przy 32 GB RAM partycja wymiany na dysku NVMe jest zbędna i generuje jedynie niepotrzebne cykle zapisu.
-- **Partycjonowanie dysku:**
-  - Wybieramy opcję **Erase disk** (_Wyczyść dysk_).
-  - **Bezwzględnie upewnij się w rozwijanej liście u góry, że wybrałeś dysk WD 512 GB, a nie Kingston 1 TB z Windowsem!**
-
-Po zakończeniu instalacji restartujemy komputer i wyjmujemy nośnik USB.
+- **Język i lokalizacja (Welcome & Location):**
+  - W oknie początkowym jako język systemu wybieramy **American English** [04:35] (ułatwia to diagnozowanie ewentualnych błędów w terminalu).
+  - W sekcji _Location_ ustawiamy strefę czasową: Region: **Europe**, Zone: **Warsaw** [04:46].
+- **Układ klawiatury (Keyboard):**
+  - Wybieramy układ **Polish (default)** [04:50].
+- **Menedżer rozruchu (Bootloader):**
+  - Wybieramy **Limine**. To niezwykle szybki, nowoczesny i minimalistyczny bootloader, który bezproblemowo obsługuje konfiguracje wielodyskowe oraz bezpośredni rozruch kernela.
+- **Partycjonowanie dysku (Partitions):**
+  - Wybieramy opcję **Erase disk** (_Wyczyść dysk_) [06:27].
+  - **KRYTYCZNE:** Bezwzględnie upewnij się w rozwijanej liście nośników u góry, że wybrałeś właściwy dysk **WD 512 GB**, a nie Kingston 1 TB z Windowsem! [06:22]
+  - **System plików:** Zaznaczamy **Btrfs**. Zapewnia domyślną kompresję `zstd` w locie oraz automatyczny układ podwoluminów przygotowany pod narzędzie Snapper.
+  - **Pamięć wymiany (Swap):** Wybieramy **No Swap**. Skompresowaną pamięć wymiany w RAM (`zram`) CachyOS konfiguruje domyślnie na poziomie bazowym przez `systemd-zram-generator`. Przy 32 GB RAM fizyczna partycja wymiany na dysku NVMe jest zbędna i generuje jedynie niepotrzebne cykle zapisu komórek pamięci.
+- **Środowisko graficzne (Desktop):**
+  - Zaznaczamy **KDE Plasma** [07:04].
+- **Selekcja pakietów (Packages):**
+  - Kierujemy się zasadą czystej bazy — odznaczamy zbędne pakiety biurowe czy odtwarzacze multimedialne [07:09]. Zostawiamy jedynie pakiety podstawowe i ewentualne wsparcie druku (_Printing Support_), jeśli z niego korzystasz [07:14].
+- **Konfiguracja konta (Users):**
+  - _Your name:_ Wpisujemy imię i nazwisko użytkownika [07:26].
+  - _Username:_ Podajemy nazwę użytkownika dla powłoki i katalogu domowego.
+  - _Password:_ Wprowadzamy oraz potwierdzamy silne hasło systemowe do logowania i poleceń administracyjnych `sudo` [07:31].
+- **Finalizacja (Summary & Install):**
+  - Weryfikujemy w oknie _Summary_ dysk docelowy oraz układ partycji [07:42].
+  - Klikamy **Install** -> **Install Now** [07:46].
+  - Po ukończeniu procesu instalacji zaznaczamy opcję **Restart now**, klikamy **Done** i wyjmujemy nośnik instalacyjny USB [08:06].
 
 > **Ważne po instalacji:** Wejdź raz jeszcze do BIOS-u (`Delete`) i w sekcji `Settings → Boot → UEFI Hard Disk Drive BBS Priorities` upewnij się, że **Limine** lub dysk WD 512 GB znajduje się na pozycji **Boot Option #1**. Dzięki temu komputer zawsze wystartuje do menu wyboru systemu.
 
@@ -146,7 +155,7 @@ Po zakończeniu instalacji restartujemy komputer i wyjmujemy nośnik USB.
 
 ### 6.1. Utworzenie migawki początkowej (Snapper)
 
-Zanim zmienimy jakikolwiek plik konfiguracyjny, tworzymy punkt przywracania:
+Zanim zmienimy jakikolwiek plik konfiguracyjny, tworzymy czysty punkt przywracania:
 
 ```bash
 # Sprawdzenie gotowości narzędzia Snapper
@@ -158,17 +167,26 @@ sudo snapper create -d "Czysty system bazowy po instalacji"
 
 ### 6.2. Przełączenie domyślnej powłoki na Bash
 
-CachyOS domyślnie uruchamia powłokę Fish. Choć wygląda efektownie, nie zachowuje pełnej zgodności ze standardem POSIX, co uniemożliwia bezpośrednie wklejanie skryptów powłoki.
+CachyOS domyślnie uruchamia powłokę Fish. Choć wygląda nowocześnie, nie zachowuje pełnej zgodności ze standardem POSIX, co uniemożliwia bezpośrednie wklejanie standardowych skryptów powłoki.
+
+Najpierw ustawiamy Bash jako domyślną powłokę dla konta w pliku `/etc/passwd`:
 
 ```bash
 # Przełączenie bieżącego okna na bash
 bash
 
-# Ustawienie Bash jako domyślnej powłoki dla użytkownika
+# Ustawienie Bash jako systemowej powłoki użytkownika
 chsh -s /usr/bin/bash
 ```
 
-Tworzymy plik `~/.bash_profile`, aby sesja logowania KDE poprawnie wczytywała zmienne:
+**Pułapka w KDE Konsole:** Samo polecenie `chsh` nie wystarczy. W CachyOS domyślny profil emulatora terminala Konsole ma w swojej konfiguracji na sztywno wpisaną komendę `/usr/bin/fish`. Należy to skorygować w interfejsie graficznym:
+
+1. W oknie terminala Konsole kliknij w menu górnym: **Ustawienia** (_Settings_) → **Zarządzaj profilami...** (_Manage Profiles..._).
+2. Zaznacz bieżący/domyślny profil i kliknij **Edytuj** (_Edit_).
+3. Na karcie **Ogólne** (_General_), w polu **Polecenie** (_Command_) zmień `/usr/bin/fish` na `/usr/bin/bash`.
+4. Kliknij **Zastosuj** i zatwierdź.
+
+Tworzymy plik `~/.bash_profile`, aby sesja logowania KDE poprawnie wczytywała zmienne środowiskowe:
 
 ```bash
 cat << 'EOF' > "$HOME/.bash_profile"
@@ -182,19 +200,23 @@ EOF
 
 ## 7. Weryfikacja Dual-Boot w bootloaderze Limine
 
-Sprawdzamy, czy Limine automatycznie wykrył partycję Windows 11 na dysku Kingston:
+Współczesny instalator CachyOS zazwyczaj automatycznie wykrywa menedżera rozruchu Windowsa na drugim fizycznym dysku i tworzy odpowiedni wpis chainloadingu podczas instalacji.
+
+W CachyOS konfiguracją bootloadera zarządza automatyczny skrypt pomocniczy (`limine-entry-tool`), który jest uruchamiany przez hooki menedżera `pacman` przy każdej aktualizacji jądra Linux.
+
+Sprawdzamy, czy Limine poprawnie rozpoznał partycję Windows 11 na dysku Kingston:
 
 ```bash
 cat /boot/limine.conf 2>/dev/null || cat /boot/limine/limine.conf 2>/dev/null
 ```
 
-Jeśli na liście widnieje wpis `/Windows 11`, konfiguracja jest gotowa. Gdyby go brakowało:
+Jeśli na liście widnieje wpis `/Windows 11`, konfiguracja jest gotowa. Gdyby instalator pominął drugi dysk:
 
-1. Odczytaj `PARTUUID` partycji EFI Windowsa:
+1. Odczytaj unikalny identyfikator `PARTUUID` partycji EFI Windowsa (znajdziesz ją na dysku Kingston):
    ```bash
    lsblk -o NAME,SIZE,FSTYPE,PARTUUID,MOUNTPOINTS | grep -E "vfat|FSTYPE"
    ```
-2. Otwórz `sudo nano /boot/limine.conf` i dopisz na końcu:
+2. Otwórz plik konfiguracyjny do edycji (`sudo nano /boot/limine.conf`) i dopisz manualny wpis:
    ```text
    /Windows 11
        comment: Windows 11 Boot Manager
@@ -202,18 +224,22 @@ Jeśli na liście widnieje wpis `/Windows 11`, konfiguracja jest gotowa. Gdyby g
        image_path: guid(TUTAJ_WKLEJ_PARTUUID):/EFI/Microsoft/Boot/bootmgfw.efi
    ```
 
+_Uwaga:_ Przy dwóch fizycznych nośnikach najczystszym zabezpieczeniem na wypadek jakichkolwiek problemów z bootloaderem jest natywny wybór dysku bezpośrednio przez menu rozruchowe płyty głównej MSI (klawisz **F11** podczas włączania komputera).
+
 ---
 
 ## 8. Monitor LG 27" 144 Hz i akceleracja Nvidia (Wayland)
+
+Karta graficzna GeForce RTX 3070 (architektura Ampere) działa na sesji Wayland w CachyOS bezproblemowo i stabilnie dzięki najnowszym własnościowym sterownikom Nvidia z pełną obsługą synchronizacji jawnej (**Explicit Sync** / `linux-drm-syncobj-v1`), co całkowicie wyeliminowało dawne problemy z migotaniem klatek czy artefaktami pod Waylandem.
 
 1. **Ustawienia ekranu w KDE Plasma:**
    - Otwórz: **Ustawienia systemowe** → **Ekran i monitor**.
    - Rozdzielczość: `2560x1440 (16:9)`.
    - Częstotliwość odświeżania: `144 Hz`.
    - Skalowanie: `100%`.
-   - Częstotliwość adaptacyjna (VRR): `Zawsze`.
+   - **Adaptacyjne odświeżanie (VRR):** Przestaw opcję na **Automatycznie** (_Automatic_) lub **Zawsze** (_Always_). W połączeniu z kablem DisplayPort zapewnia to prawidłowe działanie technologii G-Sync Compatible na pulpicie i w grach przy 144 Hz (ustawienie _Automatycznie_ zapobiega ewentualnemu subtelnemu migotaniu podświetlenia matrycy podczas wyświetlania statycznego pulpitu).
    - Kliknij **Zastosuj**.
-2. **Weryfikacja akceleracji karty RTX 3070 w terminalu:**
+2. **Weryfikacja sterowników i akceleracji w terminalu:**
 
 ```bash
 echo "Sesja: $XDG_SESSION_TYPE"
@@ -224,7 +250,7 @@ nvidia-smi --query-gpu=driver_version,name,temperature.gpu,power.draw --format=c
 
 ## 9. Zwiększenie limitów jądra Linux (`inotify`)
 
-Projekty w Astro, Vite czy indeksatory JetBrains obserwują tysiące plików w `node_modules`. Zwiększamy limity systemowe, aby uniknąć błędów braku uchwytów `ENOSPC`:
+Nowoczesne środowiska webowe (Astro, Vite) oraz indeksatory JetBrains obserwują w czasie rzeczywistym tysiące plików wewnątrz katalogów `node_modules`. Zwiększamy limity jądra, aby zapobiec awariom procesów z błędem `ENOSPC`:
 
 ```bash
 sudo tee /etc/sysctl.d/40-dev-limits.conf > /dev/null << 'EOF'
@@ -240,17 +266,27 @@ sudo sysctl --system
 
 ## 10. Instalacja stosu deweloperskiego (Astro, Python, Java)
 
-Instalujemy wyłącznie oficjalne pakiety binarne i nowoczesne narzędzia CLI w Rust/C bez zbędnych nakładek TUI:
+### Ważna uwaga: Python i restrykcja PEP 668 (EXTERNALLY-MANAGED)
+
+W CachyOS (podobnie jak w czystym Arch Linux) środowisko systemowe Pythona jest oznaczone jako zarządzane zewnętrznie zgodnie ze standardem **PEP 668**. Próba wykonania polecenia `pip install <pakiet>` bezpośrednio w globalnej powłoce zostanie zablokowana przez system, aby zapobiec nadpisaniu plików zarządzanych przez menedżer `pacman`.
+
+Prawidłowe podejście w CachyOS opiera się na 3 ścieżkach:
+
+1. **Pakiety globalne:** Instalujemy przez systemowego pacmana, np. `sudo pacman -S python-pip` lub `sudo pacman -S python-requests`.
+2. **Narzędzia CLI w Pythonie:** Instalujemy w izolacji za pomocą `pipx` (`pacman -S python-pipx`).
+3. **Środowiska projektowe:** Korzystamy z błyskawicznego narzędzia **`uv`** (`uv venv`, `uv pip install`) lub klasycznego `python -m venv .venv`.
+
+Instalujemy oficjalne pakiety binarne i nowoczesne narzędzia CLI:
 
 ```bash
 # 1. Pełna aktualizacja systemu
 sudo pacman -Syu
 
-# 2. Instalacja narzędzi programistycznych i czcionki JetBrains Mono
+# 2. Narzędzia bazowe, runtime i nowoczesne CLI
 sudo pacman -S --needed --noconfirm \
   base-devel git github-cli paru \
   nodejs pnpm \
-  python uv ipython ruff \
+  python uv ipython ruff python-pipx \
   jdk-openjdk maven \
   intellij-idea-community-edition \
   ttf-jetbrains-mono-nerd wl-clipboard pacutils \
@@ -264,7 +300,7 @@ paru -S --needed --noconfirm visual-studio-code-bin
 
 ## 11. Konfiguracja czcionki w terminalu Konsole
 
-Profil systemowy `Built-in [Read-only]` w KDE Plasma 6 jest fabrycznie zablokowany przed edycją. Aby przypisać czcionkę monospaced:
+Profil systemowy `Built-in [Read-only]` w KDE Plasma 6 jest zablokowany przed edycją. Aby przypisać czcionkę ze znakami Powerline/Nerd Font:
 
 1. W oknie **Konsole** przejdź do: **Ustawienia** (_Settings_) → **Zarządzaj profilami...** (_Manage Profiles..._).
 2. Kliknij **`+ Nowy...`** (_+ New..._).
@@ -277,10 +313,10 @@ Profil systemowy `Built-in [Read-only]` w KDE Plasma 6 jest fabrycznie zablokowa
 
 ## 12. Ścieżki systemowe i ergonomia terminala
 
-Rejestrujemy zmienne w usłudze sesji graficznej systemd (aby programy uruchamiane z menu KDE widziały ścieżki deweloperskie) oraz dopisujemy narzędzia do `~/.bashrc`:
+Rejestrujemy zmienne w usłudze sesji graficznej systemd (dzięki temu IDE uruchamiane ze skrótów KDE natychmiast widzą ścieżki deweloperskie) oraz dopisujemy narzędzia do `~/.bashrc`:
 
 ```bash
-# Zmienne sesji graficznej
+# Zmienne sesji graficznej systemd
 mkdir -p "$HOME/.config/environment.d"
 cat << 'EOF' > "$HOME/.config/environment.d/10-workstation.conf"
 PNPM_HOME="${HOME}/.local/share/pnpm"
@@ -288,9 +324,10 @@ PATH="${HOME}/.local/share/pnpm:${HOME}/.local/bin:${PATH}"
 IDEA_VM_OPTIONS="${HOME}/.config/JetBrains/idea64.vmoptions"
 EOF
 
-# Konfiguracja powłoki
+# Utworzenie lokalnych katalogów binarnych
 mkdir -p "$HOME/.local/share/pnpm" "$HOME/.local/bin"
 
+# Konfiguracja środowiska interaktywnego Bash
 cat << 'EOF' >> "$HOME/.bashrc"
 
 # --- Zmienne srodowiskowe i sciezki PATH ---
@@ -313,7 +350,7 @@ alias ll='eza -lh --group-directories-first --git'
 alias la='eza -lha --group-directories-first --git'
 alias cat='bat --paging=never --style=plain'
 
-# --- Inicjalizacja zoxide (szybkie cd) i fzf ---
+# --- Inicjalizacja zoxide (inteligentne cd) i fzf ---
 if command -v zoxide &>/dev/null; then
   eval "$(zoxide init bash)"
 fi
@@ -332,7 +369,7 @@ source "$HOME/.bashrc"
 
 ### 13.1. Visual Studio Code
 
-Wymuszamy natywne renderowanie pod Waylandem (idealna ostrość i pełne 144 Hz):
+Wymuszamy natywne renderowanie okna pod serwerem Wayland:
 
 ```bash
 mkdir -p "$HOME/.config"
@@ -350,7 +387,7 @@ code --install-extension ms-python.python --force
 code --install-extension vscjava.vscode-java-pack --force
 ```
 
-Konfigurujemy `~/.config/Code/User/settings.json`:
+Konfigurujemy plik ustawień edytora `~/.config/Code/User/settings.json`:
 
 ```json
 {
@@ -383,7 +420,7 @@ Konfigurujemy `~/.config/Code/User/settings.json`:
 
 ### 13.2. IntelliJ IDEA
 
-Przypisujemy 4 GB pamięci operacyjnej na stertę JVM:
+Przypisujemy 4 GB pamięci operacyjnej na stertę maszyny wirtualnej JVM:
 
 ```bash
 mkdir -p "$HOME/.config/JetBrains"
@@ -405,7 +442,7 @@ W ustawieniach IDE (**Settings** → **Editor** → **Font**) ustawiamy czcionk�
 
 ## 14. Konfiguracja Git i autoryzacja kluczem SSH na GitHub
 
-Wszystkie operacje z GitHubem wykonujemy wyłącznie przez protokół SSH. Klonowanie po HTTPS prywatnych repozytoriów kończy się błędem uwierzytelniania.
+Wszystkie operacje z repozytoriami zdalnymi wykonujemy przez protokół SSH.
 
 1. Ustawienie tożsamości w Git:
 
@@ -414,9 +451,10 @@ git config --global user.name "Adrian"
 git config --global user.email "adriankorzen@gmail.com"
 git config --global init.defaultBranch main
 git config --global pull.rebase false
+git config --global core.autocrlf input
 ```
 
-2. Generowanie klucza Ed25519 bez hasła (dla płynnej integracji z edytorami):
+2. Generowanie klucza Ed25519 bez hasła (dla płynnej pracy z edytorami kodu):
 
 ```bash
 mkdir -p "$HOME/.ssh" && chmod 700 "$HOME/.ssh"
@@ -454,7 +492,7 @@ ssh -T -o StrictHostKeyChecking=accept-new git@github.com
 
 _Oczekiwana odpowiedź:_ `Hi adriko! You've successfully authenticated, but GitHub does not provide shell access.`
 
-7. Klonowanie repozytoriów roboczych (zwróć uwagę na składnię SSH):
+7. Klonowanie repozytoriów roboczych:
 
 ```bash
 mkdir -p "$HOME/projects" && cd "$HOME/projects"
@@ -469,7 +507,7 @@ git clone git@github.com:adriko/maciej-website.git
 
 ## 15. Skrypt weryfikacyjny (Smoke Test)
 
-Po restarcie komputera (`reboot`) uruchamiamy w terminalu skrypt sprawdzający gotowość całego środowiska:
+Po restarcie komputera (`reboot`) uruchamiamy w terminalu skrypt sprawdzający poprawność całego środowiska:
 
 ```bash
 cat << 'EOF' > /tmp/check_env.sh
@@ -478,7 +516,6 @@ printf "%-25s: %s\n" "Uzytkownik" "$USER"
 printf "%-25s: %s\n" "Host" "$(hostname)"
 printf "%-25s: %s\n" "Powloka" "$BASH_VERSION"
 printf "%-25s: %s\n" "Sesja" "$XDG_SESSION_TYPE"
-printf "%-25s: %s\n" "Zegar RTC (Local)" "$(timedatectl show -p LocalRTC --value)"
 printf "%-25s: %s\n" "Git user.name" "$(git config --global user.name)"
 printf "%-25s: %s\n" "Git user.email" "$(git config --global user.email)"
 printf "%-25s: %s\n" "Node.js" "$(node -v 2>/dev/null || echo 'BRAK')"
@@ -494,15 +531,15 @@ EOF
 chmod +x /tmp/check_env.sh && /tmp/check_env.sh && rm -f /tmp/check_env.sh
 ```
 
-Wszystkie pozycje powinny zwrócić poprawne identyfikatory wersji, zegar wskaże `no` (prawidłowy standard UTC), a autoryzacja GitHub potwierdzi dostęp.
+Wszystkie pozycje powinny zwrócić poprawne identyfikatory wersji oprogramowania, a autoryzacja GitHub potwierdzi bezhasłowy dostęp po kluczu SSH.
 
 ---
 
 ## Notatki na przyszłość: Eksploracja Hyprland i środowisk kafelkowych
 
-Obecna konfiguracja opiera się na dojrzałym środowisku KDE Plasma, które gwarantuje stabilność podczas codziennej pracy nad zleceniami. Równocześnie bardzo intryguje mnie koncepcja pełnej obsługi pulpitu wyłącznie za pomocą skrótów klawiaturowych (_keyboard-driven workflow_) oraz automatycznego kafelkowania okien (_tiling window manager_).
+Obecna konfiguracja opiera się na dojrzałym środowisku KDE Plasma, które gwarantuje pełną stabilność podczas codziennej pracy nad zleceniami. Równocześnie bardzo intryguje mnie koncepcja pełnej obsługi pulpitu wyłącznie za pomocą skrótów klawiaturowych (_keyboard-driven workflow_) oraz automatycznego kafelkowania okien (_tiling window manager_).
 
-Próba wdrożenia wtyczek tilingowych (takich jak Polonium) wewnątrz KDE Plasma pokazała, że hybrydowe rozwiązania często kolidują z menedżerem KWin. Jeśli w przyszłości zdecyduję się na przejście na pełny tiling, logicznym krokiem będzie wdrożenie czystego ekosystemu dedykowanego pod ten styl pracy:
+Próba wdrożenia wtyczek tilingowych (takich jak Polonium) wewnątrz KDE Plasma pokazała, że hybrydowe rozwiązania potrafią kolidować z menedżerem okien KWin. Jeśli w przyszłości zdecyduję się na przejście na pełny tiling, logicznym krokiem będzie wdrożenie czystego ekosystemu dedykowanego pod ten styl pracy:
 
 - **Hyprland:** Nowoczesny, dynamiczny kompozytor Wayland oferujący automatyczne dzielenie okien, animacje i wsparcie dla monitorów o wysokim odświeżaniu.
 - **Yazi:** Superszybki, asynchroniczny menedżer plików w terminalu napisany w Rust, sterowany całkowicie klawiszami Vi.

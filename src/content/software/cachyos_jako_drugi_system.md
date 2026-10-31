@@ -542,7 +542,7 @@ Obecna konfiguracja opiera się na dojrzałym środowisku KDE Plasma, które gwa
 Próba wdrożenia wtyczek tilingowych (takich jak Polonium) wewnątrz KDE Plasma pokazała, że hybrydowe rozwiązania potrafią kolidować z menedżerem okien KWin. Jeśli w przyszłości zdecyduję się na przejście na pełny tiling, logicznym krokiem będzie wdrożenie czystego ekosystemu dedykowanego pod ten styl pracy:
 
 - **Hyprland:** Nowoczesny, dynamiczny kompozytor Wayland oferujący automatyczne dzielenie okien, animacje i wsparcie dla monitorów o wysokim odświeżaniu.
-- **Yazi:** Superszybki, asynchroniczny menedżer plików w terminalu napisany w Rust, sterowany całkowicie klawiszami Vi.
+- **Yazi:** Superszybki, asynchroniczny menedżer plików w terminalu napisany w Rust, sterowany całkowicie klawiszami.
 - **Rofi-wayland:** Błyskawiczny launcher aplikacji i menu operacji wywoływany jednym skrótem klawiszowym.
 - **Quickshell:** Elastyczny framework oparty na Qt/QML i C++ do tworzenia autorskich paneli statusu i widżetów na Waylandzie (nowoczesna alternatywa dla Waybara).
 

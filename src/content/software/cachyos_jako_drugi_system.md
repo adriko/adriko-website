@@ -117,7 +117,7 @@ CachyOS korzysta ze specjalnie zoptymalizowanych jąder kompilowanych pod instru
 
 1. Włączamy komputer i od razu wciskamy klawisz **F11** (_Boot Menu_ płyty MSI).
 2. Wybieramy pozycję z nośnikiem USB poprzedzoną przedrostkiem **UEFI: [Nazwa Pendrive'a]**.
-3. W menu rozruchowym wybieramy domyślną pozycję **CachyOS default**.
+3. W menu rozruchowym wybieramy domyślną pozycję **CachyOS**.
 4. Po załadowaniu środowiska live w oknie powitalnym _CachyOS Hello_ klikamy przycisk **Launch Installer**.
 
 ### Parametry instalacji krok po kroku:

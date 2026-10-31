@@ -1,7 +1,20 @@
 ---
 title: "Skąd się wziął adriko.net: VHS, pierwsze PC i mój własny kąt w sieci"
 date: "2026-10-16"
-tags: ["origin", "retro", "deus-ex", "matrix", "half-life", "terminator", "alien", "batman", "nostalgia", "gry", "terminal"]
+tags:
+  [
+    "origin",
+    "retro",
+    "deus-ex",
+    "matrix",
+    "half-life",
+    "terminator",
+    "alien",
+    "batman",
+    "nostalgia",
+    "gry",
+    "terminal",
+  ]
 description: "Skąd wziął się pomysł na tę stronę, pomost między klimatem retro a technologią jutra, wspomnienia rocznika '87, możliwości tutejszego terminala CLI oraz plany na adriko.net."
 ---
 
@@ -11,7 +24,7 @@ Dlatego powstało **adriko.net**. To po prostu mój prywatny, cyfrowy kąt w sie
 
 ### Rocznik '87, kasety VHS i kinowe fundamenty
 
-Moja zajawka na fantastykę i technologię nie wzięła się znikąd. Jestem z rocznika '87, więc dzieciństwo spędziłem z nosem przy kineskopowym telewizorze. Kasety VHS oglądało się u mnie do zajechania taśmy — w kółko leciały takie klasyki jak *Obcy*, *Terminator* czy *Powrót do przyszłości*. 
+Moja zajawka na fantastykę i technologię nie wzięła się znikąd. Jestem z rocznika '87, więc dzieciństwo spędziłem z nosem przy kineskopowym telewizorze. Kasety VHS oglądało się u mnie do zajechania taśmy — w kółko leciały takie klasyki jak _Obcy_, _Terminator_ czy _Powrót do przyszłości_.
 
 A potem, w 1999 roku, do kin trafił **Matrix** i wywrócił mój świat do góry nogami. Ten film zmienił dla mnie absolutnie wszystko. Spływający po ekranach zielony, cyfrowy deszcz, czarne konsole, komendy uniksowe i mroczne, hakerskie podziemie walczące z bezdusznym systemem — to właśnie tam na dobre narodziła się moja fascynacja terminalami, wierszem poleceń i cyberpunkową estetyką.
 
@@ -19,13 +32,13 @@ A potem, w 1999 roku, do kin trafił **Matrix** i wywrócił mój świat do gór
 
 Kiedy wyłączało się magnetowid, pałeczkę przejmowała popołudniowa telewizja, która wtedy aż kipiała mechanicznym i gadżeciarskim klimatem. Królowały seriale z niesamowitym, technologicznym zacięciem:
 
-* **Street Hawk (Jastrząb ulicy)** — tajny rządowy projekt, hipernapęd do 300 mil na godzinę, komputerowe systemy celownicze i czarny, naszpikowany elektroniką motocykl. To chyba właśnie wtedy podświadomie narodziła się moja miłość do dwóch kółek!
-* **Knight Rider (Nieustraszony)** — gadający Pontiac Trans Am ze sztuczną inteligencją KITT-a i tym kultowym, czerwonym skanerem na masce (skądś ta czerwona kolorystyka na mojej stronie musiała się wziąć!).
-* **Airwolf** — naddźwiękowy helikopter bojowy z kokpitem pełnym zielonych monitorów i komputerowych wskaźników.
-* **MacGyver** — facet, który ze scyzoryka, spinacza i baterii potrafił zmajstrować cokolwiek, ucząc szacunku do majsterkowania i kombinowania.
-* **Thunder in Paradise (Podwodny grom)** — Hulk Hogan za sterami futurystycznej motorówki bojowej naszpikowanej elektroniką.
+- **Street Hawk (Jastrząb ulicy)** — tajny rządowy projekt, hipernapęd do 300 mil na godzinę, komputerowe systemy celownicze i czarny, naszpikowany elektroniką motocykl. To chyba właśnie wtedy podświadomie narodziła się moja miłość do dwóch kółek!
+- **Knight Rider (Nieustraszony)** — gadający Pontiac Trans Am ze sztuczną inteligencją KITT-a i tym kultowym, czerwonym skanerem na masce (skądś ta czerwona kolorystyka na mojej stronie musiała się wziąć!).
+- **Airwolf** — naddźwiękowy helikopter bojowy z kokpitem pełnym zielonych monitorów i komputerowych wskaźników.
+- **MacGyver** — facet, który ze scyzoryka, spinacza i baterii potrafił zmajstrować cokolwiek, ucząc szacunku do majsterkowania i kombinowania.
+- **Thunder in Paradise (Podwodny grom)** — Hulk Hogan za sterami futurystycznej motorówki bojowej naszpikowanej elektroniką.
 
-Do tego dochodziły kreskówki. Na legendarnej Polonii 1 chłonąłem wielkie mechy w *Generale Daimosie*, po szkole leciały *Transformersy*, bezbłędne *Motomyszy z Marsa* i kultowe *Beast Wars* (czyli emitowane u nas *Kosmiczne Wojny*, gdzie roboty zamieniały się w dinozaury i drapieżniki). A punktualnie o 15:00 na Polsacie rządził jeden tytuł: **Batman: The Animated Series**. Mroczny klimat Gotham w stylu retro-art deco, czerwone niebo i genialny podkład muzyczny sprawiły, że Batman do dzisiaj jest moim absolutnie ulubionym komiksowym bohaterem.
+Do tego dochodziły kreskówki. Na legendarnej Polonii 1 chłonąłem wielkie mechy w _Generale Daimosie_, po szkole leciały _Transformersy_, bezbłędne _Motomyszy z Marsa_ i kultowe _Beast Wars_ (czyli emitowane u nas _Kosmiczne Wojny_, gdzie roboty zamieniały się w dinozaury i drapieżniki). A punktualnie o 15:00 na Polsacie rządził jeden tytuł: **Batman: The Animated Series**. Mroczny klimat Gotham w stylu retro-art deco, czerwone niebo i genialny podkład muzyczny sprawiły, że Batman do dzisiaj jest moim absolutnie ulubionym komiksowym bohaterem.
 
 ### Informatyk w banku i walka z DOS-em
 
@@ -43,7 +56,7 @@ Wreszcie w 2001 roku nadszedł ten wielki dzień: rodzice kupili mi pierwszy por
 
 ### O czym będę tutaj pisać?
 
-Zamiast udawać kolejny portal informacyjny, który na siłę goni za sensacjami i powiela bezduszne notki prasowe, chcę, żeby to miejsce było po prostu moim autorskim notatnikiem. 
+Zamiast udawać kolejny portal informacyjny, który na siłę goni za sensacjami i powiela bezduszne notki prasowe, chcę, żeby to miejsce było po prostu moim autorskim notatnikiem.
 
 Nie zamykam się w jednej epoce. Prawdziwa pasja polega na składaniu pojedynczych elementów w całość: od sentymentu do klasycznych pecetów, przez współczesne narzędzia programistyczne i systemowe, aż po to, co dopiero rysuje się na horyzoncie. Pogadamy tu o:
 
@@ -58,20 +71,20 @@ Chciałem, żeby sama strona wyglądała i działała inaczej niż większość 
 
 Wystylizowałem ją w surowym klimacie starych terminali i komputerów:
 
-* **Ekran startowy BIOS** — sekwencja wzorowana na płytach głównych z lat 90. Wylicza pamięć i skanuje katalogi. Możesz ją pominąć klawiszem `ESC`, a na smartfonie wystarczy tapnąć palcem w ekran, żeby ją spauzować.
-* **Zmiana widoku** — możesz przeglądać archiwum w formie kafelków (`[VIEW: CARDS]`) albo w surowym widoku drzewa plików (`[VIEW: TREE]`).
-* **Telemetria w stopce** — na dole strony działa skrypt wyliczający na żywo godziny wschodu i zachodu Słońca oraz fazę Księżyca dla moich okolic (Jarosław).
+- **Ekran startowy BIOS** — sekwencja wzorowana na płytach głównych z lat 90. Wylicza pamięć i skanuje katalogi. Możesz ją pominąć klawiszem `ESC`, a na smartfonie wystarczy tapnąć palcem w ekran, żeby ją spauzować.
+- **Zmiana widoku** — możesz przeglądać archiwum w formie kafelków (`[VIEW: CARDS]`) albo w surowym widoku drzewa plików (`[VIEW: TREE]`).
+- **Telemetria w stopce** — na dole strony działa skrypt wyliczający na żywo godziny wschodu i zachodu Słońca oraz fazę Księżyca dla moich okolic (Jarosław).
 
 Największą frajdę daje jednak wbudowana konsola na stronie głównej — **SYSTEM CLI v2.0**. Działa jak klasyczny `grep` filtrujący wpisy w locie, a po wpisaniu `help` zamienia się w małe centrum dowodzenia:
 
-* `whoami` — profil operatora i technologie, na których stoi hub.
-* `specs` — szybki skan parametrów sprzętu i Twojej przeglądarki.
-* `weather [miasto]` — telemetria pogodowa na żywo (domyślnie dla bazy w Jarosławiu).
-* `crypto <symbol>` — aktualny kurs kryptowalut w czasie rzeczywistym z Binance (np. `crypto btc`).
-* `fx <waluta>` — oficjalny średni kurs walut z NBP (np. `fx usd`, `fx eur`).
-* `ping [target]` — badanie opóźnienia do serwera (np. `ping cloudflare`).
-* `cat <katalog>` — bezpośredni skok do wybranego działu (`database`, `gear`, `hardware`, `software`).
-* `clear` — czyszczenie konsoli i reset filtrów.
+- `whoami` — profil operatora i technologie, na których stoi hub.
+- `specs` — szybki skan parametrów sprzętu i Twojej przeglądarki.
+- `weather [miasto]` — telemetria pogodowa na żywo (domyślnie dla bazy w Jarosławiu).
+- `crypto <symbol>` — aktualny kurs kryptowalut w czasie rzeczywistym z Binance (np. `crypto btc`).
+- `fx <waluta>` — oficjalny średni kurs walut z NBP (np. `fx usd`, `fx eur`).
+- `ping [target]` — badanie opóźnienia do serwera (np. `ping cloudflare`).
+- `cat <katalog>` — bezpośredni skok do wybranego działu (`database`, `gear`, `hardware`, `software`).
+- `clear` — czyszczenie konsoli i reset filtrów.
 
 Koniecznie przetestuj te komendy na stronie głównej!
 

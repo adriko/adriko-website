@@ -51,7 +51,7 @@ Uczciwie trzeba przyznać, że po niezwykle intensywnym pierwszym sezonie kolejn
 
 Tym, co najbardziej trzyma tu przy ekranie, jest niepokojąca aktualność samej opowieści. Wątki geopolityczne, kulisy tajnych operacji, wykorzystanie pośredników i mechanizmy rozgrywek na szczytach politycznej machinerii są napisane tak wiarygodnie, że człowiek ma wrażenie, iż ogląda coś, co spokojnie mogłoby – a miejscami wręcz dzieje się – w realnym świecie. Aktorsko całość ponownie trzyma wysoki poziom, zwłaszcza gdy na pierwszy plan wychodzi **Raife Hastings** grany przez **Toma Hoppera** (dawny towarzysz broni Reece'a z czasów służby w SEALs – twardo stąpający po ziemi profesjonalista z mocnym kręgosłupem moralnym) oraz rozbudowany wątek po stronie oficerów i agentów CIA.
 
-- **Ocena Sezonu 2:** `7.5/10` _(z mocnymi momentami na 8/10)_
+- **Ocena Sezonu 2:** `8.5/10`
 
 ### Dark Wolf: Powrót do 2015 roku i narodziny cienia (7 odcinków)
 
@@ -63,7 +63,7 @@ Przeniesienie akcji z Bliskiego Wschodu do Europy uważam za świetne posunięci
 
 Technicznie rzecz biorąc, dla kogoś, kto dopiero zaczyna przygodę z tym uniwersum, optymalna kolejność oglądania to **Sezon 1 → Dark Wolf → Sezon 2**. Prequel działa tutaj jako bardzo dobre wprowadzenie do drugiej odsłony głównej serii – pozwala znacznie lepiej zrozumieć dynamikę między Benem a Raife'em, zanim wrócimy do teraźniejszości. Sam finał domyka wszystkie otwarte wątki i spina całość zgrabną klamrą. Nie zdradzając szczegółów – twórcy przekonująco pokazali moment wejścia Bena w struktury CIA oraz tło jego relacji i długu wobec Reece'a, o którym mowa była już w pierwszym sezonie. Jeśli celem było zbudowanie solidnego pomostu między tymi historiami, ten plan się udał.
 
-- **Ocena Dark Wolf:** `7–7.5/10`
+- **Ocena Dark Wolf:** `8/10`
 
 ### Braterstwo broni kontra bezduszna machina
 
